@@ -38,21 +38,21 @@ Ces trois termes sont souvent confondus ou utilisés de manière interchangeable
 
 ```mermaid
 flowchart TD
-    LLM["LLM\nLarge Language Model\n\nModele de langage entraine\nsur de grandes quantites de texte.\nPredit le prochain token.\nRepond a une entree."]
+    LLM["LLM\nLarge Language Model\n\nModèle de langage entraîné\nsur de grandes quantités de texte.\nPrédit le prochain token.\nRépond a une entrée."]
 
-    AGENT["AI Agent\nAgent IA\n\nSysteme qui utilise un LLM\ncomme moteur de raisonnement\net peut appeler des outils\npour agir dans le monde."]
+    AGENT["AI Agent\nAgent IA\n\nSystème qui utilise un LLM\ncomme moteur de raisonnement\net peut appeler des outils\npour agir dans le monde."]
 
     AGENTIC["Agentic AI\nIA agentique\n\nParadigme ou plusieurs agents\ntravaillent en autonomie,\nse coordonnent, planifient\net executent des missions complexes."]
 
     LLM -->|"devient le cerveau de"| AGENT
-    AGENT -->|"compose un systeme"| AGENTIC
+    AGENT -->|"compose un système"| AGENTIC
 ```
 
 | Concept | Analogie humaine |
 |---------|-----------------|
-| **LLM** | Un expert tres instruit qui repond a des questions |
+| **LLM** | Un expert très instruit qui répond a des questions |
 | **AI Agent** | Un assistant qui peut aussi utiliser un ordinateur, chercher sur le web et envoyer des emails |
-| **Agentic AI** | Une equipe d'assistants specialises qui collaborent pour accomplir un projet |
+| **Agentic AI** | Une equipe d'assistants spécialisés qui collaborent pour accomplir un projet |
 
 </details>
 
@@ -67,27 +67,27 @@ flowchart TD
 
 <br/>
 
-### Definition et fonctionnement
+### définition et fonctionnement
 
-Un **LLM** (Large Language Model) est un modele de langage entraine sur des milliards de mots de texte pour apprendre les patterns statistiques du langage. Il fonctionne en **predisant le prochain token** (mot ou sous-mot) le plus probable etant donne le contexte precedent.
+Un **LLM** (Large Language Model) est un modèle de langage entraîné sur des milliards de mots de texte pour apprendre les patterns statistiques du langage. Il fonctionne en **prédisant le prochain token** (mot ou sous-mot) le plus probable étant donné le contexte précédent.
 
 ```mermaid
 flowchart LR
-    I["Entree (prompt)\n'La capitale de la France est'"]
+    I["entrée (prompt)\n'La capitale de la France est'"]
     T["Tokenisation\n['La', 'cap', 'itale', 'de', 'la', 'France', 'est']"]
-    M["Modele Transformer\nAttention + Feedforward\n(milliards de parametres)"]
+    M["modèle Transformer\nAttention + Feedforward\n(milliards de paramètres)"]
     O["Sortie (completion)\n'Paris'"]
 
     I --> T --> M --> O
 ```
 
-#### Comment un LLM est-il entraine ?
+#### Comment un LLM est-il entraîné ?
 
-| Etape | Description |
+| étape | Description |
 |-------|-------------|
-| **Pre-entrainement** | Entrainement sur des milliards de documents — le modele apprend la langue, les faits, la logique |
-| **Fine-tuning supervise** | Entrainement sur des exemples de bonne qualite (questions/reponses) |
-| **RLHF** | Reinforcement Learning from Human Feedback — les humains notent les reponses, le modele s'aligne |
+| **Pre-entraînement** | entraînement sur des milliards de documents — le modèle apprend la langue, les faits, la logique |
+| **Fine-tuning supervisé** | entraînement sur des exemples de bonne qualité (questions/réponses) |
+| **RLHF** | Reinforcement Learning from Human Feedback — les humains notent les réponses, le modèle s'aligne |
 
 ---
 
@@ -95,14 +95,14 @@ flowchart LR
 
 | Un LLM FAIT | Un LLM ne FAIT PAS |
 |------------|---------------------|
-| Generer du texte coherent | Agir de maniere autonome |
-| Resumer, traduire, expliquer | Naviguer sur le web (sans outils) |
+| générer du texte cohérent | Agir de maniere autonome |
+| résumer, traduire, expliquer | Naviguer sur le web (sans outils) |
 | Repondre a des questions | Se souvenir entre deux sessions (sans memoire externe) |
-| Ecrire du code | Executer ce code (sans outil) |
-| Raisonner sur un probleme | Initier une action de lui-meme |
-| Comprendre des images (si multimodal) | Prendre des decisions persistantes |
+| Ecrire du code | exécuter ce code (sans outil) |
+| Raisonner sur un problème | Initier une action de lui-même |
+| Comprendre des images (si multimodal) | Prendre des décisions persistantes |
 
-> Un LLM est **reactif** — il repond quand on lui parle. Il n'agit pas de lui-meme.
+> Un LLM est **reactif** — il répond quand on lui parle. Il n'agit pas de lui-même.
 
 ---
 
@@ -122,20 +122,20 @@ flowchart TD
     end
 ```
 
-Le mecanisme cle est l'**attention** : le modele apprend quels mots du contexte sont les plus pertinents pour predire le prochain token. C'est ce qui permet de traiter des phrases longues et des dependances a longue distance.
+Le mécanisme clé est l'**attention** : le modèle apprend quels mots du contexte sont les plus pertinents pour prédire le prochain token. C'est ce qui permet de traiter des phrases longues et des dépendances a longue distance.
 
 ---
 
 ### Exemples de LLMs majeurs en 2026
 
-| Modele | Createur | Points forts |
+| modèle | créateur | Points forts |
 |--------|---------|--------------|
 | **GPT-4o / o3** | OpenAI | Multimodal, raisonnement avance |
-| **Claude 3.5 / Claude 4** | Anthropic | Fenetre de contexte large, surete |
-| **Gemini Ultra** | Google DeepMind | Integration Google, multimodal |
+| **Claude 3.5 / Claude 4** | Anthropic | fenêtre de contexte large, surete |
+| **Gemini Ultra** | Google DeepMind | intégration Google, multimodal |
 | **LLaMA 3** | Meta | Open source, deployable localement |
 | **Mistral Large** | Mistral AI | Europeen, open source competitif |
-| **DeepSeek V3** | DeepSeek | Tres performant, couts reduits |
+| **DeepSeek V3** | DeepSeek | Très performant, couts reduits |
 | **Qwen** | Alibaba | Multilangue, open source |
 
 </details>
@@ -151,24 +151,24 @@ Le mecanisme cle est l'**attention** : le modele apprend quels mots du contexte 
 
 <br/>
 
-### Definition et architecture
+### définition et architecture
 
-Un **AI Agent** est un systeme qui utilise un LLM comme moteur de raisonnement et qui est capable d'**utiliser des outils**, de **planifier des etapes** et d'**agir dans son environnement** pour accomplir un objectif donne.
+Un **AI Agent** est un système qui utilise un LLM comme moteur de raisonnement et qui est capable d'**utiliser des outils**, de **planifier des étapes** et d'**agir dans son environnement** pour accomplir un objectif donné.
 
-La difference fondamentale avec un LLM seul : l'agent **fait des choses** dans le monde, pas seulement des mots.
+La différence fondamentale avec un LLM seul : l'agent **fait des choses** dans le monde, pas seulement des mots.
 
 ```mermaid
 flowchart TD
-    OBJ["Objectif donne par l'utilisateur"]
+    OBJ["Objectif donné par l'utilisateur"]
     OBJ --> BRAIN["LLM\n(cerveau de l'agent)\nRaisonnement et planification"]
 
-    BRAIN --> PLAN["Plan d'action\n(decomposition en etapes)"]
+    BRAIN --> PLAN["Plan d'action\n(décomposition en étapes)"]
 
     PLAN --> TOOL{Quel outil\nutiliser ?}
 
     TOOL --> T1["Recherche web\n(Bing, Google)"]
-    TOOL --> T2["Execution de code\n(Python, terminal)"]
-    TOOL --> T3["Appel d'API\n(meteo, base de donnees)"]
+    TOOL --> T2["exécution de code\n(Python, terminal)"]
+    TOOL --> T3["Appel d'API\n(meteo, base de données)"]
     TOOL --> T4["Lecture/ecriture\nde fichiers"]
     TOOL --> T5["Envoi d'email\nou message"]
 
@@ -176,7 +176,7 @@ flowchart TD
     OBS --> BRAIN
 
     BRAIN --> FIN{Objectif\natteint ?}
-    FIN -- Oui --> REP["Reponse finale\na l'utilisateur"]
+    FIN -- Oui --> REP["réponse finale\na l'utilisateur"]
     FIN -- Non --> PLAN
 ```
 
@@ -184,9 +184,9 @@ flowchart TD
 
 ### Les composants d'un agent
 
-| Composant | Role | Exemple |
+| Composant | rôle | Exemple |
 |-----------|------|---------|
-| **LLM (cerveau)** | Raisonne, planifie, decide | GPT-4, Claude, Mistral |
+| **LLM (cerveau)** | Raisonne, planifie, décide | GPT-4, Claude, Mistral |
 | **Outils (tools)** | Actions que l'agent peut effectuer | Recherche web, calculatrice, API |
 | **Memoire** | Retient le contexte et l'historique | Memoire court terme (contexte), long terme (base vectorielle) |
 | **Planificateur** | Decompose les objectifs en sous-taches | ReAct, Chain-of-Thought |
@@ -197,13 +197,13 @@ flowchart TD
 ```mermaid
 flowchart LR
     subgraph CT["Memoire court terme"]
-        C1["Fenetre de contexte\ndu LLM\nConversation en cours\n(4K a 1M tokens)"]
+        C1["fenêtre de contexte\ndu LLM\nConversation en cours\n(4K a 1M tokens)"]
     end
     subgraph LT["Memoire long terme"]
-        L1["Base de donnees vectorielle\n(Chroma, Pinecone, Weaviate)\nInformations persistantes\nentre les sessions"]
+        L1["Base de données vectorielle\n(Chroma, Pinecone, Weaviate)\nInformations persistantes\nentre les sessions"]
     end
     subgraph EXT["Memoire externe"]
-        E1["Fichiers, bases de donnees\nNotes, documents"]
+        E1["Fichiers, bases de données\nNotes, documents"]
     end
 
     CT <--> LT
@@ -217,19 +217,19 @@ flowchart LR
 | Type | Description | Exemple |
 |------|-------------|---------|
 | **Agent ReAct** | Raisonne (Reason) puis agit (Act) en boucle | Agent de recherche qui cherche et synthetise |
-| **Agent planificateur** | Cree un plan complet avant d'agir | Planification de projet |
-| **Agent executeur de code** | Ecrit et execute du code Python pour resoudre des problemes | Data analyst agent |
+| **Agent planificateur** | créé un plan complet avant d'agir | Planification de projet |
+| **Agent executeur de code** | Ecrit et exécuté du code Python pour resoudre des problèmes | Data analyst agent |
 | **Agent conversationnel** | Maintient une conversation avec memoire | Assistant personnel |
-| **Agent RAG** | Recupere des documents pertinents avant de repondre | Chatbot sur documentation interne |
+| **Agent RAG** | récupéré des documents pertinents avant de repondre | Chatbot sur documentation interne |
 
 #### Le pattern ReAct (Reason + Act)
 
 ```
-Pensee  : Je dois trouver la population de Montreal en 2026.
+Pensée  : Je dois trouver la population de Montreal en 2026.
 Action  : recherche_web("population Montreal 2026")
 Observation : "La population de Montreal est estimee a 2,1 millions en 2026."
-Pensee  : J'ai l'information. Je peux repondre.
-Reponse : La population de Montreal est d'environ 2,1 millions d'habitants en 2026.
+Pensée  : J'ai l'information. Je peux repondre.
+réponse : La population de Montreal est d'environ 2,1 millions d'habitants en 2026.
 ```
 
 </details>
@@ -245,25 +245,25 @@ Reponse : La population de Montreal est d'environ 2,1 millions d'habitants en 20
 
 <br/>
 
-### Definition
+### définition
 
-L'**Agentic AI** (IA agentique) designe un **paradigme** — une facon de concevoir des systemes IA — ou un ou plusieurs agents operent avec un **haut degre d'autonomie**, sur des **taches longues et complexes**, en boucle, avec peu ou pas d'intervention humaine a chaque etape.
+L'**Agentic AI** (IA agentique) designe un **paradigme** — une facon de concevoir des systèmes IA — ou un ou plusieurs agents operent avec un **haut degre d'autonomie**, sur des **taches longues et complexes**, en boucle, avec peu ou pas d'intervention humaine a chaque étape.
 
-Ce n'est pas un produit specifique. C'est une architecture de systeme.
+Ce n'est pas un produit spécifique. C'est une architecture de système.
 
 ---
 
 ### Ce qui distingue l'Agentic AI
 
-| Caracteristique | Agent IA simple | Agentic AI |
+| caractéristique | Agent IA simple | Agentic AI |
 |----------------|----------------|------------|
 | **Duree de la tache** | Quelques echanges | Heures, jours, semaines |
-| **Autonomie** | Moderee — l'humain supervise | Elevee — l'agent decide seul de nombreuses etapes |
+| **Autonomie** | Moderee — l'humain supervisé | Elevee — l'agent décide seul de nombreuses étapes |
 | **Nombre d'agents** | Un seul | Plusieurs agents coordonnes |
 | **Memoire** | Court terme (contexte) | Long terme, persistante entre sessions |
 | **Planification** | Simple | Multi-niveaux, avec revision du plan |
-| **Gestion des erreurs** | Limitee | L'agent detecte et corrige ses erreurs |
-| **Interaction humaine** | Apres chaque etape | Seulement aux points de decision critiques (HITL) |
+| **Gestion des erreurs** | Limitee | L'agent détecté et corrige ses erreurs |
+| **Interaction humaine** | Après chaque étape | Seulement aux points de décision critiques (HITL) |
 
 ---
 
@@ -272,13 +272,13 @@ Ce n'est pas un produit specifique. C'est une architecture de systeme.
 ```mermaid
 flowchart TD
     MISSION["Mission a long terme\ndonnee par l'humain"]
-    MISSION --> DECOMP["Decomposition\nen sous-objectifs"]
-    DECOMP --> ASSIGN["Attribution\naux agents specialises"]
+    MISSION --> DECOMP["décomposition\nen sous-objectifs"]
+    DECOMP --> ASSIGN["Attribution\naux agents spécialisés"]
 
     subgraph BOUCLE["Boucle agentique autonome"]
-        EXEC["Execution\nd'une sous-tache"]
-        EVAL["Evaluation\ndu resultat"]
-        REPLAN["Replanification\nsi necessaire"]
+        EXEC["exécution\nd'une sous-tache"]
+        EVAL["évaluation\ndu resultat"]
+        REPLAN["Replanification\nsi nécessaire"]
         EXEC --> EVAL --> REPLAN --> EXEC
     end
 
@@ -293,13 +293,13 @@ flowchart TD
     DONE -- Oui --> RESULT["Livrable final"]
 ```
 
-> **HITL** = Human In The Loop — l'humain intervient uniquement aux etapes critiques.
+> **HITL** = Human In The Loop — l'humain intervient uniquement aux étapes critiques.
 
 ---
 
-### Multi-agent systems — Systemes multi-agents
+### Multi-agent systems — systèmes multi-agents
 
-Dans l'Agentic AI, plusieurs agents specialises collaborent comme une equipe.
+Dans l'Agentic AI, plusieurs agents spécialisés collaborent comme une equipe.
 
 ```mermaid
 flowchart TD
@@ -307,7 +307,7 @@ flowchart TD
 
     ORCH --> A1["Agent chercheur\nRecherche et collecte\nd'informations"]
     ORCH --> A2["Agent codeur\nEcrit et teste\ndu code"]
-    ORCH --> A3["Agent critique\nEvalue la qualite\ndu travail des autres"]
+    ORCH --> A3["Agent critique\nEvalue la qualité\ndu travail des autres"]
     ORCH --> A4["Agent redacteur\nRedige le livrable final"]
 
     A1 -->|"Informations collectees"| ORCH
@@ -318,12 +318,12 @@ flowchart TD
 
 #### Exemples de frameworks multi-agents
 
-| Framework | Createur | Description |
+| Framework | créateur | Description |
 |-----------|---------|-------------|
-| **CrewAI** | CrewAI | Orchestration d'agents avec roles et objectifs definis |
-| **AutoGen** | Microsoft | Agents qui se parlent entre eux pour resoudre des problemes |
+| **CrewAI** | CrewAI | Orchestration d'agents avec rôles et objectifs définis |
+| **AutoGen** | Microsoft | Agents qui se parlent entre eux pour resoudre des problèmes |
 | **LangGraph** | LangChain | Graphe d'etats pour des workflows agentiques complexes |
-| **OpenAI Swarm** | OpenAI | Framework leger pour systemes multi-agents |
+| **OpenAI Swarm** | OpenAI | Framework leger pour systèmes multi-agents |
 | **Agency Swarm** | Communaute | Agents avec memoire et communication structuree |
 
 </details>
@@ -341,15 +341,15 @@ flowchart TD
 
 ### Tableau comparatif complet
 
-| Critere | LLM | AI Agent | Agentic AI |
+| critère | LLM | AI Agent | Agentic AI |
 |---------|-----|----------|------------|
-| **Definition** | Modele de langage qui predit des tokens | Systeme base sur un LLM + outils | Paradigme de systemes autonomes a long terme |
-| **Initiative** | Aucune — repond uniquement | Peut planifier des etapes | Opere de maniere independante sur de longues missions |
+| **définition** | modèle de langage qui prédit des tokens | système base sur un LLM + outils | Paradigme de systèmes autonomes a long terme |
+| **Initiative** | Aucune — répond uniquement | Peut planifier des étapes | Opere de maniere independante sur de longues missions |
 | **Outils externes** | Non (sauf plugins) | Oui | Oui — plusieurs types d'outils |
-| **Nombre d'agents** | 1 modele | 1 agent | Plusieurs agents coordonnes |
-| **Memoire** | Fenetre de contexte uniquement | Contexte + memoire externe | Memoire persistante multi-sessions |
-| **Duree d'execution** | Secondes | Minutes | Heures a jours |
-| **Supervision humaine** | A chaque echange | Moderee | Minimale (HITL aux points cles) |
+| **Nombre d'agents** | 1 modèle | 1 agent | Plusieurs agents coordonnes |
+| **Memoire** | fenêtre de contexte uniquement | Contexte + memoire externe | Memoire persistante multi-sessions |
+| **Duree d'exécution** | Secondes | Minutes | Heures a jours |
+| **Supervision humaine** | A chaque echange | Moderee | Minimale (HITL aux points clés) |
 | **Gestion des erreurs** | Aucune | Limitee | Correction autonome |
 | **Exemple** | ChatGPT en mode chat | Agent de recherche Perplexity | Devin (agent de dev logiciel autonome) |
 
@@ -359,7 +359,7 @@ flowchart TD
 
 ```mermaid
 quadrantChart
-    title Autonomie vs Complexite des taches
+    title Autonomie vs complexité des taches
     x-axis Tache simple --> Tache complexe
     y-axis Supervision humaine totale --> Autonomie totale
     quadrant-1 Agentic AI
@@ -369,8 +369,8 @@ quadrantChart
     LLM simple: [0.15, 0.1]
     Chatbot avec outils: [0.3, 0.25]
     AI Agent ReAct: [0.55, 0.45]
-    Agent multi-etapes: [0.65, 0.6]
-    Systeme multi-agents: [0.8, 0.75]
+    Agent multi-étapes: [0.65, 0.6]
+    système multi-agents: [0.8, 0.75]
     Agentic AI autonome: [0.9, 0.88]
 ```
 
@@ -380,9 +380,9 @@ quadrantChart
 
 | Concept IA | Analogie |
 |-----------|---------|
-| **LLM** | Un expert tres qualifie qu'on consulte en face a face — il repond, mais ne fait rien si on ne lui demande pas |
+| **LLM** | Un expert très qualifie qu'on consulte en face a face — il repond, mais ne fait rien si on ne lui demande pas |
 | **AI Agent** | Un assistant personnel avec acces a un ordinateur, internet et votre agenda — il peut agir, mais reste sous supervision |
-| **Agentic AI** | Une equipe entiere d'assistants specialises qui travaille sur un projet de plusieurs semaines, se coordonne et ne vous contacte que pour les decisions importantes |
+| **Agentic AI** | Une equipe entiere d'assistants spécialisés qui travaille sur un projet de plusieurs semaines, se coordonne et ne vous contacte que pour les décisions importantes |
 
 </details>
 
@@ -401,7 +401,7 @@ LLM, AI Agent et Agentic AI ne sont pas des alternatives — ils s'imbriquent l'
 
 ```mermaid
 flowchart TD
-    subgraph AGENTIC_SYS["Systeme Agentic AI"]
+    subgraph AGENTIC_SYS["système Agentic AI"]
         subgraph AGENT1["Agent 1 — Chercheur"]
             LLM1["LLM\n(GPT-4o)"] --> TOOLS1["Outils\n(web search, API)"]
         end
@@ -439,7 +439,7 @@ flowchart LR
     S1 --> S2 --> S3 --> S4 --> S5
 ```
 
-> A mesure que le niveau augmente : plus de puissance, mais aussi plus de risques, plus de couts et plus de complexite de supervision.
+> A mesure que le niveau augmente : plus de puissance, mais aussi plus de risques, plus de couts et plus de complexité de supervision.
 
 </details>
 
@@ -456,18 +456,18 @@ flowchart LR
 
 ### Limites des LLMs
 
-| Limite | Description |
+| limite | Description |
 |--------|-------------|
-| **Hallucinations** | Le modele genere des informations fausses avec confiance |
-| **Coupure temporelle** | Pas de connaissance des evenements apres la date de training |
+| **Hallucinations** | Le modèle généré des informations fausses avec confiance |
+| **Coupure temporelle** | Pas de connaissance des evenements après la date de training |
 | **Absence de memoire** | Oublie tout entre deux conversations (sans memoire externe) |
-| **Pas de raisonnement causal** | Correlations statistiques, pas de comprehension reelle |
-| **Sensible aux biais** | Reproduit les biais presents dans les donnees d'entrainement |
-| **Couts** | Chaque token genere a un cout financier et energetique |
+| **Pas de raisonnement causal** | Correlations statistiques, pas de comprehension réelle |
+| **Sensible aux biais** | Reproduit les biais presents dans les données d'entraînement |
+| **Couts** | Chaque token généré a un cout financier et energetique |
 
 ---
 
-### Risques specifiques aux agents et a l'Agentic AI
+### Risques spécifiques aux agents et a l'Agentic AI
 
 ```mermaid
 flowchart TD
@@ -478,7 +478,7 @@ flowchart TD
     RISQUES --> R3["Boucle infinie\nL'agent tourne sans\natteindre l'objectif"]
     RISQUES --> R4["Actions irreversibles\nSuppression de fichiers,\nenvoi d'emails, transactions"]
     RISQUES --> R5["Cout exponentiel\nLes boucles longues\nconsomment beaucoup de tokens"]
-    RISQUES --> R6["Opacite\nDifficile de savoir pourquoi\nl'agent a pris une decision"]
+    RISQUES --> R6["Opacite\nDifficile de savoir pourquoi\nl'agent a pris une décision"]
 ```
 
 ---
@@ -488,26 +488,26 @@ flowchart TD
 | Risque | Mitigation |
 |--------|-----------|
 | **Hallucinations** | RAG, grounding sur des sources verifiees, validation humaine |
-| **Prompt injection** | Validation des entrees, sandboxing des outils |
+| **Prompt injection** | Validation des entrées, sandboxing des outils |
 | **Actions irreversibles** | Mode simulation avant action, validation HITL |
-| **Boucle infinie** | Limite de tokens et d'iterations |
-| **Couts eleves** | Monitoring des couts, modeles plus petits pour les sous-taches simples |
-| **Opacite** | Logging de chaque etape, traces d'execution |
+| **Boucle infinie** | limite de tokens et d'iterations |
+| **Couts eleves** | Monitoring des couts, modèles plus petits pour les sous-taches simples |
+| **Opacite** | Logging de chaque étape, traces d'exécution |
 
 ---
 
-### La question de la confiance et du controle
+### La question de la confiance et du contrôle
 
-Plus un systeme est agentique, plus la question du controle humain est critique.
+Plus un système est agentique, plus la question du contrôle humain est critique.
 
-| Niveau d'autonomie | Modele de supervision |
+| Niveau d'autonomie | modèle de supervision |
 |-------------------|----------------------|
-| LLM seul | L'humain lit et valide chaque reponse |
-| AI Agent | L'humain supervise le plan et les etapes cles |
-| Agentic AI | HITL aux decisions critiques — le reste est autonome |
+| LLM seul | L'humain lit et valide chaque réponse |
+| AI Agent | L'humain supervisé le plan et les étapes clés |
+| Agentic AI | HITL aux décisions critiques — le reste est autonome |
 | Super-agentic (futur) | Supervision difficile — risque systemique |
 
-> La plupart des experts recommandent de maintenir un **humain dans la boucle** pour toute action ayant des consequences reelles et irreversibles.
+> La plupart des experts recommandent de maintenir un **humain dans la boucle** pour toute action ayant des consequences réelles et irreversibles.
 
 </details>
 
@@ -526,11 +526,11 @@ Plus un systeme est agentique, plus la question du controle humain est critique.
 
 | Cas d'usage | Pourquoi un LLM suffit |
 |-------------|----------------------|
-| Resumer un document | Tache discrete, une seule entree |
+| résumer un document | Tache discrete, une seule entrée |
 | Traduire un texte | Pas besoin d'action externe |
-| Repondre a des FAQ | Les reponses sont dans le contexte ou le modele |
-| Generer du code a partir d'une description | L'humain copie-colle et execute lui-meme |
-| Classifier un email | Entree unique, sortie unique |
+| Repondre a des FAQ | Les réponses sont dans le contexte ou le modèle |
+| générer du code a partir d'une description | L'humain copie-colle et exécuté lui-même |
+| Classifier un email | entrée unique, sortie unique |
 
 ---
 
@@ -538,36 +538,36 @@ Plus un systeme est agentique, plus la question du controle humain est critique.
 
 | Cas d'usage | Ce que l'agent apporte |
 |-------------|----------------------|
-| Rechercher et synthetiser des informations recentes | Acces au web en temps reel |
-| Analyser un fichier CSV et produire un rapport | Execution de code Python |
-| Reserver un vol selon des criteres | Appel d'APIs externes |
-| Monitorer un site web et alerter en cas de changement | Boucle d'execution periodique |
+| Rechercher et synthetiser des informations récentes | Acces au web en temps réel |
+| Analyser un fichier CSV et produire un rapport | exécution de code Python |
+| Reserver un vol selon des critères | Appel d'APIs externes |
+| Monitorer un site web et alerter en cas de changement | Boucle d'exécution periodique |
 | Repondre a des questions sur une base documentaire interne | RAG + recherche semantique |
 
 ---
 
 ### Quand utiliser l'Agentic AI ?
 
-| Cas d'usage | Pourquoi l'Agentic AI est necessaire |
+| Cas d'usage | Pourquoi l'Agentic AI est nécessaire |
 |-------------|-------------------------------------|
-| Developper une fonctionnalite logicielle de A a Z | Necessite recherche, code, tests, revue — plusieurs agents |
-| Conduire une analyse de marche complete | Collecte de donnees, analyse, redaction — taches paralleles |
-| Automatiser un pipeline de recrutement | Tri de CV, entretiens preliminaires, rapports — agents specialises |
+| Developper une fonctionnalite logicielle de A a Z | nécessité recherche, code, tests, revue — plusieurs agents |
+| Conduire une analyse de marche complète | Collecte de données, analyse, redaction — taches paralleles |
+| Automatiser un pipeline de recrutement | Tri de CV, entretiens preliminaires, rapports — agents spécialisés |
 | Gerer un projet de contenu editorial | Recherche, redaction, relecture, publication — workflow long |
-| Supporter le cycle de vie d'un projet IA | Collecte, nettoyage, entrainement, evaluation, deploiement — automatise |
+| Supporter le cycle de vie d'un projet IA | Collecte, nettoyage, entraînement, évaluation, déploiement — automatise |
 
 ---
 
-### Exemples de produits reels en 2026
+### Exemples de produits réels en 2026
 
 | Produit | Type | Ce qu'il fait |
 |---------|------|---------------|
-| **ChatGPT** (sans plugins) | LLM | Conversation, generation de texte et code |
+| **ChatGPT** (sans plugins) | LLM | Conversation, génération de texte et code |
 | **Perplexity AI** | AI Agent | Recherche web + synthese |
-| **GitHub Copilot** | AI Agent | Completion et generation de code avec contexte du repo |
+| **GitHub Copilot** | AI Agent | Completion et génération de code avec contexte du repo |
 | **Devin** (Cognition) | Agentic AI | Developpement logiciel autonome de bout en bout |
 | **Operator** (OpenAI) | Agentic AI | Navigation web autonome, remplissage de formulaires |
-| **Claude Computer Use** | Agentic AI | Controle d'un ordinateur comme un humain |
+| **Claude Computer Use** | Agentic AI | contrôle d'un ordinateur comme un humain |
 | **Microsoft Copilot Agents** | Agentic AI | Workflows automatises dans Office 365 |
 
 </details>
@@ -583,95 +583,95 @@ Plus un systeme est agentique, plus la question du controle humain est critique.
 
 <br/>
 
-Pour chaque question, choisissez la meilleure reponse puis ouvrez l'explication.
+Pour chaque question, choisissez la meilleure réponse puis ouvrez l'explication.
 
 ---
 
-**Question 1** — Un etudiant ouvre ChatGPT, pose une question sur Python et obtient une reponse. Quel type de systeme utilise-t-il ?
+**Question 1** — Un etudiant ouvre ChatGPT, pose une question sur Python et obtient une réponse. Quel type de système utilise-t-il ?
 
 A) Un AI Agent  
 B) Un LLM  
-C) Un systeme Agentic AI  
-D) Un systeme multi-agents
+C) Un système Agentic AI  
+D) Un système multi-agents
 
 <details>
-<summary>Reponse et explication</summary>
+<summary>réponse et explication</summary>
 
-**Reponse : B — Un LLM**
+**réponse : B — Un LLM**
 
-ChatGPT en mode conversation standard est un LLM. Il repond a une entree sans initier d'actions, sans outils externes (sauf si des plugins sont actives) et sans planification multi-etapes. C'est le niveau le plus simple.
+ChatGPT en mode conversation standard est un LLM. Il répond a une entrée sans initier d'actions, sans outils externes (sauf si des plugins sont actives) et sans planification multi-étapes. C'est le niveau le plus simple.
 
 </details>
 
 ---
 
-**Question 2** — Perplexity AI recoit une question, effectue plusieurs recherches web, consulte des sources, les synthetise et produit une reponse avec citations. Quel type de systeme est-ce ?
+**Question 2** — Perplexity AI recoit une question, effectue plusieurs recherches web, consulte des sources, les synthetise et produit une réponse avec citations. Quel type de système est-ce ?
 
 A) Un LLM seul  
 B) Un AI Agent  
-C) Un systeme Agentic AI  
-D) Un modele de diffusion
+C) Un système Agentic AI  
+D) Un modèle de diffusion
 
 <details>
-<summary>Reponse et explication</summary>
+<summary>réponse et explication</summary>
 
-**Reponse : B — Un AI Agent**
+**réponse : B — Un AI Agent**
 
-Perplexity utilise un LLM comme moteur de raisonnement, mais ajoute des outils de recherche web. Il planifie des etapes (chercher, lire, synthetiser) et agit dans son environnement (internet). C'est la definition d'un AI Agent.
+Perplexity utilise un LLM comme moteur de raisonnement, mais ajoute des outils de recherche web. Il planifie des étapes (chercher, lire, synthetiser) et agit dans son environnement (internet). C'est la définition d'un AI Agent.
 
 </details>
 
 ---
 
-**Question 3** — Devin recoit comme mission "cree une API REST pour gerer des utilisateurs, avec tests et documentation", travaille pendant 2 heures en ecrivant du code, en executant des tests, en corrigeant ses erreurs, et livre un projet fonctionnel. Quel type de systeme est-ce ?
+**Question 3** — Devin recoit comme mission "créé une API REST pour gerer des utilisateurs, avec tests et documentation", travaille pendant 2 heures en ecrivant du code, en executant des tests, en corrigeant ses erreurs, et livre un projet fonctionnel. Quel type de système est-ce ?
 
 A) Un LLM  
 B) Un AI Agent simple  
-C) Un systeme Agentic AI  
-D) Un systeme expert
+C) Un système Agentic AI  
+D) Un système expert
 
 <details>
-<summary>Reponse et explication</summary>
+<summary>réponse et explication</summary>
 
-**Reponse : C — Un systeme Agentic AI**
+**réponse : C — Un système Agentic AI**
 
-Devin opere de maniere autonome sur une mission longue, planifie de nombreuses sous-taches, utilise plusieurs outils (editeur de code, terminal, navigateur), detecte et corrige ses propres erreurs sans intervention humaine a chaque etape. C'est le paradigme Agentic AI.
+Devin opere de maniere autonome sur une mission longue, planifie de nombreuses sous-taches, utilise plusieurs outils (editeur de code, terminal, navigateur), détecté et corrige ses propres erreurs sans intervention humaine a chaque étape. C'est le paradigme Agentic AI.
 
 </details>
 
 ---
 
-**Question 4** — Quelle est la difference principale entre un AI Agent et un LLM ?
+**Question 4** — Quelle est la différence principale entre un AI Agent et un LLM ?
 
-A) Un AI Agent utilise un modele plus grand  
-B) Un AI Agent peut agir dans son environnement grace a des outils  
-C) Un AI Agent ne peut pas generer de texte  
+A) Un AI Agent utilise un modèle plus grand  
+B) Un AI Agent peut agir dans son environnement grâce à des outils  
+C) Un AI Agent ne peut pas générer de texte  
 D) Un LLM est plus autonome qu'un AI Agent
 
 <details>
-<summary>Reponse et explication</summary>
+<summary>réponse et explication</summary>
 
-**Reponse : B**
+**réponse : B**
 
-La difference fondamentale est la capacite d'**action**. Un LLM genere du texte en reponse a une entree. Un AI Agent utilise ce LLM comme cerveau mais peut en plus appeler des outils (web, code, APIs, fichiers) pour agir dans le monde reel. L'AI Agent est construit **autour** du LLM.
+La différence fondamentale est la capacité d'**action**. Un LLM généré du texte en réponse a une entrée. Un AI Agent utilise ce LLM comme cerveau mais peut en plus appeler des outils (web, code, APIs, fichiers) pour agir dans le monde réel. L'AI Agent est construit **autour** du LLM.
 
 </details>
 
 ---
 
-**Question 5** — Dans un systeme Agentic AI, qu'est-ce que le HITL ?
+**Question 5** — Dans un système Agentic AI, qu'est-ce que le HITL ?
 
-A) Un type de modele de langage  
+A) Un type de modèle de langage  
 B) Un outil de recherche web  
-C) Le moment ou un humain intervient pour valider une decision critique  
-D) Une technique d'entrainement
+C) Le moment ou un humain intervient pour valider une décision critique  
+D) Une technique d'entraînement
 
 <details>
-<summary>Reponse et explication</summary>
+<summary>réponse et explication</summary>
 
-**Reponse : C**
+**réponse : C**
 
-**HITL** (Human In The Loop) designe les points dans le workflow agentique ou l'intervention humaine est requise avant de continuer. Par exemple, avant qu'un agent envoie un email important, supprime des fichiers ou effectue une transaction financiere. C'est le mecanisme de controle qui permet de garder l'humain responsable des decisions critiques.
+**HITL** (Human In The Loop) designe les points dans le workflow agentique ou l'intervention humaine est requise avant de continuer. Par exemple, avant qu'un agent envoie un email important, supprime des fichiers ou effectue une transaction financiere. C'est le mécanisme de contrôle qui permet de garder l'humain responsable des décisions critiques.
 
 </details>
 
