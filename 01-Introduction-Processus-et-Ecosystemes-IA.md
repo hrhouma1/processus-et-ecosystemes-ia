@@ -194,7 +194,7 @@ timeline
     2012 : AlexNet — Révolution en vision par ordinateur
     2016 : AlphaGo bat Lee Sedol au jeu de Go (DeepMind)
     2017 : Transformer architecture (Google — Attention is All You Need)
-    2020 : GPT-3 — LLM à 175 milliards de paramètres (OpenAI)
+    2020 : GPT-3 — LLM à 175 milliards de paramètrès (OpenAI)
     2022 : ChatGPT — Démocratisation de l'IA générative
     2023 : GPT-4, Gemini, Claude — Course aux LLMs multimodaux
     2024 : IA agentique, modèles de raisonnement (o1, o3)
@@ -209,7 +209,7 @@ timeline
 
 - **1943** — Warren McCulloch et Walter Pitts publient un modèle mathématique du neurone, base des réseaux de neurones.
 - **1950** — Alan Turing publie *Computing Machinery and Intelligence* et propose le **Test de Turing**.
-- **1956** — La **conférence de Dartmouth** est considérée comme la naissance officielle de l'IA. John McCarthy, Marvin Minsky, Claude Shannon et d'autres définissent le domaine.
+- **1956** — La **conférence de Dartmouth** est considérée comme la naissance officielle de l'IA. John McCarthy, Marvin Minsky, Claude Shannon et d'autrès définissent le domaine.
 
 #### 1957–1974 — Optimisme et premier hiver
 
@@ -314,7 +314,7 @@ mindmap
 | Secteur | Application | Outil / Technologie |
 |---------|------------|---------------------|
 | **Santé** | Détection du cancer sur IRM | Deep Learning (CNN) |
-| **Finance** | Détection de transactions frauduleuses | Anomaly Detection, ML |
+| **Finance** | Détection de transactions frauduleuses | Anomaly détection, ML |
 | **Transport** | Véhicules autonomes | Computer Vision, RL |
 | **Commerce** | « Vous aimerez aussi... » | Systèmes de recommandation |
 | **Éducation** | Correction automatique de dissertations | NLP |
@@ -458,7 +458,7 @@ En 2026, l'IA générative est omniprésente. Les LLMs sont intégrés dans la q
 
 ### L'IA agentique (Agentic AI)
 
-L'**IA agentique** désigne des systèmes d'IA capables de **planifier, décider et agir de manière autonome** pour accomplir des objectifs complexes sur plusieurs étapes, en utilisant des outils, en naviguant sur le web, en écrivant et exécutant du code, et en interagissant avec d'autres agents.
+L'**IA agentique** désigne des systèmes d'IA capables de **planifier, décider et agir de manière autonome** pour accomplir des objectifs complexes sur plusieurs étapes, en utilisant des outils, en naviguant sur le web, en écrivant et exécutant du code, et en interagissant avec d'autrès agents.
 
 #### Comment fonctionne un agent IA ?
 
@@ -500,7 +500,7 @@ flowchart TD
 
 #### Objectif
 
-Analyser et présenter l'**état réel de l'IA en 2026** : sommes-nous proches de l'IA forte ? L'IA agentique change-t-elle fondamentalement la donne ?
+Analyser et présenter l'**état réel de l'IA en 2026** : sommes-nous proches de l'IA forte ? L'IA agentique change-t-elle fondamentalement la donné ?
 
 #### Formation des groupes
 
