@@ -20,6 +20,7 @@
 | 5a | &nbsp;&nbsp;&nbsp;↳ [Choisir le bon algorithme](#section-5) |
 | 5b | &nbsp;&nbsp;&nbsp;↳ [Entraînement et validation](#section-5) |
 | 5c | &nbsp;&nbsp;&nbsp;↳ [Hyperparamètres et optimisation](#section-5) |
+| 5d | &nbsp;&nbsp;&nbsp;↳ [Fine-tuning — adapter un modèle pré-entraîné](#section-5) |
 | 6 | [Phase 5 — Évaluation du modèle](#section-6) |
 | 6a | &nbsp;&nbsp;&nbsp;↳ [Métriques d'évaluation](#section-6) |
 | 6b | &nbsp;&nbsp;&nbsp;↳ [Biais, équité et limites](#section-6) |
@@ -29,9 +30,14 @@
 | 8 | [Phase 7 — Monitoring et maintenance](#section-8) |
 | 8a | &nbsp;&nbsp;&nbsp;↳ [Data drift et model drift](#section-8) |
 | 8b | &nbsp;&nbsp;&nbsp;↳ [Réentraînement et versioning](#section-8) |
-| 9 | [MLOps — Automatiser le cycle de vie](#section-9) |
-| 10 | [Étude de cas — Projet complet de A à Z](#section-10) |
-| 11 | [Travail pratique — Planifier un projet IA](#section-11) |
+| 9 | [Cycle de vie des données — Rétention, archivage et suppression](#section-data-lifecycle) |
+| 9a | &nbsp;&nbsp;&nbsp;↳ [Diagramme du cycle de vie des données](#section-data-lifecycle) |
+| 9b | &nbsp;&nbsp;&nbsp;↳ [Politiques de rétention](#section-data-lifecycle) |
+| 9c | &nbsp;&nbsp;&nbsp;↳ [Discarding — quand et comment supprimer](#section-data-lifecycle) |
+| 9d | &nbsp;&nbsp;&nbsp;↳ [RGPD et obligations légales](#section-data-lifecycle) |
+| 10 | [MLOps — Automatiser le cycle de vie](#section-9) |
+| 11 | [Étude de cas — Projet complet de A à Z](#section-10) |
+| 12 | [Travail pratique — Planifier un projet IA](#section-11) |
 
 ---
 
@@ -57,6 +63,16 @@ flowchart TD
     P8 --> P9{Dégradation\ndétectée ?}
     P9 -- Oui --> P4
     P9 -- Non --> P8
+
+    P2 --> DL["📦 Cycle de vie des données"]
+    P3 --> DL
+    P8 --> DL
+    DL --> R["🗄️ Rétention\n(conserver, archiver)"]
+    DL --> D["🗑️ Discarding\n(supprimer, anonymiser)"]
+    R --> RC{Durée de\nrétention\natteinte ?}
+    RC -- Oui --> D
+    RC -- Non --> R
+    D --> RGPD["⚖️ Conformité RGPD\n& obligations légales"]
 ```
 
 ---
@@ -466,6 +482,170 @@ grid_search.fit(X_train, y_train)
 print("Meilleurs paramètres :", grid_search.best_params_)
 ```
 
+---
+
+### Fine-tuning — Adapter un modèle pré-entraîné
+
+Le **fine-tuning** consiste à prendre un modèle déjà entraîné sur une grande quantité de données (modèle pré-entraîné) et à le **réentraîner partiellement** sur vos propres données spécifiques pour l'adapter à votre tâche.
+
+> C'est l'approche dominante en 2026 : plutôt que d'entraîner un modèle de zéro (coûteux et lent), on part d'un modèle puissant et on l'affine.
+
+---
+
+#### Pourquoi faire du fine-tuning ?
+
+| Situation | Solution recommandée |
+|-----------|---------------------|
+| Peu de données, tâche standard | **Zero-shot / Few-shot** avec un LLM |
+| Données spécifiques à un domaine (médical, juridique...) | **Fine-tuning** |
+| Tâche très différente du modèle de base | **Fine-tuning complet** |
+| Budget limité, modèle déjà bon | **Prompt engineering** seulement |
+| Besoin de style ou format précis | **Fine-tuning** |
+
+---
+
+#### Les 3 niveaux de fine-tuning
+
+```mermaid
+flowchart TD
+    PT["Modèle pré-entraîné\n(GPT, BERT, ResNet, LLaMA...)"]
+    PT --> A["1️⃣ Feature extraction\nGeler toutes les couches\nAjouter une couche de sortie\nEntraîner uniquement la tête"]
+    PT --> B["2️⃣ Fine-tuning partiel\nGeler les premières couches\nRéentraîner les dernières couches\n+ la tête"]
+    PT --> C["3️⃣ Fine-tuning complet\nRéentraîner tout le modèle\nRequiert plus de données et de GPU"]
+
+    A --> A1["✅ Peu de données\nRapide, moins de risque d'overfitting"]
+    B --> B1["✅ Données moyennes\nBon équilibre performance / coût"]
+    C --> C1["✅ Beaucoup de données\nMeilleure adaptation possible"]
+```
+
+---
+
+#### Fine-tuning d'un modèle de vision (Transfer Learning avec TensorFlow)
+
+```python
+import tensorflow as tf
+from tensorflow.keras.applications import MobileNetV2
+from tensorflow.keras import layers, Model
+
+# 1. Charger le modèle pré-entraîné sans la tête de classification
+base_model = MobileNetV2(
+    input_shape=(224, 224, 3),
+    include_top=False,       # on retire la couche finale
+    weights="imagenet"       # poids pré-entraînés sur ImageNet
+)
+
+# 2. Geler les couches du modèle de base (feature extraction)
+base_model.trainable = False
+
+# 3. Ajouter notre propre tête de classification
+x = base_model.output
+x = layers.GlobalAveragePooling2D()(x)
+x = layers.Dense(128, activation="relu")(x)
+output = layers.Dense(3, activation="softmax")(x)  # 3 classes
+
+model = Model(inputs=base_model.input, outputs=output)
+
+# 4. Entraîner seulement la tête
+model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
+model.fit(train_ds, validation_data=val_ds, epochs=10)
+
+# 5. Fine-tuning partiel : dégeler les 20 dernières couches
+base_model.trainable = True
+for layer in base_model.layers[:-20]:
+    layer.trainable = False
+
+model.compile(optimizer=tf.keras.optimizers.Adam(1e-5), # lr très petit
+              loss="categorical_crossentropy",
+              metrics=["accuracy"])
+model.fit(train_ds, validation_data=val_ds, epochs=5)
+```
+
+---
+
+#### Fine-tuning d'un LLM (avec Hugging Face)
+
+```python
+from transformers import AutoModelForSequenceClassification, AutoTokenizer, Trainer, TrainingArguments
+from datasets import load_dataset
+
+# 1. Charger le modèle et le tokenizer pré-entraînés
+model_name = "bert-base-uncased"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=2)
+
+# 2. Préparer les données
+dataset = load_dataset("imdb")
+
+def tokenize(batch):
+    return tokenizer(batch["text"], truncation=True, padding="max_length", max_length=512)
+
+tokenized = dataset.map(tokenize, batched=True)
+
+# 3. Configurer l'entraînement
+training_args = TrainingArguments(
+    output_dir="./results",
+    num_train_epochs=3,
+    per_device_train_batch_size=16,
+    per_device_eval_batch_size=16,
+    evaluation_strategy="epoch",
+    save_strategy="epoch",
+    learning_rate=2e-5,        # très petit pour ne pas détruire les poids pré-entraînés
+    load_best_model_at_end=True,
+)
+
+# 4. Lancer le fine-tuning
+trainer = Trainer(
+    model=model,
+    args=training_args,
+    train_dataset=tokenized["train"],
+    eval_dataset=tokenized["test"],
+)
+trainer.train()
+```
+
+---
+
+#### PEFT et LoRA — Fine-tuning à faible coût
+
+Pour les très grands modèles (LLaMA, Mistral, GPT...), le fine-tuning complet est **trop coûteux**. On utilise des techniques de **fine-tuning efficace** :
+
+| Technique | Description | Coût |
+|-----------|-------------|------|
+| **LoRA** (Low-Rank Adaptation) | Ajouter de petites matrices d'adaptation sans modifier les poids originaux | Très faible |
+| **QLoRA** | LoRA + quantification 4-bit | Encore plus faible — faisable sur 1 GPU grand public |
+| **Prefix Tuning** | Ajouter des tokens virtuels entraînables en début de séquence | Faible |
+| **Adapter layers** | Insérer de petites couches entre les couches existantes | Faible |
+
+```python
+# Exemple avec PEFT + LoRA (Hugging Face)
+from peft import get_peft_model, LoraConfig, TaskType
+
+lora_config = LoraConfig(
+    task_type=TaskType.SEQ_CLS,
+    r=8,              # rang des matrices LoRA
+    lora_alpha=32,
+    lora_dropout=0.1,
+    target_modules=["query", "value"]
+)
+
+peft_model = get_peft_model(model, lora_config)
+peft_model.print_trainable_parameters()
+# → "trainable params: 294,912 || all params: 109,776,128 || trainable%: 0.27"
+# Seulement 0.27% des paramètres sont entraînés !
+```
+
+---
+
+#### Fine-tuning vs Prompt Engineering vs RAG
+
+| Approche | Quand l'utiliser | Coût | Données requises |
+|----------|-----------------|------|-----------------|
+| **Prompt Engineering** | Le modèle est déjà bon avec des instructions claires | Nul | Aucune |
+| **Few-shot prompting** | Quelques exemples suffisent dans le prompt | Nul | 5–20 exemples |
+| **RAG** (Retrieval-Augmented Generation) | Besoin de connaissances actualisées ou propriétaires | Faible | Documents à indexer |
+| **Fine-tuning** | Style, format ou domaine très spécifique | Moyen | 100 à 10 000 exemples |
+| **Pré-entraînement from scratch** | Domaine totalement nouveau, budget important | Très élevé | Millions d'exemples |
+
 </details>
 
 <p align="right"><a href="#top">↑ Retour en haut</a></p>
@@ -773,10 +953,202 @@ flowchart LR
 
 ---
 
+<a id="section-data-lifecycle"></a>
+
+<details>
+<summary><strong>9 — Cycle de vie des données — Rétention, archivage et suppression</strong></summary>
+
+<br/>
+
+> Les données ne sont pas éternelles. Elles naissent, sont utilisées, vieillissent et doivent être gérées — voire supprimées. Ce cycle est **indissociable** du cycle de vie du projet IA.
+
+---
+
+### Diagramme complet du cycle de vie des données
+
+```mermaid
+flowchart LR
+    subgraph CREATION["1️⃣ Création / Collecte"]
+        C1["Capteurs, formulaires\nAPIs, logs, scraping"]
+    end
+    subgraph STOCKAGE["2️⃣ Stockage"]
+        S1["Base de données\nData lake / Data warehouse\nCloud storage"]
+    end
+    subgraph UTILISATION["3️⃣ Utilisation"]
+        U1["EDA\nEntraînement\nFine-tuning\nMonitoring"]
+    end
+    subgraph ARCHIVAGE["4️⃣ Archivage"]
+        A1["Données froides\nStockage long terme\nCompression"]
+    end
+    subgraph SUPPRESSION["5️⃣ Suppression / Discarding"]
+        D1["Suppression définitive\nAnonymisation\nPseudonymisation"]
+    end
+
+    CREATION --> STOCKAGE --> UTILISATION --> ARCHIVAGE --> SUPPRESSION
+    UTILISATION -- "Données obsolètes\nou inutilisables" --> SUPPRESSION
+    ARCHIVAGE -- "Données réutilisables\npour réentraînement" --> UTILISATION
+```
+
+---
+
+### Où le cycle de vie des données s'insère-t-il dans le projet IA ?
+
+| Phase du projet IA | Action sur les données |
+|-------------------|----------------------|
+| **Phase 2 — Collecte** | Création, stockage initial, définition de la politique de rétention |
+| **Phase 3 — Préparation** | Nettoyage → suppression des doublons et données inutilisables |
+| **Phase 4 — Entraînement** | Utilisation active des données ; versioning du dataset |
+| **Phase 7 — Monitoring** | Les nouvelles données de production entrent dans le cycle |
+| **Fin de projet / réentraînement** | Archivage des vieux datasets, suppression des données expirées |
+
+---
+
+### Politiques de rétention
+
+Une **politique de rétention** définit combien de temps chaque type de données est conservé et sous quelle forme.
+
+| Type de donnée | Durée de rétention typique | Justification |
+|----------------|---------------------------|---------------|
+| Données d'entraînement brutes | 1 à 5 ans | Permettre le réentraînement et l'audit |
+| Données de production (logs) | 6 mois à 2 ans | Debugging, monitoring, drift detection |
+| Données personnelles (RGPD) | Durée minimale nécessaire | Obligation légale — droit à l'oubli |
+| Modèles entraînés | Aussi longtemps que déployés + 1 an | Reproductibilité, audit |
+| Données médicales | 10 à 20 ans (selon pays) | Obligation réglementaire |
+| Données financières | 5 à 7 ans | Obligation légale |
+| Données de test / validation | Durée du projet + 1 an | Comparaison future de modèles |
+
+---
+
+### Discarding — Quand et comment supprimer les données
+
+Le **discarding** est la décision de **retirer des données du pipeline** — temporairement ou définitivement.
+
+#### Quand supprimer ?
+
+```mermaid
+flowchart TD
+    Q["Une donnée doit-elle\nêtre supprimée ?"] --> A{Durée de\nrétention\natteinte ?}
+    A -- Oui --> DEL["🗑️ Supprimer"]
+    A -- Non --> B{Donnée\npersonnelle\nsans consentement ?}
+    B -- Oui --> DEL
+    B -- Non --> C{Donnée\ncorrompue ou\ninutilisable ?}
+    C -- Oui --> D{Récupérable ?}
+    D -- Non --> DEL
+    D -- Oui --> FIX["🔧 Corriger et\nréintégrer"]
+    C -- Non --> E{Donnée\nobsolète ?\n(concept drift)"}
+    E -- Oui --> F["📦 Archiver\nou supprimer"]
+    E -- Non --> KEEP["✅ Conserver"]
+```
+
+#### Les 3 méthodes de discarding
+
+| Méthode | Description | Cas d'usage |
+|---------|-------------|------------|
+| **Suppression définitive** | Effacement complet et irréversible | Données personnelles, expiration légale |
+| **Anonymisation** | Retirer tous les identifiants — la donnée reste utilisable | Réutiliser des données médicales en recherche |
+| **Pseudonymisation** | Remplacer les identifiants par des codes — réversible | RGPD, données clients actifs |
+
+```python
+import pandas as pd
+import hashlib
+
+df = pd.read_csv("users_data.csv")
+
+# Suppression définitive d'une colonne personnelle
+df = df.drop(columns=["nom", "prenom", "email"])
+
+# Pseudonymisation — remplacer l'identifiant par un hash
+def pseudonymize(value: str) -> str:
+    return hashlib.sha256(value.encode()).hexdigest()[:16]
+
+df["user_id"] = df["user_id"].apply(pseudonymize)
+
+# Anonymisation — supprimer la précision géographique
+df["code_postal"] = df["code_postal"].astype(str).str[:2]  # garder seulement la province
+
+df.to_csv("users_anonymized.csv", index=False)
+```
+
+---
+
+### Données de mauvaise qualité — Discarding dans le pipeline ML
+
+Lors de la préparation des données, certaines lignes doivent être **écartées** du dataset d'entraînement :
+
+| Raison d'écarter | Exemple | Action |
+|-----------------|---------|--------|
+| Valeurs aberrantes extrêmes | Âge = 999 ans | Supprimer la ligne |
+| Données dupliquées | Même transaction enregistrée 2 fois | Dédupliquer |
+| Label incorrect | Image d'un chien étiquetée « chat » | Corriger ou supprimer |
+| Données du futur (leakage) | Colonne créée après l'événement cible | Retirer la feature |
+| Données trop anciennes | Comportements d'achat d'avant 2015 | Archiver, ne pas entraîner dessus |
+| Données sous-représentées | 3 exemples d'une classe rare | Augmenter ou écarter selon le contexte |
+
+```python
+# Exemple de pipeline de discarding automatique
+def clean_and_discard(df: pd.DataFrame) -> pd.DataFrame:
+
+    initial_size = len(df)
+
+    # 1. Supprimer les doublons
+    df = df.drop_duplicates()
+
+    # 2. Supprimer les lignes avec trop de valeurs manquantes (> 50 %)
+    df = df.dropna(thresh=int(len(df.columns) * 0.5))
+
+    # 3. Écarter les outliers extrêmes (z-score > 4)
+    from scipy import stats
+    import numpy as np
+    numeric_cols = df.select_dtypes(include=[np.number]).columns
+    z_scores = np.abs(stats.zscore(df[numeric_cols].fillna(0)))
+    df = df[(z_scores < 4).all(axis=1)]
+
+    # 4. Écarter les données trop anciennes (> 3 ans)
+    df["date"] = pd.to_datetime(df["date"])
+    cutoff = pd.Timestamp.now() - pd.DateOffset(years=3)
+    df = df[df["date"] >= cutoff]
+
+    discarded = initial_size - len(df)
+    print(f"Données écartées : {discarded} lignes ({discarded/initial_size*100:.1f} %)")
+    return df
+```
+
+---
+
+### RGPD et obligations légales
+
+Le **Règlement Général sur la Protection des Données** (RGPD / GDPR) impose des règles strictes sur les données personnelles utilisées en IA.
+
+| Principe RGPD | Impact sur le projet IA |
+|--------------|------------------------|
+| **Minimisation des données** | Collecter uniquement ce qui est nécessaire à la tâche |
+| **Limitation de la finalité** | Ne pas réutiliser les données pour un autre usage sans consentement |
+| **Limitation de la conservation** | Définir et respecter une durée de rétention |
+| **Droit à l'effacement** | Pouvoir supprimer toutes les données d'un utilisateur à sa demande |
+| **Portabilité** | Pouvoir exporter les données d'un utilisateur |
+| **Transparence** | Expliquer comment les données sont utilisées dans le modèle |
+
+> **En pratique** : avant tout projet IA avec des données personnelles, une **analyse d'impact (AIPD / DPIA)** est souvent obligatoire.
+
+#### Checklist RGPD pour un projet IA
+
+- [ ] Les données personnelles sont-elles nécessaires ou peut-on utiliser des données anonymes ?
+- [ ] Le consentement des utilisateurs a-t-il été obtenu ?
+- [ ] Une durée de rétention est-elle définie pour chaque type de donnée ?
+- [ ] Le droit à l'effacement est-il techniquement possible ?
+- [ ] Les données sont-elles stockées dans l'UE ou dans un pays adéquat ?
+- [ ] Le modèle prend-il des décisions automatiques impactant des individus ? (Art. 22 RGPD)
+
+</details>
+
+<p align="right"><a href="#top">↑ Retour en haut</a></p>
+
+---
+
 <a id="section-9"></a>
 
 <details>
-<summary><strong>9 — MLOps — Automatiser le cycle de vie</strong></summary>
+<summary><strong>10 — MLOps — Automatiser le cycle de vie</strong></summary>
 
 <br/>
 
