@@ -51,10 +51,12 @@ Le cycle de vie d’un projet ML correspond à l’ensemble des étapes qui perm
 
 ## Schéma global du cycle ML
 
+
 ```mermaid
-flowchart LR
-    A["Problème réel"] --> B["Collecte des données"]
-    B --> C["Analyse exploratoire\nEDA"]
+flowchart TD
+    A["Problème réel"]
+    A --> B["Collecte des données"]
+    B --> C["Analyse exploratoire<br/>EDA"]
     C --> D["Préparation des données"]
     D --> E["Feature engineering"]
     E --> F["Choix de l'algorithme"]
@@ -62,7 +64,7 @@ flowchart LR
     G --> H["Évaluation du modèle"]
     H --> I["Fine-tuning"]
     I --> J["Déploiement"]
-    J --> K["Monitoring\net amélioration continue"]
+    J --> K["Monitoring<br/>et amélioration continue"]
     K --> C
 ```
 
