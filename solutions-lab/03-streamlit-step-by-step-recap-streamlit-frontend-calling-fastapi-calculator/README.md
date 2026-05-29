@@ -1,4 +1,4 @@
-#  - Step-by-step recap: Streamlit frontend calling FastAPI calculator
+#  Step-by-step recap: Streamlit frontend calling FastAPI calculator
 
 > [!TIP]
 > **Objectif  — Faire dialoguer DEUX conteneurs : un front Streamlit qui appelle le backend FastAPI du chap27.**
