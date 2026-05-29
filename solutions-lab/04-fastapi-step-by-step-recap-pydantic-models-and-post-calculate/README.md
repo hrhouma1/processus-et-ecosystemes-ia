@@ -1,7 +1,7 @@
-# chap29 - Step-by-step recap: Pydantic models + POST /calculate
+#  Step-by-step recap: Pydantic models + POST /calculate
 
 > [!TIP]
-> **Objectif du chap29 — Passer des paramètres d'URL à un VRAI body JSON validé par Pydantic.**
+> **Objectif - Passer des paramètres d'URL à un VRAI body JSON validé par Pydantic.**
 >
 > Tu vas :
 > 1. Garder la pile `fastapi + streamlit` du chap28 (réseau `calc-net`, hot reload, `depends_on`).
@@ -15,7 +15,7 @@
 ## Structure du projet
 
 ```
-chap29-fastapi-step-by-step-recap-pydantic-models-and-post-calculate/
+fastapi-step-by-step-recap-pydantic-models-and-post-calculate/
 ├── fastapi/
 │   └── Dockerfile
 ├── streamlit/
@@ -27,9 +27,9 @@ chap29-fastapi-step-by-step-recap-pydantic-models-and-post-calculate/
 └── README.md
 ```
 
-## What's new vs chap28
+## What's 
 
-| | chap28 | chap29 |
+| | chapitre précédent | ce chapitre  |
 |---|---|---|
 | Endpoint principal | `GET /add/{a}/{b}` | `POST /calculate` |
 | Paramètres | dans l'URL (path) | dans le **body JSON** |
@@ -78,7 +78,7 @@ Avec ce code :
 ## Run it (100% Docker, no Python on the host)
 
 ```bash
-cd chap29-fastapi-step-by-step-recap-pydantic-models-and-post-calculate
+cd fastapi-step-by-step-recap-pydantic-models-and-post-calculate
 
 # 1. Build + up des deux services :
 docker compose up -d --build
@@ -131,7 +131,7 @@ docker compose down
 ## Recap
 
 ```bash
-cd chap29-fastapi-step-by-step-recap-pydantic-models-and-post-calculate
+cd fastapi-step-by-step-recap-pydantic-models-and-post-calculate
 docker compose up -d --build
 # -> http://localhost:8501  (front)
 # -> http://localhost:8000/docs  (backend Swagger avec POST /calculate)
@@ -141,7 +141,7 @@ docker compose down
 ## Recap +
 
 ```bash
-cd chap29-fastapi-step-by-step-recap-pydantic-models-and-post-calculate
+cd fastapi-step-by-step-recap-pydantic-models-and-post-calculate
 docker compose up -d --build
 
 # Tester directement depuis le conteneur Streamlit :
