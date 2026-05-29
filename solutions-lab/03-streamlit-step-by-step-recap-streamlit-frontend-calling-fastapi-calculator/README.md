@@ -4,7 +4,7 @@
 > **Objectif  — Faire dialoguer DEUX conteneurs : un front Streamlit qui appelle le backend FastAPI du chap27.**
 >
 > Tu vas :
-> 1. Réutiliser exactement la calculatrice FastAPI du chap27 (`main.py`, port 8000).
+> 1. Réutiliser exactement la calculatrice FastAPI du chapitre précédent (`main.py`, port 8000).
 > 2. Ajouter un **second service** dans `docker-compose.yml` : un front Streamlit (`app.py`, port 8501).
 > 3. Mettre les deux services sur **le même réseau Docker** (`calc-net`) pour que Streamlit puisse appeler FastAPI par le nom de service `http://fastapi:8000` (et NON `http://localhost:8000`).
 > 4. Utiliser `depends_on` + `healthcheck` pour que Streamlit ne démarre **qu'après** que FastAPI soit prêt à répondre.
