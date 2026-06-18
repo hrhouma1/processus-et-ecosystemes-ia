@@ -1,7 +1,5 @@
 ﻿# chap01 - Step-by-step recap: Hello MLflow basics
 
-The full lesson lives at [`../01-practical-work-mlflow-step-by-step-recap-hello-mlflow-basics.md`](../01-practical-work-mlflow-step-by-step-recap-hello-mlflow-basics.md).
-
 > [!TIP]
 > **Objectif du chap01 — Faire tourner MLflow pour la toute première fois.**
 >
