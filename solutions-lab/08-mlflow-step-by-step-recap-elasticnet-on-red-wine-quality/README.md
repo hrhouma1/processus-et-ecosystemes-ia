@@ -1,224 +1,220 @@
-﻿# chap03 - Step-by-step recap: first ElasticNet pipeline on red-wine-quality
+# chap03 - Récapitulatif étape par étape : premier pipeline ElasticNet sur red-wine-quality
 
-The full lesson lives at [`../03-practical-work-mlflow-step-by-step-recap-elasticnet-on-red-wine-quality.md`](../03-practical-work-mlflow-step-by-step-recap-elasticnet-on-red-wine-quality.md).
+
 
 > [!TIP]
 > **Objectif du chap03 — Premier vrai pipeline ML tracé dans MLflow.**
 >
 > Tu vas :
-> 1. Reprendre la même pile à un seul service `mlflow` qu'aux chap01/02 (bind mounts `./database`, `./mlruns`, `./data`).
-> 2. Entraîner un modèle **ElasticNet** sur le dataset `red-wine-quality.csv` en passant `--alpha` et `--l1_ratio` en CLI.
-> 3. Logger **paramètres**, **métriques** (`rmse`, `mae`, `r2`) et **modèle** (`mlflow.sklearn.log_model`) dans MLflow.
-> 4. Lancer **trois runs successifs** avec des hyperparamètres différents (`0.1/0.1`, `0.5/0.5`, `0.9/0.1`) et les comparer dans l'UI (`http://localhost:5000`).
 >
-> À la fin, tu sais lancer le _même_ script avec des arguments différents, comparer les runs côte à côte dans MLflow, et identifier le meilleur jeu d'hyperparamètres. C'est le **squelette de code** que tous les chapitres suivants vont enrichir (multi-services, `log_artifacts`, signatures, registry, etc.).
+> 1. Reprendre la même pile à un seul service `mlflow` que dans les chap01 et chap02, avec les bind mounts `./database`, `./mlruns` et `./data`.
+> 2. Entraîner un modèle **ElasticNet** sur le dataset `red-wine-quality.csv` en passant `--alpha` et `--l1_ratio` en ligne de commande.
+> 3. Logger dans MLflow les **paramètres**, les **métriques** (`rmse`, `mae`, `r2`) et le **modèle** avec `mlflow.sklearn.log_model`.
+> 4. Lancer **trois runs successifs** avec des hyperparamètres différents (`0.1/0.1`, `0.5/0.5`, `0.9/0.1`) et les comparer dans l’interface MLflow (`http://localhost:5000`).
+>
+> À la fin, tu sauras lancer le *même* script avec des arguments différents, comparer les runs côte à côte dans MLflow, et identifier le meilleur jeu d’hyperparamètres. C’est le **squelette de code** que tous les chapitres suivants vont enrichir : multi-services, `log_artifacts`, signatures, registry, etc.
 
+Ce laboratoire montre comment exécuter plusieurs expériences MLflow avec différents hyperparamètres.
 
-This lab shows how to run several MLflow experiments with different hyperparameters.
-
-You will train the same ElasticNet model three times, but each run will use different values of:
+Tu vas entraîner le même modèle ElasticNet trois fois, mais chaque run utilisera des valeurs différentes de :
 
 ```text
 alpha
 l1_ratio
-````
+```
 
-The goal is to compare the results in the MLflow UI.
-
-
-## What's new vs chap02 - MLflow ElasticNet on Red Wine Quality with Docker
-
-- A real ML pipeline: `pd.read_csv` -> `train_test_split` -> `ElasticNet.fit` -> compute `rmse / mae / r2`
-- `mlflow.sklearn.log_model(lr, "mymodel")` to persist the trained model
+L’objectif est de comparer les résultats dans l’interface MLflow.
 
 ---
 
-# 1. Clone the project
+## Ce qui est nouveau par rapport au chap02 — ElasticNet sur Red Wine Quality avec Docker
+
+* Un vrai pipeline de Machine Learning : `pd.read_csv` → `train_test_split` → `ElasticNet.fit` → calcul de `rmse / mae / r2`.
+* `mlflow.sklearn.log_model(lr, "mymodel")` pour sauvegarder le modèle entraîné dans MLflow.
+
+---
+
+# 1. Cloner le projet
 
 ```bash
 git clone https://github.com/inskillflow/mlops-beginner-level-01-en.git
 ```
 
-Then enter the project folders in order:
+Ensuite, entre dans les dossiers du projet dans l’ordre :
 
 ```bash
 cd mlops-beginner-level-01-en/chap01-mlflow-step-by-step-recap-hello-mlflow-basics
-# done
+# terminé
 
 cd ../chap02-mlflow-step-by-step-recap-printing-the-tracking-uri
-# done
+# terminé
 
 cd ../chap03-mlflow-step-by-step-recap-elasticnet-on-red-wine-quality
-# start project #3
+# début du projet #3
 ```
 
 ---
 
-# 2. Stop any running containers first
+# 2. Arrêter d’abord les conteneurs déjà en cours d’exécution
 
-Before starting this lab, make sure that no other MLflow container is already running on port `5000`.
+Avant de commencer ce laboratoire, assure-toi qu’aucun autre conteneur MLflow n’est déjà en cours d’exécution sur le port `5000`.
 
-## Method 1 — Stop containers from another project
+## Méthode 1 — Arrêter les conteneurs d’un autre projet
 
-Go to the other project folder:
+Va dans le dossier de l’autre projet :
 
 ```bash
 cd other-project
 docker compose down
 ```
 
-This stops and removes the containers created by that project.
+Cette commande arrête et supprime les conteneurs créés par ce projet.
 
 ---
 
-## Method 2 — Use Docker Desktop
+## Méthode 2 — Utiliser Docker Desktop
 
-You can also open **Docker Desktop** and manually:
+Tu peux aussi ouvrir **Docker Desktop** et faire manuellement les étapes suivantes :
 
 ```text
-1. Go to Containers
-2. Find the running container
-3. Stop it
-4. Delete it if necessary
+1. Aller dans Containers
+2. Trouver le conteneur en cours d’exécution
+3. L’arrêter
+4. Le supprimer si nécessaire
 ```
 
-This is useful if you do not remember which folder started the container.
+Cette méthode est utile si tu ne te souviens plus quel dossier a démarré le conteneur.
 
 ---
 
-# 3. Start project #3
+# 3. Démarrer le projet #3
 
-You should now be inside this folder:
+Tu dois maintenant être dans ce dossier :
 
 ```bash
 chap03-mlflow-step-by-step-recap-elasticnet-on-red-wine-quality
 ```
 
-Create the required folders:
+Crée les dossiers nécessaires :
 
 ```bash
 mkdir -p database mlruns
 ```
 
-Or On Windows PowerShell:
+Ou sur Windows PowerShell :
 
 ```powershell
 New-Item -ItemType Directory -Force database, mlruns
 ```
 
-Or create the 2 folders manually (database and mlruns)
+Tu peux aussi créer les deux dossiers manuellement : `database` et `mlruns`.
 
-
-
-Then start the MLflow server:
+Ensuite, démarre le serveur MLflow :
 
 ```bash
 docker compose up -d --build
 ```
 
-Open the MLflow UI:
+Ouvre l’interface MLflow :
 
 ```text
 http://localhost:5000
 ```
 
-At this point, the UI may be empty or may only show the default experiment. This is normal.
+À ce stade, l’interface peut être vide ou afficher uniquement l’expérience par défaut. C’est normal.
 
+> **Attention importante :** crée les dossiers `database/` et `mlruns/` avant de démarrer Docker.
 
-
-⚠️ Important: create `database/` and `mlruns/` before starting Docker.
-
-If you forget them, stop Docker, create the folders, and restart with `--build`:
+Si tu les oublies, arrête Docker, crée les dossiers, puis redémarre avec `--build` :
 
 ```bash
 docker compose down
 mkdir -p database mlruns
 docker compose up -d --build
-````
+```
 
-The `--build` option forces Docker to rebuild instead of using the cache.
-
+L’option `--build` force Docker à reconstruire l’image au lieu d’utiliser le cache.
 
 ---
 
-# 4. Run experiment 1
+# 4. Lancer l’expérience 1
 
-Run the model with:
+Lance le modèle avec :
 
 ```text
 alpha = 0.1
 l1_ratio = 0.1
 ```
 
-Command:
+Commande :
 
 ```bash
 docker compose exec mlflow python train_with_mlflow.py --alpha 0.1 --l1_ratio 0.1
 ```
 
-Then check:
+Ensuite, vérifie :
 
 ```text
 http://localhost:5000
 ```
 
-You should see a new MLflow run.
+Tu devrais voir un nouveau run MLflow.
 
 ---
 
-# 5. Run experiment 2
+# 5. Lancer l’expérience 2
 
-Run the model with:
+Lance le modèle avec :
 
 ```text
 alpha = 0.5
 l1_ratio = 0.5
 ```
 
-Command:
+Commande :
 
 ```bash
 docker compose exec mlflow python train.py --alpha 0.5 --l1_ratio 0.5
 ```
 
-Then check again:
+Ensuite, vérifie à nouveau :
 
 ```text
 http://localhost:5000
 ```
 
-You should now see another run.
+Tu devrais maintenant voir un autre run.
 
 ---
 
-# 6. Run experiment 3
+# 6. Lancer l’expérience 3
 
-Run the model with:
+Lance le modèle avec :
 
 ```text
 alpha = 0.9
 l1_ratio = 0.9
 ```
 
-Command:
+Commande :
 
 ```bash
 docker compose exec mlflow python train.py --alpha 0.9 --l1_ratio 0.9
 ```
 
-Then check again:
+Ensuite, vérifie à nouveau :
 
 ```text
 http://localhost:5000
 ```
 
-You should now see three different runs.
+Tu devrais maintenant voir trois runs différents.
 
 ---
 
-# 7. Compare the runs in MLflow
+# 7. Comparer les runs dans MLflow
 
-In the MLflow UI, compare the runs using:
+Dans l’interface MLflow, compare les runs à l’aide de :
 
 ```text
 Parameters
@@ -227,64 +223,60 @@ Artifacts
 Model output
 ```
 
-The important idea is this:
+L’idée importante est la suivante :
 
 ```text
-Each run uses the same training script, but different hyperparameters.
-MLflow records each run separately.
-This allows you to compare which configuration gives the best results.
+Chaque run utilise le même script d’entraînement, mais avec des hyperparamètres différents.
+MLflow enregistre chaque run séparément.
+Cela permet de comparer quelle configuration donne les meilleurs résultats.
 ```
 
-For example:
+Par exemple :
 
 ```text
-Run 1: alpha = 0.1, l1_ratio = 0.1
-Run 2: alpha = 0.5, l1_ratio = 0.5
-Run 3: alpha = 0.9, l1_ratio = 0.9
+Run 1 : alpha = 0.1, l1_ratio = 0.1
+Run 2 : alpha = 0.5, l1_ratio = 0.5
+Run 3 : alpha = 0.9, l1_ratio = 0.9
 ```
 
 ---
 
-# 8. Stop the containers
+# 8. Arrêter les conteneurs
 
-When you are finished:
-
+Lorsque tu as terminé :
 
 ```bash
-docker compose down       # keep all runs
-docker compose down -v    # wipe everything
+docker compose down       # conserve tous les runs
+docker compose down -v    # supprime tout
 ```
 
+---
 
+## Attention importante — créer d’abord les dossiers
 
+Sois vigilant : si les deux dossiers `database/` et `mlruns/` ne sont pas créés avant le démarrage de Docker, MLflow peut ne pas sauvegarder correctement les données d’expérience.
 
-
-
-## ⚠️ Important warning — create the folders first
-
-⚠️ Be careful: if the two folders `database/` and `mlruns/` are not created before starting Docker, MLflow may not save the experiment data correctly.
-
-You may open the MLflow UI at:
+Tu peux ouvrir l’interface MLflow à l’adresse :
 
 ```text
 http://localhost:5000
-````
+```
 
-but you may not see your runs, metrics, parameters, or artifacts.
+mais tu risques de ne pas voir tes runs, tes métriques, tes paramètres ou tes artefacts.
 
-Before running Docker, create the two folders manually:
+Avant d’exécuter Docker, crée les deux dossiers manuellement :
 
 ```bash
 mkdir -p database mlruns
 ```
 
-On Windows PowerShell:
+Sur Windows PowerShell :
 
 ```powershell
 New-Item -ItemType Directory -Force database, mlruns
 ```
 
-If you already started Docker without creating these folders, do this:
+Si tu as déjà démarré Docker sans créer ces dossiers, fais ceci :
 
 ```bash
 docker compose down
@@ -292,7 +284,7 @@ mkdir -p database mlruns
 docker compose up -d --build
 ```
 
-On Windows PowerShell:
+Sur Windows PowerShell :
 
 ```powershell
 docker compose down
@@ -300,27 +292,27 @@ New-Item -ItemType Directory -Force database, mlruns
 docker compose up -d --build
 ```
 
-⚠️ The `--build` option is important here.
+L’option `--build` est importante ici.
 
-It forces Docker to rebuild the image instead of reusing the previous cached version.
+Elle force Docker à reconstruire l’image au lieu de réutiliser l’ancienne version en cache.
 
-Without `--build`, Docker may reuse the old cached configuration, and your fix may not be applied correctly.
+Sans `--build`, Docker peut réutiliser l’ancienne configuration en cache, et ta correction peut ne pas être appliquée correctement.
 
 ---
 
-# Final command recap
+# Récapitulatif final des commandes
 
 ```bash
 git clone https://github.com/inskillflow/mlops-beginner-level-01-en.git
 
 cd mlops-beginner-level-01-en/chap01-mlflow-step-by-step-recap-hello-mlflow-basics
-# done
+# terminé
 
 cd ../chap02-mlflow-step-by-step-recap-printing-the-tracking-uri
-# done
+# terminé
 
 cd ../chap03-mlflow-step-by-step-recap-elasticnet-on-red-wine-quality
-# start project #3
+# début du projet #3
 
 mkdir -p database mlruns
 
@@ -333,19 +325,19 @@ docker compose exec mlflow python train.py --alpha 0.9 --l1_ratio 0.9
 docker compose down
 ```
 
-PowerShell version:
+Version PowerShell :
 
 ```powershell
 git clone https://github.com/inskillflow/mlops-beginner-level-01-en.git
 
 cd mlops-beginner-level-01-en/chap01-mlflow-step-by-step-recap-hello-mlflow-basics
-# done
+# terminé
 
 cd ../chap02-mlflow-step-by-step-recap-printing-the-tracking-uri
-# done
+# terminé
 
 cd ../chap03-mlflow-step-by-step-recap-elasticnet-on-red-wine-quality
-# start project #3
+# début du projet #3
 
 New-Item -ItemType Directory -Force database, mlruns
 
@@ -360,21 +352,21 @@ docker compose down
 
 ---
 
-# To enter the container manually
+# Entrer manuellement dans le conteneur
 
-First list the running containers:
+Liste d’abord les conteneurs en cours d’exécution :
 
 ```bash
 docker ps
 ```
 
-Then enter the MLflow container:
+Ensuite, entre dans le conteneur MLflow :
 
 ```bash
 docker exec -it <container_id> bash
 ```
 
-Inside the container:
+À l’intérieur du conteneur :
 
 ```bash
 ls
@@ -382,7 +374,7 @@ python train_with_mlflow.py --alpha 0.1 --l1_ratio 0.1
 exit
 ```
 
-The Docker Compose equivalent is simpler:
+L’équivalent avec Docker Compose est plus simple :
 
 ```bash
 docker compose exec mlflow bash
@@ -390,96 +382,95 @@ docker compose exec mlflow bash
 
 ---
 
-# Why not use `-d` with `docker compose exec`?
+# Pourquoi ne pas utiliser `-d` avec `docker compose exec` ?
 
-You may see this command:
+Tu peux parfois voir cette commande :
 
 ```bash
 docker compose exec -d mlflow python train.py --alpha 0.1 --l1_ratio 0.1
 ```
 
-It works, but it runs the script in detached mode.
+Elle fonctionne, mais elle lance le script en mode détaché.
 
-
-## Recommended version ⚠️⚠️ :
+## Version recommandée :
 
 ```bash
 docker compose exec mlflow python train.py --alpha 0.1 --l1_ratio 0.1
 ```
 
-This way, if something goes wrong, the error appears immediately in the console !!!!
+De cette manière, si une erreur se produit, elle apparaît immédiatement dans la console.
 
 ---
 
-# What happens if I forgot to create `mlruns` and `database`?
+# Que se passe-t-il si j’ai oublié de créer `mlruns` et `database` ?
 
-If you forgot to create these folders before starting Docker, you may have problems with:
+Si tu as oublié de créer ces dossiers avant de démarrer Docker, tu peux rencontrer des problèmes avec :
 
 ```text
-SQLite database permissions
-MLflow metadata storage
-artifact storage
-root-owned folders
-bind mount errors
+les permissions de la base SQLite
+le stockage des métadonnées MLflow
+le stockage des artefacts
+des dossiers appartenant à root
+des erreurs de bind mount
 ```
 
-In simple words:
+En termes simples :
 
 ```text
-MLflow needs a place to store experiment information and artifacts.
-The database/ folder stores the SQLite metadata.
-The mlruns/ folder stores the run artifacts.
-If these folders are missing or created incorrectly, MLflow may not be able to write data properly.
+MLflow a besoin d’un endroit pour stocker les informations d’expérience et les artefacts.
+Le dossier database/ stocke les métadonnées SQLite.
+Le dossier mlruns/ stocke les artefacts des runs.
+Si ces dossiers sont absents ou créés incorrectement, MLflow peut ne pas réussir à écrire les données correctement.
 ```
 
 ---
 
-# How to fix it
+# Comment corriger le problème
 
-## Step 1 — Stop the containers
+## Étape 1 — Arrêter les conteneurs
 
 ```bash
 docker compose down
 ```
 
-## Step 2 — Create the required folders
+## Étape 2 — Créer les dossiers nécessaires
 
-Linux, macOS, Git Bash:
+Linux, macOS, Git Bash :
 
 ```bash
 mkdir -p database mlruns
 ```
 
-Windows PowerShell:
+Windows PowerShell :
 
 ```powershell
 New-Item -ItemType Directory -Force database, mlruns
 ```
 
-## Step 3 — Rebuild and restart the containers
+## Étape 3 — Reconstruire et redémarrer les conteneurs
 
 ```bash
 docker compose up -d --build
 ```
 
-The `--build` option forces Docker to rebuild the image.
+L’option `--build` force Docker à reconstruire l’image.
 
-This is useful when:
+C’est utile lorsque :
 
 ```text
-the Dockerfile changed
-dependencies changed
-the environment needs to be refreshed
-the previous container was created incorrectly
+le Dockerfile a changé
+les dépendances ont changé
+l’environnement doit être rafraîchi
+le conteneur précédent a été créé incorrectement
 ```
 
-## Step 4 — Run the training script again
+## Étape 4 — Relancer le script d’entraînement
 
 ```bash
 docker compose exec mlflow python train.py --alpha 0.1 --l1_ratio 0.1
 ```
 
-Then open:
+Ensuite, ouvre :
 
 ```text
 http://localhost:5000
@@ -487,9 +478,9 @@ http://localhost:5000
 
 ---
 
-# Troubleshooting 1 : port 5000 already used ⚠️
+# Dépannage 1 : le port 5000 est déjà utilisé
 
-On Windows CMD:
+Sur Windows CMD :
 
 ```bat
 netstat -ano | findstr :5000
@@ -497,52 +488,46 @@ tasklist | findstr 12345
 taskkill /PID 12345 /F
 ```
 
-On PowerShell:
+Sur PowerShell :
 
 ```powershell
 Get-NetTCPConnection -LocalPort 5000
 Stop-Process -Id 12345 -Force
 ```
 
-Replace `12345` with the PID shown by the command.
+Remplace `12345` par le PID affiché par la commande.
 
-Simple explanation:
+Explication simple :
 
-Port `5000` is like a door. If another application is already using this door, MLflow cannot start on the same port. You must either stop the other application or change the port used by MLflow.
-
-
-
-
+Le port `5000` est comme une porte. Si une autre application utilise déjà cette porte, MLflow ne peut pas démarrer sur le même port. Tu dois donc soit arrêter l’autre application, soit changer le port utilisé par MLflow.
 
 ---
 
-# Troubleshooting 2 : docker Desktop not starting ⚠️
+# Dépannage 2 : Docker Desktop ne démarre pas
 
-
-
-Open **PowerShell as Administrator**, then run this:
+Ouvre **PowerShell en tant qu’administrateur**, puis exécute ceci :
 
 ```powershell
-# 1. Stop Docker Desktop processes
+# 1. Arrêter les processus Docker Desktop
 Get-Process *docker* -ErrorAction SilentlyContinue | Stop-Process -Force
 
-# 2. Stop Docker Desktop service
+# 2. Arrêter le service Docker Desktop
 Stop-Service com.docker.service -Force -ErrorAction SilentlyContinue
 
-# 3. Force-stop WSL backend used by Docker
+# 3. Forcer l’arrêt du backend WSL utilisé par Docker
 wsl --shutdown
 ```
 
-Then wait **10–15 seconds**.
+Attends ensuite **10 à 15 secondes**.
 
-To restart Docker Desktop:
+Pour redémarrer Docker Desktop :
 
 ```powershell
 Start-Service com.docker.service
 Start-Process "C:\Program Files\Docker\Docker\Docker Desktop.exe"
 ```
 
-If it is still frozen, use the stronger version:
+Si Docker est encore bloqué, utilise la version plus forte :
 
 ```powershell
 taskkill /F /IM "Docker Desktop.exe"
@@ -552,12 +537,6 @@ taskkill /F /IM "dockerd.exe"
 wsl --shutdown
 ```
 
-Then restart Docker Desktop manually from the Start menu.
+Ensuite, redémarre Docker Desktop manuellement depuis le menu Démarrer.
 
-Do **not** delete Docker folders yet. First try force stop + `wsl --shutdown`.
-
-
-
-
-
-
+Ne supprime pas encore les dossiers Docker. Essaie d’abord l’arrêt forcé avec `wsl --shutdown`.
