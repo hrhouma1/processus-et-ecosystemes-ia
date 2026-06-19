@@ -1,96 +1,211 @@
-﻿# chap02 - Step-by-step recap: print the tracking URI
+# chap02 - Récapitulatif étape par étape : afficher le Tracking URI
 
-The full lesson lives at [`../02-practical-work-mlflow-step-by-step-recap-printing-the-tracking-uri.md`](../02-practical-work-mlflow-step-by-step-recap-printing-the-tracking-uri.md).
 
 > [!TIP]
-> **Objectif du chap02 — Savoir _où_ MLflow écrit, avant même de logger.**
+> **Objectif du chap02 — Savoir *où* MLflow écrit, avant même de logger.**
 >
 > Tu vas :
-> 1. Reprendre exactement la pile de chap01 (un seul conteneur `mlflow`, bind mounts `./database` et `./mlruns`).
-> 2. Ajouter **une seule ligne** dans le script : `print("Tracking URI:", mlflow.get_tracking_uri())`.
-> 3. Lancer `docker compose exec mlflow python train.py` et **lire l'URI imprimée** dans la console.
-> 4. Comparer cette URI avec ce que tu vois sur disque (`./database/mlflow.db`, `./mlruns/0/...`) pour confirmer où vont les runs.
 >
-> À la fin, tu comprends que **MLflow choisit son backend en fonction de l'URI courante** (`file:///...` par défaut, `http://...` plus tard), ce qui est la base de toute la suite (chap04+ : passer cette URI via `MLFLOW_TRACKING_URI`).
+> 1. Reprendre exactement la pile du chap01 : un seul conteneur `mlflow`, avec les bind mounts `./database` et `./mlruns`.
+> 2. Ajouter **une seule ligne** dans le script : `print("Tracking URI:", mlflow.get_tracking_uri())`.
+> 3. Lancer `docker compose exec mlflow python train.py` et **lire l’URI affichée** dans la console.
+> 4. Comparer cette URI avec ce que tu vois sur le disque (`./database/mlflow.db`, `./mlruns/0/...`) pour confirmer où les runs sont enregistrés.
+>
+> À la fin, tu comprends que **MLflow choisit son backend en fonction de l’URI courante** : `file:///...` par défaut, puis `http://...` plus tard.
+> C’est la base de toute la suite, notamment à partir du chap04, où cette URI sera passée avec la variable `MLFLOW_TRACKING_URI`.
 
-## What's new vs chap01
+## Ce qui est nouveau par rapport au chap01
 
-A single line:
+Une seule ligne est ajoutée :
 
 ```python
 print("Tracking URI:", mlflow.get_tracking_uri())
 ```
 
-## Run it (100% Docker, no Python on the host)
+Cette ligne permet d’afficher l’adresse utilisée par MLflow pour savoir où enregistrer les expériences, les runs, les paramètres, les métriques et les artefacts.
+
+## Exécution du projet : 100 % Docker, aucun Python sur la machine hôte
 
 ```bash
-# First, make sure you have read the Dockerfile and docker-compose.yml files
-# to understand how the mlflow server is set up and how it persists metadata
-# (SQLite) and artifacts on local folders.
+# Avant de commencer, assure-toi d’avoir lu les fichiers Dockerfile
+# et docker-compose.yml afin de comprendre comment le serveur MLflow
+# est configuré.
+#
+# Le serveur MLflow persiste :
+# - les métadonnées dans une base SQLite ;
+# - les artefacts dans des dossiers locaux montés avec des bind mounts.
 
-# 1. Create `database/` and `mlruns/` in the current directory.
-#    REQUIRED: bind mounts in docker-compose.yml expect them to exist.
+# 1. Créer les dossiers database/ et mlruns/ dans le répertoire courant.
+#
+#    CETTE ÉTAPE EST OBLIGATOIRE.
+#    Les bind mounts définis dans docker-compose.yml s’attendent à trouver
+#    ces dossiers sur la machine hôte.
+
 cd chap02-mlflow-step-by-step-recap-printing-the-tracking-uri
 mkdir database mlruns
 
-# 2. Start the mlflow server in detached mode.
+# 2. Démarrer le serveur MLflow en mode détaché.
+
 docker compose up -d --build
-# Check this URL: http://localhost:5000  (empty UI: only "Default" experiment)
+
+# Vérifie ensuite cette adresse :
+# http://localhost:5000
+#
+# Au début, l’interface MLflow est vide.
+# Tu devrais seulement voir l’expérience "Default".
 
 # python hello_mlflow.py
-# Will NOT work: mlflow may not be installed on the host, and the local
-# `mlflow/` folder also shadows the `mlflow` Python package on the host.
-# Run it INSIDE the mlflow container instead:
+#
+# Cette commande ne fonctionnera PAS correctement dans ce contexte.
+#
+# Raisons possibles :
+# - MLflow n’est peut-être pas installé sur la machine hôte ;
+# - le dossier local `mlflow/` peut masquer le package Python `mlflow`
+#   si tu exécutes le script directement depuis l’hôte ;
+# - le serveur MLflow tourne dans un conteneur Docker.
+#
+# La bonne solution est donc d’exécuter le script À L’INTÉRIEUR
+# du conteneur mlflow.
 
 docker compose exec -d mlflow python hello_mlflow.py
-# Expected stdout (visible via `docker compose logs mlflow`):
+
+# Sortie attendue, visible avec :
+# docker compose logs mlflow
+#
+# Exemple :
 #   Tracking URI: http://localhost:5000
 #   Done. Open http://localhost:5000 to see your run.
 
-# Refresh http://localhost:5000  -> experiment "hello_mlflow" appears with
-# a new run named "my_first_run".
+# Actualise ensuite l’interface :
+# http://localhost:5000
+#
+# L’expérience "hello_mlflow" devrait apparaître avec un nouveau run
+# nommé "my_first_run".
 
-# 3. Stop the mlflow server.
+# 3. Arrêter le serveur MLflow.
+
 docker compose down
 ```
 
-## What ends up on your host
+## Ce qui est créé sur ta machine hôte
 
-```
+Après l’exécution, tu obtiens une structure similaire à celle-ci :
+
+```text
 chap02-mlflow-step-by-step-recap-printing-the-tracking-uri/
-├── database/mlflow.db
-└── mlruns/0/<run_id>/...
+├── database/
+│   └── mlflow.db
+└── mlruns/
+    └── 0/
+        └── <run_id>/
+            └── ...
 ```
 
-## Tear down (full wipe)
+Le dossier `database/` contient la base SQLite utilisée par MLflow pour enregistrer les métadonnées.
+
+Le dossier `mlruns/` contient les artefacts liés aux runs.
+
+## Nettoyage complet du projet
 
 ```bash
 docker compose down
-rm -rf database mlruns        # delete persisted DB + artifacts
+
+# Supprimer complètement la base SQLite et les artefacts persistés.
+# Attention : cette commande efface les données MLflow locales.
+
+rm -rf database mlruns
 ```
 
+## Récapitulatif
 
-
-## Recap
-
-> Suppose that you are still located in the first project 
-> you need to execute docker compose down to stop the mlflow server 
-> Then you can navigate to the second project directory and repeat the same steps to start the mlflow server, run the hello_mlflow.py script, and then stop the mlflow server:
-
+> Supposons que tu es encore dans le premier projet.
+>
+> Avant de passer au deuxième projet, tu dois d’abord exécuter `docker compose down` pour arrêter le serveur MLflow du chap01.
+>
+> Ensuite, tu peux te déplacer dans le dossier du chap02 et répéter les mêmes étapes :
+>
+> * créer les dossiers nécessaires ;
+> * démarrer le serveur MLflow ;
+> * exécuter le script `hello_mlflow.py` ;
+> * vérifier l’interface MLflow ;
+> * arrêter le serveur.
 
 ```bash
 docker compose down
+
 cd ../chap02-mlflow-step-by-step-recap-printing-the-tracking-uri
+
 mkdir database mlruns
-docker compose up -d --build  
-docker compose exec -d mlflow python hello_mlflow.py # This command will not show you the print commands since it's running in the background (detached mode)
-docker compose exec mlflow python hello_mlflow.py  # This command will show you the 2 prints in the beging and end of execution of your .py file
-# Check your terminal logs
-# Check the http://localhost:5000
-docker-compose down 
+
+docker compose up -d --build
+
+docker compose exec -d mlflow python hello_mlflow.py
+
+# Attention :
+# Cette commande exécute le script en arrière-plan, en mode détaché.
+# Elle ne montre donc pas directement les messages print dans le terminal.
+
+docker compose exec mlflow python hello_mlflow.py
+
+# Cette commande exécute le script au premier plan.
+# Elle affiche donc les messages print au début et à la fin de l’exécution
+# du fichier Python.
+
+# Vérifie les logs dans ton terminal.
+# Vérifie aussi l’interface MLflow :
+# http://localhost:5000
+
+docker compose down
 ```
 
+## Pourquoi la deuxième commande affiche les print ?
 
+Cette commande :
 
+```bash
+docker compose exec -d mlflow python hello_mlflow.py
+```
 
+lance le script en mode détaché grâce à l’option `-d`.
 
+Cela veut dire que Docker démarre le script en arrière-plan et te rend immédiatement la main dans le terminal.
+
+Donc, les messages `print()` ne sont pas affichés directement dans ta console.
+
+Pour voir les messages, tu peux utiliser :
+
+```bash
+docker compose logs mlflow
+```
+
+Ou bien exécuter le script sans `-d` :
+
+```bash
+docker compose exec mlflow python hello_mlflow.py
+```
+
+Dans ce cas, le script s’exécute au premier plan, et les messages `print()` apparaissent directement dans le terminal.
+
+## À retenir
+
+Le chap02 ne change presque rien par rapport au chap01.
+
+La grande nouveauté est cette ligne :
+
+```python
+print("Tracking URI:", mlflow.get_tracking_uri())
+```
+
+Elle permet de voir clairement où MLflow envoie les données de tracking.
+
+Dans ce chapitre, l’URI affichée est généralement :
+
+```text
+Tracking URI: http://localhost:5000
+```
+
+Cela signifie que le script Python envoie les informations vers le serveur MLflow disponible sur le port `5000`.
+
+Comme le script est exécuté dans le conteneur `mlflow`, l’adresse `localhost:5000` désigne le serveur MLflow à l’intérieur du même conteneur.
+
+C’est une notion très importante pour comprendre la suite du cours.
