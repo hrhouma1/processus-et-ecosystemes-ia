@@ -34,9 +34,6 @@ L’objectif est de comparer les résultats dans l’interface MLflow.
 
 
 # début du projet #3
-```
-
----
 
 # 2. Arrêter d’abord les conteneurs déjà en cours d’exécution
 
