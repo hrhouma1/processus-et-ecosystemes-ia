@@ -33,9 +33,8 @@ L’objectif est de comparer les résultats dans l’interface MLflow.
 * `mlflow.sklearn.log_model(lr, "mymodel")` pour sauvegarder le modèle entraîné dans MLflow.
 
 
-# début du projet #3
 
-# 2. Arrêter d’abord les conteneurs déjà en cours d’exécution
+# Arrêter d’abord les conteneurs déjà en cours d’exécution
 
 Avant de commencer ce laboratoire, assure-toi qu’aucun autre conteneur MLflow n’est déjà en cours d’exécution sur le port `5000`.
 
