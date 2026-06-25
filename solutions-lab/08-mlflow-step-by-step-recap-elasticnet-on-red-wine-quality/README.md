@@ -32,24 +32,7 @@ L’objectif est de comparer les résultats dans l’interface MLflow.
 * Un vrai pipeline de Machine Learning : `pd.read_csv` → `train_test_split` → `ElasticNet.fit` → calcul de `rmse / mae / r2`.
 * `mlflow.sklearn.log_model(lr, "mymodel")` pour sauvegarder le modèle entraîné dans MLflow.
 
----
 
-# 1. Cloner le projet
-
-```bash
-git clone https://github.com/inskillflow/mlops-beginner-level-01-en.git
-```
-
-Ensuite, entre dans les dossiers du projet dans l’ordre :
-
-```bash
-cd mlops-beginner-level-01-en/chap01-mlflow-step-by-step-recap-hello-mlflow-basics
-# terminé
-
-cd ../chap02-mlflow-step-by-step-recap-printing-the-tracking-uri
-# terminé
-
-cd ../chap03-mlflow-step-by-step-recap-elasticnet-on-red-wine-quality
 # début du projet #3
 ```
 
@@ -89,11 +72,6 @@ Cette méthode est utile si tu ne te souviens plus quel dossier a démarré le c
 
 # 3. Démarrer le projet #3
 
-Tu dois maintenant être dans ce dossier :
-
-```bash
-chap03-mlflow-step-by-step-recap-elasticnet-on-red-wine-quality
-```
 
 Crée les dossiers nécessaires :
 
