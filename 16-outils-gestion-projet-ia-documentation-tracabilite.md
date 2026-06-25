@@ -2,29 +2,27 @@
 
 # Outils de gestion des différents aspects d’un projet en IA — Documentation et traçabilité
 
-> Objectif général : comprendre comment organiser, suivre, documenter et tracer un projet en intelligence artificielle à l’aide d’outils comme Trello, Jira, Notion et Azure DevOps.
-
----
-
 ## Table des matières
 
-| #  | Section                                                                                                      |
-| -- | ------------------------------------------------------------------------------------------------------------ |
-| 1  | [Introduction générale](#section-1)                                                                          |
-| 2  | [Pourquoi un projet en IA demande plus de suivi qu’un projet classique](#section-2)                          |
-| 3  | [Documentation et traçabilité : deux notions essentielles](#section-3)                                       |
-| 4  | [Cycle de vie d’un projet en IA](#section-4)                                                                 |
-| 5  | [Trello : organisation visuelle des tâches](#section-5)                                                     |
-| 6  | [Jira : gestion structurée des tâches, des sprints et des anomalies](#section-6)                             |
-| 7  | [Notion : documentation, centralisation et suivi collaboratif](#section-7)                                   |
-| 8  | [Azure DevOps : gestion du code, des tâches, des dépôts et des pipelines](#section-8)                        |
-| 9  | [Comparaison simple entre Trello, Jira, Notion et Azure DevOps](#section-9)                                  |
-| 10 | [Exemple complet : projet IA de prédiction du désabonnement client](#section-10)                             |
-| 11 | [Bonnes pratiques de documentation dans un projet IA](#section-11)                                          |
-| 12 | [Scénarios sans outils et avec outils](#section-12)                                                          |
-| 13 | [Activité formative guidée](#section-13)                                                                     |
-| 14 | [Annexe — Résumé court](#section-14)                                                                         |
-| 15 | [Conclusion](#section-15)                                                                                    |
+| #  | Section                                                                          |
+| -- | -------------------------------------------------------------------------------- |
+| 1  | [Introduction générale](#section-1)                                              |
+| 2  | [Pourquoi un projet IA doit être organisé](#section-2)                           |
+| 3  | [Documentation et traçabilité](#section-3)                                       |
+| 4  | [Cycle de vie d’un projet IA](#section-4)                                        |
+| 5  | [Trello — Organisation visuelle des tâches](#section-5)                          |
+| 6  | [Jira — Gestion structurée des tâches, sprints et anomalies](#section-6)         |
+| 7  | [Notion — Documentation et centralisation de l’information](#section-7)          |
+| 8  | [Azure DevOps — Code, tâches, dépôts et pipelines](#section-8)                   |
+| 9  | [Tableau comparatif des outils](#section-9)                                      |
+| 10 | [Exemple complet — Projet IA de prédiction du désabonnement client](#section-10) |
+| 11 | [Modèles de documents à produire](#section-11)                                   |
+| 12 | [Bonnes pratiques de traçabilité](#section-12)                                   |
+| 13 | [Scénarios sans outils et avec outils](#section-13)                              |
+| 14 | [Activité formative](#section-14)                                                |
+| 15 | [Quiz de consolidation](#section-15)                                             |
+| 16 | [Résumé final](#section-16)                                                      |
+| 17 | [Conclusion](#section-17)                                                        |
 
 ---
 
@@ -35,57 +33,61 @@
 
 <br/>
 
-Un projet en intelligence artificielle ne consiste pas seulement à écrire du code ou à entraîner un modèle.
+Dans un projet d’intelligence artificielle, il ne suffit pas de créer un modèle qui donne de bons résultats une seule fois.
 
-Un projet en IA comprend généralement plusieurs dimensions :
+Un projet IA sérieux doit être :
 
-* la compréhension du besoin métier ;
-* la collecte des données ;
-* la préparation des données ;
-* l’expérimentation avec plusieurs modèles ;
-* l’évaluation des performances ;
-* le suivi des erreurs ;
-* la documentation des décisions ;
-* la gestion du code ;
-* le déploiement ;
-* la surveillance du modèle après son utilisation.
+* organisé ;
+* documenté ;
+* traçable ;
+* reproductible ;
+* compréhensible par une autre personne ;
+* maintenable dans le temps.
 
-Cela signifie qu’un projet IA doit être **organisé**, **documenté** et **traçable**.
+Cela signifie qu’une équipe doit être capable de répondre clairement à plusieurs questions.
 
-En termes simples, il faut être capable de répondre à ces questions :
+Par exemple :
 
+* Quel est l’objectif du projet ?
 * Qui travaille sur quelle tâche ?
-* Quelle tâche est terminée ?
-* Quelle tâche est bloquée ?
 * Quelle version du code a été utilisée ?
-* Quel jeu de données a servi à entraîner le modèle ?
-* Quel modèle a obtenu les meilleurs résultats ?
-* Pourquoi une décision technique a-t-elle été prise ?
-* Où se trouve la documentation du projet ?
-* Quelle anomalie a été détectée ?
-* Est-ce que le projet peut être repris par une autre personne ?
+* Quel jeu de données a été utilisé ?
+* Quels tests ont été réalisés ?
+* Quels résultats ont été obtenus ?
+* Quelles décisions ont été prises ?
+* Pourquoi un modèle a été choisi plutôt qu’un autre ?
+* Où se trouve la documentation ?
+* Où se trouve le code source ?
+* Où sont les anomalies ou problèmes connus ?
 
-Sans outils de gestion, les réponses à ces questions deviennent rapidement floues.
+Pour gérer tout cela, les équipes utilisent des outils de gestion de projet et de documentation.
 
-Avec des outils adaptés, le projet devient plus clair, plus professionnel et plus facile à maintenir.
+Dans ce cours, nous allons étudier quatre outils importants :
 
-```mermaid
-flowchart LR
-    A["Idée du projet IA"] --> B["Tâches organisées"]
-    B --> C["Documentation claire"]
-    C --> D["Code suivi"]
-    D --> E["Modèle traçable"]
-    E --> F["Projet maintenable"]
-```
+| Outil        | Rôle principal                                                 |
+| ------------ | -------------------------------------------------------------- |
+| Trello       | Organiser visuellement les tâches                              |
+| Jira         | Gérer les tâches, les sprints, les anomalies et le suivi agile |
+| Notion       | Centraliser la documentation et l’information                  |
+| Azure DevOps | Gérer le code, les tâches, les dépôts et les pipelines         |
 
-L’objectif de ce cours est donc de comprendre le rôle de quatre outils très utilisés :
+Ces outils ne remplacent pas les compétences techniques. Ils permettent plutôt de structurer le travail pour que le projet reste clair, maîtrisable et professionnel.
 
-| Outil | Rôle principal |
-| ----- | -------------- |
-| Trello | organiser visuellement les tâches |
-| Jira | gérer des tâches structurées, des sprints et des anomalies |
-| Notion | centraliser la documentation et les informations du projet |
-| Azure DevOps | gérer le code, les tâches, les dépôts et les pipelines |
+---
+
+### Idée principale
+
+Un projet IA mal organisé peut fonctionner au début, mais devenir rapidement difficile à comprendre, difficile à corriger et difficile à faire évoluer.
+
+Un projet IA bien organisé garde une trace claire :
+
+* du travail réalisé ;
+* des décisions prises ;
+* des versions utilisées ;
+* des résultats obtenus ;
+* des problèmes rencontrés.
+
+C’est cette capacité à garder une trace qui rend le projet sérieux.
 
 </details>
 
@@ -96,60 +98,110 @@ L’objectif de ce cours est donc de comprendre le rôle de quatre outils très 
 <a id="section-2"></a>
 
 <details>
-<summary>2 - Pourquoi un projet en IA demande plus de suivi qu’un projet classique</summary>
+<summary>2 - Pourquoi un projet IA doit être organisé</summary>
 
 <br/>
 
-Dans un projet logiciel classique, l’équipe suit surtout le code, les fonctionnalités et les anomalies.
+Un projet d’intelligence artificielle est souvent plus complexe qu’un projet logiciel classique.
 
-Dans un projet en IA, il faut suivre davantage d’éléments.
+Dans un projet logiciel traditionnel, l’équipe travaille principalement sur le code.
 
-Un système d’intelligence artificielle dépend de plusieurs composants en même temps :
+Dans un projet IA, l’équipe doit gérer plusieurs éléments en même temps :
 
-* le code source ;
-* les jeux de données ;
-* les versions des données ;
-* les scripts de nettoyage ;
-* les paramètres d’entraînement ;
-* les modèles entraînés ;
-* les métriques de performance ;
-* les décisions prises pendant les expérimentations ;
-* les erreurs observées ;
-* les limites du modèle.
+* le code ;
+* les données ;
+* les modèles ;
+* les expériences ;
+* les métriques ;
+* les résultats ;
+* les versions ;
+* les décisions ;
+* les limites ;
+* les validations.
 
-C’est cette combinaison qui rend les projets IA plus difficiles à suivre.
+---
 
-Par exemple, deux étudiants peuvent entraîner le même modèle avec le même code, mais obtenir des résultats différents si :
+### Exemple simple
 
-* le fichier de données n’est pas exactement le même ;
-* les données ont été nettoyées différemment ;
-* les paramètres du modèle ont changé ;
-* une colonne a été supprimée ;
-* la méthode de division entraînement/test n’est pas identique ;
-* la version d’une bibliothèque Python est différente.
+Imaginons une équipe qui développe un modèle pour prédire si un client risque de quitter une entreprise.
 
-C’est pourquoi un projet IA doit être documenté avec rigueur.
+L’équipe doit gérer :
 
-```mermaid
-flowchart TD
-    A["Projet logiciel classique"] --> B["Code"]
-    B --> C["Application"]
+| Élément       | Exemple                                                         |
+| ------------- | --------------------------------------------------------------- |
+| Données       | fichier `clients.csv`                                           |
+| Code          | scripts Python d’entraînement et d’évaluation                   |
+| Modèle        | modèle entraîné `model_churn.pkl`                               |
+| Métriques     | exactitude, précision, rappel, F1-score                         |
+| Documentation | objectif, installation, limites                                 |
+| Tâches        | nettoyage des données, entraînement, évaluation                 |
+| Anomalies     | erreur dans les données, mauvais score, problème d’installation |
+| Décisions     | choix de l’algorithme, choix des variables, choix du seuil      |
 
-    D["Projet IA"] --> E["Code"]
-    D --> F["Données"]
-    D --> G["Modèle"]
-    D --> H["Métriques"]
-    D --> I["Décisions"]
-    E --> J["Système IA"]
-    F --> J
-    G --> J
-    H --> J
-    I --> J
-```
+Sans outil de gestion, ces informations peuvent être dispersées dans :
 
-**À retenir**
+* des courriels ;
+* des messages Teams ;
+* des fichiers locaux ;
+* des captures d’écran ;
+* des notebooks non organisés ;
+* des conversations informelles ;
+* des dossiers mal nommés.
 
-Dans un projet IA, le code ne suffit pas. Il faut aussi suivre les données, les expériences, les modèles et les décisions.
+Le projet devient alors difficile à suivre.
+
+---
+
+### Problème fréquent
+
+Une personne peut dire :
+
+> « Le modèle fonctionnait hier, mais je ne sais plus quelle version j’ai utilisée. »
+
+Ou encore :
+
+> « J’ai obtenu un score de 88 %, mais je ne sais plus avec quel fichier de données. »
+
+Ou encore :
+
+> « J’ai modifié le nettoyage des données, mais je n’ai pas documenté ce changement. »
+
+Ces situations montrent un manque de traçabilité.
+
+---
+
+### Pourquoi c’est grave ?
+
+Dans un projet IA, un petit changement peut modifier fortement les résultats.
+
+Par exemple :
+
+* changer une colonne dans le jeu de données ;
+* supprimer des valeurs manquantes différemment ;
+* modifier le seuil de classification ;
+* changer la séparation entraînement/test ;
+* utiliser une autre version du modèle ;
+* modifier les hyperparamètres.
+
+Si ces changements ne sont pas suivis, l’équipe ne peut plus expliquer précisément les résultats.
+
+---
+
+### À retenir
+
+Un projet IA doit être organisé parce qu’il contient plusieurs éléments qui évoluent en même temps.
+
+Le code seul ne suffit pas.
+
+Il faut aussi gérer :
+
+* les tâches ;
+* les données ;
+* les modèles ;
+* les résultats ;
+* la documentation ;
+* les décisions ;
+* les validations.
 
 </details>
 
@@ -160,81 +212,149 @@ Dans un projet IA, le code ne suffit pas. Il faut aussi suivre les données, les
 <a id="section-3"></a>
 
 <details>
-<summary>3 - Documentation et traçabilité : deux notions essentielles</summary>
+<summary>3 - Documentation et traçabilité</summary>
 
 <br/>
 
-La documentation et la traçabilité sont deux notions proches, mais elles ne désignent pas exactement la même chose.
+La documentation et la traçabilité sont deux notions proches, mais elles ne signifient pas exactement la même chose.
 
 ---
 
-### Documentation
+## 3.1 Documentation
 
 La documentation sert à expliquer le projet.
 
 Elle répond à des questions comme :
 
-* Quel est l’objectif du projet ?
-* Quel problème veut-on résoudre ?
-* Quelles données sont utilisées ?
+* Quel est le but du projet ?
 * Comment installer le projet ?
-* Comment exécuter le code ?
+* Comment exécuter le projet ?
+* Où se trouvent les données ?
 * Comment entraîner le modèle ?
-* Comment interpréter les résultats ?
-* Quelles sont les limites connues ?
+* Comment évaluer le modèle ?
+* Quels résultats ont été obtenus ?
+* Quelles sont les limites du modèle ?
 
-Exemple de documentation attendue dans un projet IA :
-
-| Document | Rôle |
-| -------- | ---- |
-| README.md | expliquer rapidement le projet |
-| cahier des charges | décrire le besoin et les exigences |
-| dictionnaire des données | expliquer les colonnes du jeu de données |
-| rapport d’expérimentation | comparer les modèles testés |
-| journal des décisions | garder les choix importants |
-| guide d’installation | permettre à une autre personne d’exécuter le projet |
+La documentation aide une personne à comprendre le projet.
 
 ---
 
-### Traçabilité
+### Exemple de documentation
 
-La traçabilité sert à retrouver l’historique du projet.
+Un fichier `README.md` peut expliquer :
+
+* l’objectif du projet ;
+* la structure des dossiers ;
+* les commandes d’installation ;
+* les commandes d’exécution ;
+* les résultats principaux ;
+* les limites connues.
+
+Exemple :
+
+<pre><code class="language-markdown"># Projet IA — Prédiction du désabonnement client
+
+## Objectif
+
+Ce projet vise à prédire si un client risque de quitter l’entreprise à partir de données historiques.
+
+## Installation
+
+Créer un environnement virtuel :
+
+python -m venv .venv
+
+Activer l’environnement virtuel :
+
+.venv\Scripts\Activate.ps1
+
+Installer les dépendances :
+
+pip install -r requirements.txt
+
+## Exécution
+
+Lancer l’entraînement :
+
+python src/train.py
+
+Lancer l’évaluation :
+
+python src/evaluate.py
+
+## Résultats principaux
+
+Le modèle obtient une exactitude de 86 %, une précision de 82 % et un rappel de 79 %.
+
+## Limites
+
+Le modèle dépend des données historiques et doit être réévalué régulièrement.</code></pre>
+
+---
+
+## 3.2 Traçabilité
+
+La traçabilité sert à garder la preuve de ce qui a été fait.
 
 Elle répond à des questions comme :
 
-* Qui a modifié cette tâche ?
-* Quand cette anomalie a-t-elle été détectée ?
-* Quelle version du modèle a été déployée ?
-* Quelle version du code a produit ce résultat ?
-* Pourquoi cette fonctionnalité a-t-elle été ajoutée ?
-* Quelle décision a été prise pendant la réunion ?
+* Qui a fait cette modification ?
+* Quand cette modification a-t-elle été faite ?
+* Pourquoi cette décision a-t-elle été prise ?
+* Quelle version du code a été utilisée ?
+* Quelle version des données a été utilisée ?
+* Quel modèle a été entraîné ?
+* Quels résultats ont été obtenus ?
+* Quelle tâche est liée à quel commit ?
+* Quelle anomalie a été corrigée ?
 
-La traçabilité permet donc de comprendre **ce qui s’est passé**, **quand**, **par qui** et **pourquoi**.
-
----
-
-### Différence simple
-
-| Notion | Question principale | Exemple |
-| ------ | ------------------- | ------- |
-| Documentation | Comment fonctionne le projet ? | README, guide, rapport |
-| Traçabilité | Que s’est-il passé dans le projet ? | historique des tâches, commits, tickets, décisions |
+La traçabilité permet de revenir en arrière et de comprendre l’historique du projet.
 
 ---
 
-### Exemple très simple
+### Exemple de traçabilité
 
-Sans documentation :
+| Élément à tracer    | Exemple                                   |
+| ------------------- | ----------------------------------------- |
+| Version du code     | commit Git `a3f45c2`                      |
+| Version des données | `clients_clean_v2.csv`                    |
+| Modèle entraîné     | `model_churn_v3.pkl`                      |
+| Date d’entraînement | 25 juin 2026                              |
+| Métriques           | précision 82 %, rappel 79 %               |
+| Responsable         | membre de l’équipe IA                     |
+| Décision            | modèle retenu pour test interne           |
+| Justification       | meilleur rappel que la version précédente |
 
-> Le modèle fonctionne, mais personne ne sait exactement comment l’exécuter.
+---
 
-Sans traçabilité :
+## 3.3 Différence simple
 
-> Le modèle a changé, mais personne ne sait quelle modification a causé la différence.
+| Notion        | Question principale                                            |
+| ------------- | -------------------------------------------------------------- |
+| Documentation | Comment comprendre et utiliser le projet ?                     |
+| Traçabilité   | Comment savoir ce qui a été fait, par qui, quand et pourquoi ? |
 
-Avec documentation et traçabilité :
+---
 
-> L’équipe peut expliquer le projet, reproduire les résultats et comprendre l’historique des décisions.
+### Exemple concret
+
+Documentation :
+
+> Pour lancer le projet, exécuter `python src/train.py`.
+
+Traçabilité :
+
+> La commande `python src/train.py` a été exécutée le 25 juin 2026 avec le fichier `clients_clean_v2.csv`, et le modèle obtenu a donné un F1-score de 80 %.
+
+---
+
+### À retenir
+
+La documentation explique le projet.
+
+La traçabilité prouve et suit ce qui a été fait dans le projet.
+
+Les deux sont nécessaires dans un projet IA professionnel.
 
 </details>
 
@@ -245,56 +365,205 @@ Avec documentation et traçabilité :
 <a id="section-4"></a>
 
 <details>
-<summary>4 - Cycle de vie d’un projet en IA</summary>
+<summary>4 - Cycle de vie d’un projet IA</summary>
 
 <br/>
 
-Un projet en IA suit généralement plusieurs étapes.
+Un projet d’intelligence artificielle suit généralement plusieurs étapes.
 
-Ces étapes doivent être suivies dans un outil de gestion afin d’éviter la confusion.
+Chaque étape doit être suivie, documentée et reliée aux autres.
+
+---
 
 ```mermaid
 flowchart LR
-    A["Besoin métier"] --> B["Collecte des données"]
+    A["Définition du problème"] --> B["Collecte des données"]
     B --> C["Préparation des données"]
     C --> D["Analyse exploratoire"]
     D --> E["Entraînement du modèle"]
     E --> F["Évaluation"]
-    F --> G["Documentation"]
+    F --> G["Validation"]
     G --> H["Déploiement"]
     H --> I["Surveillance"]
-    I --> J["Amélioration"]
-    J --> E
+    I --> J["Amélioration continue"]
 ```
 
-Chaque étape peut être transformée en tâches concrètes.
+---
 
-| Étape | Exemples de tâches à suivre |
-| ----- | --------------------------- |
-| Besoin métier | définir l’objectif, identifier les utilisateurs, préciser les contraintes |
-| Collecte des données | obtenir les fichiers, vérifier les sources, valider les permissions |
-| Préparation des données | nettoyer les valeurs manquantes, supprimer les doublons, transformer les colonnes |
-| Analyse exploratoire | produire des graphiques, comprendre les distributions, détecter les anomalies |
-| Entraînement | tester plusieurs modèles, ajuster les paramètres, sauvegarder les résultats |
-| Évaluation | calculer les métriques, comparer les modèles, choisir un modèle candidat |
-| Documentation | rédiger le README, expliquer les données, noter les limites |
-| Déploiement | créer une API, préparer un conteneur, configurer un environnement |
-| Surveillance | suivre les erreurs, mesurer les prédictions, détecter la dérive |
-| Amélioration | corriger les problèmes, réentraîner, améliorer les données |
+## 4.1 Définition du problème
 
-Dans un projet professionnel, ces tâches doivent être visibles et attribuées.
+La première étape consiste à définir clairement le problème à résoudre.
 
-Cela signifie que chaque tâche doit idéalement avoir :
+Exemples :
 
-* un titre clair ;
-* une description ;
-* un responsable ;
-* un statut ;
-* une priorité ;
-* une date limite ;
-* des commentaires ;
-* des pièces jointes si nécessaire ;
-* un lien vers le code, la documentation ou le résultat produit.
+* prédire le désabonnement client ;
+* détecter des transactions frauduleuses ;
+* recommander des produits ;
+* classer des images ;
+* prédire la demande ;
+* analyser des commentaires clients.
+
+À cette étape, il faut documenter :
+
+* l’objectif métier ;
+* les utilisateurs concernés ;
+* la valeur attendue ;
+* les contraintes ;
+* les risques ;
+* les critères de succès.
+
+---
+
+## 4.2 Collecte des données
+
+La deuxième étape consiste à identifier et collecter les données.
+
+À cette étape, il faut documenter :
+
+* la source des données ;
+* le format des données ;
+* la date de collecte ;
+* les colonnes disponibles ;
+* les droits d’accès ;
+* les données sensibles ;
+* les limites connues.
+
+---
+
+## 4.3 Préparation des données
+
+Les données doivent souvent être nettoyées avant d’être utilisées.
+
+Exemples de traitements :
+
+* suppression des doublons ;
+* gestion des valeurs manquantes ;
+* transformation des colonnes ;
+* encodage des variables catégorielles ;
+* normalisation ;
+* séparation entraînement/test.
+
+À cette étape, il faut garder une trace claire des transformations appliquées.
+
+---
+
+## 4.4 Analyse exploratoire
+
+L’analyse exploratoire permet de mieux comprendre les données.
+
+Elle peut inclure :
+
+* des statistiques descriptives ;
+* des graphiques ;
+* l’analyse des valeurs manquantes ;
+* l’analyse des distributions ;
+* la recherche de corrélations ;
+* la détection d’anomalies.
+
+Cette étape doit être documentée, car elle influence les choix du modèle.
+
+---
+
+## 4.5 Entraînement du modèle
+
+L’entraînement consiste à apprendre un modèle à partir des données.
+
+À cette étape, il faut suivre :
+
+* l’algorithme utilisé ;
+* les paramètres ;
+* les données utilisées ;
+* la version du code ;
+* la durée d’entraînement ;
+* les résultats obtenus.
+
+---
+
+## 4.6 Évaluation
+
+L’évaluation permet de mesurer la qualité du modèle.
+
+Selon le type de problème, on peut utiliser :
+
+| Type de problème | Métriques possibles                     |
+| ---------------- | --------------------------------------- |
+| Classification   | exactitude, précision, rappel, F1-score |
+| Régression       | MAE, MSE, RMSE, R²                      |
+| Clustering       | silhouette score, analyse qualitative   |
+| Recommandation   | précision@k, rappel@k, taux de clic     |
+
+Les résultats doivent être conservés pour comparer les versions.
+
+---
+
+## 4.7 Validation
+
+La validation permet de décider si le modèle est acceptable.
+
+Il faut se demander :
+
+* le modèle est-il assez performant ?
+* les erreurs sont-elles acceptables ?
+* les données sont-elles représentatives ?
+* le modèle respecte-t-il les contraintes ?
+* les limites sont-elles documentées ?
+* le modèle peut-il être utilisé en production ?
+
+---
+
+## 4.8 Déploiement
+
+Le déploiement consiste à rendre le modèle utilisable.
+
+Le modèle peut être déployé :
+
+* dans une API ;
+* dans une application web ;
+* dans un tableau de bord ;
+* dans un pipeline automatisé ;
+* dans un environnement cloud.
+
+À cette étape, la traçabilité est essentielle.
+
+Il faut savoir quelle version du modèle est déployée.
+
+---
+
+## 4.9 Surveillance
+
+Après le déploiement, le modèle doit être surveillé.
+
+Il faut suivre :
+
+* les erreurs ;
+* la latence ;
+* la qualité des prédictions ;
+* les changements dans les données ;
+* la dérive des données ;
+* la dérive du modèle ;
+* les retours utilisateurs.
+
+---
+
+## 4.10 Amélioration continue
+
+Un modèle IA n’est pas figé.
+
+Il peut devoir être amélioré lorsque :
+
+* de nouvelles données sont disponibles ;
+* la performance diminue ;
+* le contexte métier change ;
+* les utilisateurs signalent des problèmes ;
+* une nouvelle version est nécessaire.
+
+---
+
+### À retenir
+
+Chaque étape du cycle de vie d’un projet IA doit être organisée.
+
+Les outils comme Trello, Jira, Notion et Azure DevOps permettent de suivre ces étapes de manière plus claire et plus professionnelle.
 
 </details>
 
@@ -305,119 +574,167 @@ Cela signifie que chaque tâche doit idéalement avoir :
 <a id="section-5"></a>
 
 <details>
-<summary>5 - Trello : organisation visuelle des tâches</summary>
+<summary>5 - Trello — Organisation visuelle des tâches</summary>
 
 <br/>
 
 Trello est un outil simple et visuel pour organiser les tâches.
 
-Il fonctionne avec une logique de tableau.
-
-Dans un tableau Trello, on retrouve généralement :
-
-* des colonnes ;
-* des cartes ;
-* des étiquettes ;
-* des responsables ;
-* des dates ;
-* des commentaires ;
-* des listes de vérification.
+Il fonctionne avec des tableaux, des listes et des cartes.
 
 ---
 
-### Idée simple
+## 5.1 Principe de base
 
-Trello ressemble à un tableau avec des colonnes.
+Dans Trello, un projet est représenté par un tableau.
+
+Dans ce tableau, on crée des colonnes.
+
+Dans chaque colonne, on ajoute des cartes.
 
 Chaque carte représente une tâche.
 
-Exemple de colonnes :
-
-| Colonne | Signification |
-| ------- | ------------- |
-| À faire | tâches prévues mais non commencées |
-| En cours | tâches actuellement travaillées |
-| À vérifier | tâches terminées mais à valider |
-| Terminé | tâches complétées et validées |
-
 ---
 
-### Exemple pour un projet IA
+### Exemple de tableau Trello
 
-Projet : prédire le désabonnement des clients.
-
-| Colonne | Exemples de cartes |
-| ------- | ------------------ |
-| À faire | récupérer le jeu de données, définir les métriques, créer le README |
-| En cours | nettoyer les données, faire l’analyse exploratoire |
-| À vérifier | valider les métriques, relire le rapport |
-| Terminé | dépôt Git créé, structure du projet finalisée |
-
----
-
-### Exemple de carte Trello bien rédigée
-
-Titre de la carte :
-
-```text
-Nettoyer les valeurs manquantes du fichier clients.csv
-```
-
-Description :
-
-```text
-Objectif : identifier les colonnes contenant des valeurs manquantes et appliquer une stratégie de nettoyage.
-
-Travail attendu :
-- charger le fichier clients.csv ;
-- afficher le nombre de valeurs manquantes par colonne ;
-- décider quelles colonnes seront supprimées ou imputées ;
-- documenter la stratégie dans le fichier documentation/donnees.md.
-
-Résultat attendu :
-- script Python propre ;
-- capture ou tableau des valeurs manquantes ;
-- explication courte de la stratégie choisie.
-```
-
-Liste de vérification possible :
-
-```text
-[ ] Charger le fichier CSV
-[ ] Afficher les valeurs manquantes
-[ ] Proposer une stratégie de nettoyage
-[ ] Appliquer la stratégie
-[ ] Documenter le choix
-[ ] Faire valider par l’équipe
+```mermaid
+flowchart LR
+    A["À faire"] --> B["En cours"]
+    B --> C["À valider"]
+    C --> D["Terminé"]
 ```
 
 ---
 
-### Quand utiliser Trello ?
+## 5.2 Exemple de colonnes pour un projet IA
 
-Trello est utile lorsque :
+Pour un projet IA, on peut créer les colonnes suivantes :
 
-* l’équipe débute ;
-* le projet est simple ;
-* on veut visualiser rapidement l’avancement ;
-* on ne veut pas créer une structure trop lourde ;
-* on veut comprendre qui fait quoi.
-
-Trello est particulièrement adapté pour les projets pédagogiques, les petits projets IA, les prototypes et les travaux d’équipe.
+| Colonne   | Rôle                                    |
+| --------- | --------------------------------------- |
+| Idées     | tâches proposées ou non encore validées |
+| À faire   | tâches prévues                          |
+| En cours  | tâches actuellement traitées            |
+| Bloqué    | tâches qui ont un problème              |
+| À valider | tâches terminées mais à vérifier        |
+| Terminé   | tâches validées                         |
 
 ---
 
-### Limites de Trello
+## 5.3 Exemple de cartes Trello
 
-Trello peut devenir insuffisant lorsque :
+Dans un projet de prédiction du désabonnement client, on peut créer les cartes suivantes :
 
-* le projet devient très grand ;
-* il y a beaucoup d’anomalies à suivre ;
-* l’équipe travaille avec des sprints structurés ;
-* il faut produire des rapports complexes ;
-* il faut relier fortement les tâches au code et aux versions.
+| Carte                                    | Description                   |
+| ---------------------------------------- | ----------------------------- |
+| Définir l’objectif du projet             | préciser le problème métier   |
+| Importer le fichier clients.csv          | ajouter les données au projet |
+| Nettoyer les valeurs manquantes          | préparer les données          |
+| Créer le notebook d’analyse exploratoire | comprendre les données        |
+| Entraîner un premier modèle              | créer une première version    |
+| Évaluer le modèle                        | calculer les métriques        |
+| Documenter les résultats                 | écrire les conclusions        |
+| Préparer la présentation finale          | synthétiser le projet         |
 
-Dans ce cas, Jira ou Azure DevOps peuvent être plus adaptés.
+---
+
+## 5.4 Exemple détaillé d’une carte Trello
+
+Une carte Trello peut contenir :
+
+* un titre ;
+* une description ;
+* une personne responsable ;
+* une date limite ;
+* une checklist ;
+* des pièces jointes ;
+* des commentaires ;
+* une étiquette.
+
+Exemple :
+
+| Élément     | Exemple                                                                  |
+| ----------- | ------------------------------------------------------------------------ |
+| Titre       | Nettoyer les valeurs manquantes                                          |
+| Responsable | membre responsable des données                                           |
+| Date limite | 28 juin 2026                                                             |
+| Description | Identifier et traiter les valeurs manquantes dans le fichier clients.csv |
+| Checklist   | analyser, nettoyer, sauvegarder, documenter                              |
+| Étiquette   | Données                                                                  |
+| Statut      | En cours                                                                 |
+
+---
+
+## 5.5 Exemple de checklist
+
+<pre><code class="language-text">Tâche : Nettoyer les valeurs manquantes
+
+Checklist :
+[ ] Identifier les colonnes avec valeurs manquantes
+[ ] Calculer le pourcentage de valeurs manquantes
+[ ] Choisir une stratégie de traitement
+[ ] Appliquer le nettoyage
+[ ] Sauvegarder le fichier nettoyé
+[ ] Documenter les transformations appliquées
+[ ] Déplacer la carte dans la colonne À valider</code></pre>
+
+---
+
+## 5.6 Avantages de Trello
+
+Trello est utile parce qu’il est :
+
+* simple ;
+* visuel ;
+* facile à comprendre ;
+* adapté aux petits projets ;
+* pratique pour suivre l’avancement ;
+* accessible aux débutants.
+
+Il permet de voir rapidement :
+
+* ce qui est à faire ;
+* ce qui est en cours ;
+* ce qui est terminé ;
+* ce qui bloque.
+
+---
+
+## 5.7 Limites de Trello
+
+Trello peut devenir limité lorsque le projet devient plus complexe.
+
+Ses limites possibles :
+
+* moins adapté aux grands projets ;
+* moins structuré que Jira ;
+* suivi des anomalies moins avancé ;
+* moins adapté aux équipes avec beaucoup de règles ;
+* traçabilité technique moins forte qu’Azure DevOps.
+
+---
+
+## 5.8 Quand utiliser Trello ?
+
+Trello est recommandé pour :
+
+* un petit projet IA ;
+* un projet étudiant ;
+* une équipe débutante ;
+* un suivi visuel simple ;
+* une phase d’idéation ;
+* un prototype.
+
+---
+
+### À retenir
+
+Trello répond surtout à la question :
+
+> Où en est le travail ?
+
+Il permet de visualiser les tâches et leur avancement.
 
 </details>
 
@@ -428,130 +745,249 @@ Dans ce cas, Jira ou Azure DevOps peuvent être plus adaptés.
 <a id="section-6"></a>
 
 <details>
-<summary>6 - Jira : gestion structurée des tâches, des sprints et des anomalies</summary>
+<summary>6 - Jira — Gestion structurée des tâches, sprints et anomalies</summary>
 
 <br/>
 
-Jira est un outil plus structuré que Trello.
+Jira est un outil de gestion de projet plus structuré que Trello.
 
-Il est très utilisé dans les équipes qui travaillent avec des méthodes agiles comme Scrum ou Kanban.
+Il est souvent utilisé dans les équipes qui travaillent avec des méthodes agiles, comme Scrum ou Kanban.
 
 Jira permet de gérer :
 
-* des tâches ;
-* des user stories ;
-* des anomalies ;
-* des sprints ;
-* des priorités ;
-* des responsables ;
-* des workflows ;
-* des tableaux de suivi ;
-* des rapports d’avancement.
+* les tâches ;
+* les user stories ;
+* les anomalies ;
+* les sprints ;
+* les priorités ;
+* les statuts ;
+* les responsabilités ;
+* les tableaux de bord ;
+* les rapports d’avancement.
 
 ---
 
-### Vocabulaire de base dans Jira
+## 6.1 Principe de base
 
-| Terme | Explication simple |
-| ----- | ------------------ |
-| Projet | espace de travail pour une équipe ou un produit |
-| Work item | élément de travail à suivre |
-| Tâche | travail précis à réaliser |
-| Bug | problème ou anomalie à corriger |
-| Story | besoin exprimé du point de vue utilisateur |
-| Epic | grand bloc de travail regroupant plusieurs stories |
-| Sprint | période courte pendant laquelle l’équipe réalise un ensemble de tâches |
-| Backlog | liste des tâches prévues mais pas encore réalisées |
-| Workflow | chemin suivi par une tâche, par exemple À faire → En cours → Terminé |
+Dans Jira, le travail est découpé en éléments appelés tickets ou issues.
 
----
+Un ticket peut représenter :
 
-### Exemple de user story pour un projet IA
-
-```text
-En tant que responsable marketing,
-je veux identifier les clients qui risquent de quitter l’entreprise,
-afin de lancer des actions de fidélisation ciblées.
-```
-
-Cette user story peut ensuite être découpée en tâches.
-
-| Tâche | Responsable possible |
-| ----- | -------------------- |
-| Préparer le jeu de données client | data analyst |
-| Créer les variables utiles | data scientist |
-| Entraîner un modèle de classification | data scientist |
-| Évaluer le modèle avec précision, rappel et F1-score | data scientist |
-| Créer une API de prédiction | développeur backend |
-| Documenter les limites du modèle | équipe IA |
+* une tâche ;
+* une anomalie ;
+* une amélioration ;
+* une user story ;
+* une demande technique ;
+* une activité de documentation.
 
 ---
 
-### Exemple de bug dans un projet IA
+## 6.2 Types de tickets utiles en projet IA
 
-Titre du bug :
+| Type de ticket | Exemple                                                      |
+| -------------- | ------------------------------------------------------------ |
+| Epic           | Construire un système de prédiction du désabonnement         |
+| Story          | En tant qu’analyste, je veux visualiser les clients à risque |
+| Task           | Nettoyer les données clients                                 |
+| Bug            | Le script d’entraînement échoue si une colonne est manquante |
+| Spike          | Comparer deux algorithmes de classification                  |
+| Sub-task       | Calculer le taux de valeurs manquantes                       |
 
-```text
-Le modèle retourne une erreur lorsque la colonne age est vide
-```
+---
+
+## 6.3 Exemple d’Epic
+
+Un Epic est un grand bloc de travail.
+
+Exemple :
+
+<pre><code class="language-text">Epic : Développer un modèle IA de prédiction du désabonnement client
+
+Objectif :
+Construire un modèle capable de prédire si un client risque de quitter l’entreprise.
+
+Tickets liés :
+- Collecter les données clients
+- Nettoyer les données
+- Réaliser l’analyse exploratoire
+- Entraîner un modèle de classification
+- Évaluer le modèle
+- Documenter les résultats
+- Préparer une démonstration</code></pre>
+
+---
+
+## 6.4 Exemple de user story
+
+Une user story décrit un besoin du point de vue d’un utilisateur.
+
+Format classique :
+
+<pre><code class="language-text">En tant que [type d’utilisateur],
+je veux [objectif],
+afin de [bénéfice attendu].</code></pre>
+
+Exemple :
+
+<pre><code class="language-text">En tant que responsable marketing,
+je veux identifier les clients à risque de désabonnement,
+afin de proposer des actions de rétention avant leur départ.</code></pre>
+
+---
+
+## 6.5 Exemple de ticket de tâche
+
+<pre><code class="language-text">Titre :
+Nettoyer le fichier clients.csv
+
+Type :
+Task
 
 Description :
+Analyser le fichier clients.csv, identifier les valeurs manquantes, supprimer les doublons et produire un fichier nettoyé.
 
-```text
-Contexte : l’API de prédiction échoue lorsqu’un client n’a pas de valeur dans la colonne age.
+Critères d’acceptation :
+- Les valeurs manquantes sont identifiées.
+- Les doublons sont supprimés.
+- Le fichier clients_clean.csv est généré.
+- Les transformations sont documentées.
+- Le ticket contient un lien vers le commit Git correspondant.
+
+Priorité :
+Élevée
+
+Statut :
+À faire</code></pre>
+
+---
+
+## 6.6 Exemple de ticket d’anomalie
+
+Un ticket d’anomalie sert à documenter un problème.
+
+<pre><code class="language-text">Titre :
+Le script train.py échoue lorsque la colonne monthly_charges est vide
+
+Type :
+Bug
+
+Description :
+Lors de l’exécution du script d’entraînement, le programme s’arrête si certaines lignes contiennent une valeur vide dans la colonne monthly_charges.
 
 Étapes pour reproduire :
-1. envoyer une requête avec age vide ;
-2. appeler l’endpoint /predict ;
-3. observer l’erreur retournée par l’API.
+1. Utiliser le fichier clients.csv.
+2. Exécuter python src/train.py.
+3. Observer l’erreur dans le terminal.
 
-Résultat observé : erreur serveur.
+Résultat obtenu :
+Le script s’arrête avec une erreur.
 
-Résultat attendu : le système doit appliquer une valeur par défaut ou retourner un message clair.
+Résultat attendu :
+Le script doit gérer les valeurs manquantes ou afficher un message clair.
 
-Priorité : élevée.
-```
+Priorité :
+Moyenne
 
----
-
-### Exemple de sprint IA
-
-Un sprint est une période de travail courte, par exemple deux semaines.
-
-Sprint 1 : préparation des données.
-
-| Tâche | Statut |
-| ----- | ------ |
-| Importer les données brutes | Terminé |
-| Nettoyer les valeurs manquantes | En cours |
-| Supprimer les doublons | À faire |
-| Documenter le dictionnaire des données | À faire |
-| Produire une première analyse exploratoire | À faire |
-
-Sprint 2 : expérimentation.
-
-| Tâche | Statut |
-| ----- | ------ |
-| Tester une régression logistique | À faire |
-| Tester un arbre de décision | À faire |
-| Comparer les métriques | À faire |
-| Sélectionner un modèle candidat | À faire |
-| Rédiger le rapport d’évaluation | À faire |
+Critères de résolution :
+- Le problème est corrigé.
+- Un test simple est ajouté.
+- La correction est liée à un commit Git.</code></pre>
 
 ---
 
-### Quand utiliser Jira ?
+## 6.7 Notion de sprint
 
-Jira est utile lorsque :
+Un sprint est une période courte pendant laquelle l’équipe réalise un ensemble de tâches.
 
-* le projet est structuré ;
-* l’équipe travaille avec des sprints ;
-* il faut gérer des anomalies ;
-* il faut suivre les priorités ;
-* il faut produire des rapports d’avancement ;
-* plusieurs rôles participent au projet.
+Un sprint dure souvent une ou deux semaines.
 
-Jira convient bien aux projets IA plus sérieux, aux équipes professionnelles et aux projets qui doivent être suivis avec rigueur.
+Dans un projet IA, un sprint peut avoir un objectif précis.
+
+Exemple :
+
+| Sprint   | Objectif                                             |
+| -------- | ---------------------------------------------------- |
+| Sprint 1 | Comprendre le problème et collecter les données      |
+| Sprint 2 | Nettoyer les données et faire l’analyse exploratoire |
+| Sprint 3 | Entraîner et comparer les modèles                    |
+| Sprint 4 | Évaluer, documenter et préparer la démonstration     |
+
+---
+
+## 6.8 Exemple de sprint IA
+
+<pre><code class="language-text">Sprint 2 — Préparation des données
+
+Objectif du sprint :
+Produire un jeu de données propre et prêt pour l’entraînement.
+
+Tickets du sprint :
+- Identifier les valeurs manquantes
+- Supprimer les doublons
+- Encoder les variables catégorielles
+- Normaliser les variables numériques
+- Générer clients_clean.csv
+- Documenter les transformations
+
+Résultat attendu :
+Un fichier de données nettoyé et une documentation claire des traitements appliqués.</code></pre>
+
+---
+
+## 6.9 Avantages de Jira
+
+Jira est utile parce qu’il permet :
+
+* une gestion structurée du travail ;
+* un suivi précis des tâches ;
+* une gestion claire des anomalies ;
+* une organisation par sprint ;
+* une priorisation des tâches ;
+* une meilleure traçabilité ;
+* une bonne visibilité pour les équipes.
+
+---
+
+## 6.10 Limites de Jira
+
+Jira peut être plus difficile à utiliser pour les débutants.
+
+Ses limites possibles :
+
+* plus complexe que Trello ;
+* demande une bonne discipline ;
+* peut devenir lourd si les tickets sont mal rédigés ;
+* nécessite une configuration plus sérieuse ;
+* moins naturel pour la documentation longue que Notion.
+
+---
+
+## 6.11 Quand utiliser Jira ?
+
+Jira est recommandé pour :
+
+* un projet IA structuré ;
+* une équipe de plusieurs personnes ;
+* un projet avec des sprints ;
+* un projet avec beaucoup de tâches ;
+* un projet avec des anomalies à suivre ;
+* un projet qui demande une traçabilité plus formelle.
+
+---
+
+### À retenir
+
+Jira répond surtout aux questions :
+
+> Qui fait quoi ?
+
+> Dans quel sprint ?
+
+> Quel ticket est lié à quel problème ?
+
+> Quelle anomalie a été corrigée ?
+
+Il permet de gérer le projet de manière plus structurée que Trello.
 
 </details>
 
@@ -562,124 +998,259 @@ Jira convient bien aux projets IA plus sérieux, aux équipes professionnelles e
 <a id="section-7"></a>
 
 <details>
-<summary>7 - Notion : documentation, centralisation et suivi collaboratif</summary>
+<summary>7 - Notion — Documentation et centralisation de l’information</summary>
 
 <br/>
 
 Notion est un outil de documentation et d’organisation collaborative.
 
-Il permet de créer des pages, des bases de données, des tableaux, des listes, des calendriers et des espaces de documentation.
+Il permet de centraliser plusieurs types d’informations dans un même espace.
 
-Dans un projet IA, Notion peut servir à centraliser :
+Dans un projet IA, Notion peut servir à regrouper :
 
-* le cahier des charges ;
-* les notes de réunion ;
-* le dictionnaire des données ;
-* les décisions techniques ;
-* les résultats d’expérimentation ;
-* les liens vers les dépôts Git ;
-* les liens vers les tableaux Trello ou Jira ;
-* les guides d’installation ;
-* les comptes rendus de validation.
-
----
-
-### Idée simple
-
-Notion peut être vu comme le classeur principal du projet.
-
-Trello ou Jira servent surtout à suivre les tâches.
-
-Notion sert surtout à expliquer et conserver l’information.
+* la documentation du projet ;
+* les comptes rendus de réunion ;
+* les décisions importantes ;
+* les descriptions des données ;
+* les résultats d’expériences ;
+* les liens utiles ;
+* les risques ;
+* les notes de cours ou de projet ;
+* les guides d’installation.
 
 ---
 
-### Structure Notion recommandée pour un projet IA
+## 7.1 Pourquoi utiliser Notion ?
 
-```text
-Projet IA — Prédiction du désabonnement client
-│
-├── 01 - Présentation du projet
-├── 02 - Objectifs métier
-├── 03 - Données utilisées
-├── 04 - Dictionnaire des données
-├── 05 - Analyse exploratoire
-├── 06 - Expérimentations modèles
-├── 07 - Résultats et métriques
-├── 08 - Décisions techniques
-├── 09 - Guide d’installation
-├── 10 - Limites du modèle
-└── 11 - Suivi des réunions
-```
+Un projet IA produit beaucoup d’informations.
 
----
+Ces informations ne sont pas toujours du code.
 
-### Exemple de page : dictionnaire des données
+Par exemple :
 
-| Colonne | Type | Description | Exemple | Remarque |
-| ------- | ---- | ----------- | ------- | -------- |
-| customer_id | texte | identifiant unique du client | C001 | ne doit pas être utilisé comme variable prédictive |
-| age | nombre | âge du client | 42 | valeurs manquantes possibles |
-| monthly_charge | nombre | montant mensuel payé | 79.90 | variable importante |
-| contract_type | catégorie | type de contrat | mensuel | à encoder avant l’entraînement |
-| churn | binaire | client parti ou non | 0 ou 1 | variable cible |
+* pourquoi le projet existe ;
+* quelles données sont utilisées ;
+* quelles hypothèses ont été faites ;
+* quelles décisions ont été prises ;
+* quels modèles ont été testés ;
+* quels résultats ont été obtenus ;
+* quelles limites doivent être connues.
+
+Notion permet de centraliser ces informations dans un espace clair.
 
 ---
 
-### Exemple de page : journal des décisions
+## 7.2 Exemple de structure Notion
 
-| Date | Décision | Justification | Impact |
-| ---- | -------- | ------------- | ------ |
-| 2026-06-01 | supprimer customer_id | identifiant sans valeur prédictive | réduit le bruit |
-| 2026-06-02 | utiliser F1-score | classes déséquilibrées | meilleure évaluation |
-| 2026-06-03 | tester Random Forest | modèle robuste pour données tabulaires | comparaison avec modèle simple |
+Pour un projet IA, on peut créer les pages suivantes :
 
----
+<pre><code class="language-text">Projet IA — Prédiction du désabonnement client
 
-### Exemple de page : expérimentation modèle
-
-```text
-Nom de l’expérience : Random Forest V1
-
-Données utilisées : dataset_clients_v1.csv
-
-Prétraitement :
-- suppression des doublons ;
-- imputation de l’âge par la médiane ;
-- encodage one-hot des variables catégorielles.
-
-Modèle : Random Forest
-
-Paramètres :
-- n_estimators = 100
-- max_depth = 10
-- random_state = 42
-
-Résultats :
-- accuracy = 0.87
-- precision = 0.81
-- recall = 0.74
-- F1-score = 0.77
-
-Conclusion :
-le modèle est prometteur, mais le rappel doit être amélioré.
-```
+1. Présentation du projet
+2. Objectifs et contexte métier
+3. Données utilisées
+4. Analyse exploratoire
+5. Expériences et modèles testés
+6. Résultats
+7. Décisions importantes
+8. Risques et limites
+9. Réunions
+10. Liens utiles
+11. Guide d’installation
+12. Rapport final</code></pre>
 
 ---
 
-### Quand utiliser Notion ?
+## 7.3 Page de présentation du projet
 
-Notion est utile lorsque :
+Exemple de contenu :
 
-* il faut centraliser la documentation ;
-* l’équipe veut un espace lisible ;
-* plusieurs documents doivent être reliés ;
-* il faut garder les décisions importantes ;
-* il faut préparer une présentation claire du projet.
+<pre><code class="language-text">Nom du projet :
+Prédiction du désabonnement client
 
-Notion ne remplace pas toujours Git, Jira ou Azure DevOps.
+Objectif :
+Identifier les clients qui risquent de quitter l’entreprise.
 
-Il complète ces outils en rendant l’information plus accessible.
+Contexte :
+L’entreprise souhaite réduire les pertes de clients en repérant les profils à risque.
+
+Utilisateurs concernés :
+- équipe marketing
+- équipe relation client
+- direction commerciale
+
+Résultat attendu :
+Un modèle capable de produire un score de risque pour chaque client.
+
+Critères de succès :
+- rappel supérieur à 75 %
+- documentation complète
+- résultats interprétables
+- limites clairement identifiées</code></pre>
+
+---
+
+## 7.4 Page de documentation des données
+
+Dans un projet IA, les données doivent être documentées avec soin.
+
+Exemple :
+
+<pre><code class="language-text">Nom du fichier :
+clients.csv
+
+Source :
+Export interne du système client.
+
+Date d’extraction :
+25 juin 2026.
+
+Nombre de lignes :
+10 000 clients.
+
+Nombre de colonnes :
+12 colonnes.
+
+Variable cible :
+churn
+
+Description de la variable cible :
+0 signifie client conservé.
+1 signifie client perdu.
+
+Colonnes importantes :
+- tenure : ancienneté du client
+- monthly_charges : montant mensuel payé
+- contract_type : type de contrat
+- support_tickets : nombre de demandes au support
+- churn : statut final du client
+
+Limites connues :
+- certaines valeurs sont manquantes
+- certaines colonnes ne sont pas normalisées
+- les données représentent une période historique précise</code></pre>
+
+---
+
+## 7.5 Page de suivi des expériences
+
+Notion peut aussi servir à suivre les expériences de machine learning.
+
+Exemple de tableau :
+
+| Expérience | Modèle                | Données | Précision | Rappel | F1-score | Décision   |
+| ---------- | --------------------- | ------- | --------: | -----: | -------: | ---------- |
+| EXP-001    | Régression logistique | v1      |      78 % |   70 % |     74 % | rejetée    |
+| EXP-002    | Random Forest         | v1      |      84 % |   76 % |     80 % | à comparer |
+| EXP-003    | XGBoost               | v2      |      86 % |   79 % |     82 % | retenue    |
+
+---
+
+## 7.6 Page de décisions importantes
+
+Une bonne pratique consiste à garder une page des décisions importantes.
+
+Exemple :
+
+<pre><code class="language-text">Décision 001
+
+Date :
+25 juin 2026
+
+Décision :
+Utiliser le rappel comme métrique principale.
+
+Justification :
+Dans ce projet, il est plus grave de ne pas détecter un client réellement à risque que de signaler un client qui ne quittera finalement pas l’entreprise.
+
+Impact :
+Les modèles seront comparés principalement sur le rappel, puis sur le F1-score.
+
+Responsable :
+Équipe IA.</code></pre>
+
+---
+
+## 7.7 Page de réunion
+
+Exemple :
+
+<pre><code class="language-text">Réunion du 25 juin 2026
+
+Participants :
+- responsable projet
+- responsable données
+- responsable modèle
+- responsable documentation
+
+Sujets discutés :
+- qualité du fichier clients.csv
+- choix des premières métriques
+- organisation du dépôt Git
+- répartition des tâches
+
+Décisions :
+- commencer avec un modèle simple
+- documenter toutes les transformations de données
+- créer un tableau de suivi des expériences
+
+Actions à faire :
+- préparer clients_clean.csv
+- créer le fichier README.md
+- lancer une première expérience
+- créer les tickets de suivi</code></pre>
+
+---
+
+## 7.8 Avantages de Notion
+
+Notion est utile parce qu’il permet :
+
+* de centraliser l’information ;
+* de créer une documentation lisible ;
+* de structurer les notes ;
+* de suivre les décisions ;
+* de partager facilement l’information ;
+* d’avoir des pages liées entre elles ;
+* de créer des tableaux simples.
+
+---
+
+## 7.9 Limites de Notion
+
+Notion n’est pas un outil principal de gestion de code.
+
+Ses limites possibles :
+
+* moins adapté au suivi technique du code ;
+* moins adapté aux pipelines CI/CD ;
+* moins structuré que Jira pour les sprints ;
+* peut devenir désorganisé si les pages sont mal structurées ;
+* ne remplace pas Git ni Azure DevOps.
+
+---
+
+## 7.10 Quand utiliser Notion ?
+
+Notion est recommandé pour :
+
+* la documentation centrale ;
+* les notes de projet ;
+* les décisions importantes ;
+* les comptes rendus ;
+* les tableaux de suivi simples ;
+* la préparation d’un rapport ;
+* la centralisation des liens.
+
+---
+
+### À retenir
+
+Notion répond surtout à la question :
+
+> Où se trouve l’information importante du projet ?
+
+Il permet d’éviter que les connaissances du projet soient dispersées.
 
 </details>
 
@@ -690,164 +1261,245 @@ Il complète ces outils en rendant l’information plus accessible.
 <a id="section-8"></a>
 
 <details>
-<summary>8 - Azure DevOps : gestion du code, des tâches, des dépôts et des pipelines</summary>
+<summary>8 - Azure DevOps — Code, tâches, dépôts et pipelines</summary>
 
 <br/>
 
-Azure DevOps est une plateforme plus complète.
+Azure DevOps est une plateforme complète pour gérer le cycle de vie d’un projet logiciel ou IA.
 
-Elle permet de gérer plusieurs aspects d’un projet logiciel ou IA :
+Elle peut être utilisée pour :
 
-* les tâches ;
-* les tableaux de suivi ;
-* les dépôts Git ;
-* les branches ;
-* les pull requests ;
+* gérer les tâches ;
+* héberger le code source ;
+* gérer les dépôts Git ;
+* suivre les branches ;
+* automatiser les tests ;
+* créer des pipelines ;
+* gérer les versions ;
+* suivre les livraisons.
+
+Dans un projet IA, Azure DevOps peut relier le travail de gestion, le code et l’automatisation.
+
+---
+
+## 8.1 Principaux composants d’Azure DevOps
+
+| Composant        | Rôle                                            |
+| ---------------- | ----------------------------------------------- |
+| Azure Boards     | gérer les tâches, bugs, user stories et sprints |
+| Azure Repos      | héberger le code source avec Git                |
+| Azure Pipelines  | automatiser les tests, builds et déploiements   |
+| Azure Artifacts  | gérer des packages                              |
+| Azure Test Plans | organiser des tests plus formels                |
+
+---
+
+## 8.2 Azure Boards
+
+Azure Boards permet de suivre le travail.
+
+Il ressemble à Jira sur plusieurs aspects.
+
+On peut y créer :
+
+* des tâches ;
+* des bugs ;
+* des user stories ;
+* des epics ;
+* des sprints ;
+* des priorités.
+
+Exemple :
+
+<pre><code class="language-text">Epic :
+Créer un modèle IA de prédiction du désabonnement.
+
+User story :
+En tant que responsable marketing, je veux obtenir un score de risque client afin de prioriser les actions de rétention.
+
+Task :
+Nettoyer le fichier clients.csv.
+
+Bug :
+Le script evaluate.py échoue lorsque le modèle n’existe pas dans le dossier models.</code></pre>
+
+---
+
+## 8.3 Azure Repos
+
+Azure Repos permet d’héberger le code source avec Git.
+
+Dans un projet IA, le dépôt peut contenir :
+
+* les scripts Python ;
+* les notebooks ;
+* les fichiers de configuration ;
 * les tests ;
-* les pipelines CI/CD ;
-* les artefacts ;
-* les tableaux de bord.
+* la documentation ;
+* les pipelines ;
+* le fichier README.md.
 
-Dans un projet IA, Azure DevOps peut servir à relier le suivi du travail avec le code et l’automatisation.
+Exemple de structure :
 
----
-
-### Principaux composants
-
-| Composant | Rôle simple |
-| --------- | ----------- |
-| Azure Boards | suivre les tâches, bugs, user stories et sprints |
-| Azure Repos | stocker le code source avec Git |
-| Azure Pipelines | automatiser les tests, les builds et les déploiements |
-| Azure Test Plans | organiser des plans de tests |
-| Azure Artifacts | stocker des packages ou dépendances |
-| Dashboards | afficher l’état du projet avec des indicateurs |
-
----
-
-### Exemple dans un projet IA
-
-```mermaid
-flowchart LR
-    A["Azure Boards"] --> B["Tâches IA"]
-    B --> C["Azure Repos"]
-    C --> D["Code Python"]
-    D --> E["Azure Pipelines"]
-    E --> F["Tests automatiques"]
-    F --> G["Déploiement"]
-    G --> H["Tableau de bord"]
-```
-
----
-
-### Exemple de tâche dans Azure Boards
-
-Titre :
-
-```text
-Créer un pipeline de test pour le modèle de prédiction
-```
-
-Description :
-
-```text
-Objectif : automatiser les tests de base du projet IA à chaque modification du code.
-
-Travail attendu :
-- installer les dépendances Python ;
-- exécuter les tests unitaires ;
-- vérifier que le script d’entraînement démarre correctement ;
-- générer un rapport de test ;
-- bloquer la fusion si les tests échouent.
-
-Résultat attendu :
-- fichier de pipeline fonctionnel ;
-- exécution automatique à chaque commit ou pull request ;
-- preuve que les tests passent.
-```
-
----
-
-### Exemple de structure de dépôt Git pour un projet IA
-
-```text
-projet-ia-churn/
+<pre><code class="language-text">projet-ia/
 │
 ├── data/
-│   ├── raw/
-│   └── processed/
-│
 ├── notebooks/
-│   └── exploration.ipynb
-│
 ├── src/
-│   ├── preprocessing.py
-│   ├── train.py
-│   ├── evaluate.py
-│   └── predict.py
-│
 ├── tests/
-│   ├── test_preprocessing.py
-│   └── test_predict.py
-│
-├── docs/
-│   ├── donnees.md
-│   ├── experimentation.md
-│   └── limites.md
-│
+├── models/
+├── reports/
+├── azure-pipelines.yml
 ├── requirements.txt
-├── README.md
-└── azure-pipelines.yml
-```
+└── README.md</code></pre>
 
 ---
 
-### Exemple simplifié de pipeline
+## 8.4 Azure Pipelines
 
-```yaml
-trigger:
+Azure Pipelines permet d’automatiser certaines étapes.
+
+Par exemple :
+
+* installer les dépendances ;
+* vérifier le code ;
+* exécuter les tests ;
+* entraîner un modèle ;
+* générer un rapport ;
+* déployer une API ;
+* archiver un artefact.
+
+---
+
+### Exemple simple de pipeline
+
+<pre><code class="language-yaml">trigger:
   - main
 
 pool:
   vmImage: ubuntu-latest
 
 steps:
-  - task: UsePythonVersion@0
-    inputs:
-      versionSpec: '3.12'
-
   - script: |
       python -m pip install --upgrade pip
       pip install -r requirements.txt
     displayName: Installer les dépendances
 
   - script: |
-      pytest tests
-    displayName: Exécuter les tests
-```
+      python src/train.py
+    displayName: Entraîner le modèle
 
-Ce pipeline signifie :
-
-* lorsqu’une modification est envoyée sur la branche principale ;
-* Azure DevOps prépare un environnement ;
-* Python est installé ;
-* les dépendances sont installées ;
-* les tests sont exécutés automatiquement.
+  - script: |
+      python src/evaluate.py
+    displayName: Évaluer le modèle</code></pre>
 
 ---
 
-### Quand utiliser Azure DevOps ?
+## 8.5 Pourquoi Azure DevOps est utile en IA ?
 
-Azure DevOps est utile lorsque :
+Azure DevOps est utile parce qu’il permet de relier :
 
-* le projet doit être très structuré ;
-* le code doit être versionné ;
-* les tâches doivent être reliées au code ;
-* les tests doivent être automatisés ;
-* il faut mettre en place une logique CI/CD ;
-* l’équipe travaille dans un environnement Microsoft ou Azure.
+* les tâches ;
+* le code ;
+* les commits ;
+* les branches ;
+* les tests ;
+* les pipelines ;
+* les versions ;
+* les validations.
 
-Azure DevOps est plus complet, mais aussi plus exigeant pour des débutants.
+Cela améliore fortement la traçabilité.
+
+---
+
+## 8.6 Exemple de traçabilité avec Azure DevOps
+
+Imaginons qu’un bug soit créé :
+
+<pre><code class="language-text">Bug :
+Le modèle produit une erreur lorsque la colonne monthly_charges contient une valeur vide.</code></pre>
+
+L’équipe peut ensuite :
+
+1. créer une branche Git ;
+2. corriger le code ;
+3. faire un commit ;
+4. lier le commit au bug ;
+5. créer une pull request ;
+6. exécuter les tests automatiquement ;
+7. valider la correction ;
+8. fermer le bug.
+
+---
+
+### Exemple de branche
+
+<pre><code class="language-text">fix/gestion-valeurs-manquantes</code></pre>
+
+---
+
+### Exemple de message de commit
+
+<pre><code class="language-text">Corrige la gestion des valeurs manquantes dans monthly_charges</code></pre>
+
+---
+
+## 8.7 Avantages d’Azure DevOps
+
+Azure DevOps est utile parce qu’il permet :
+
+* de gérer le code et les tâches au même endroit ;
+* de relier les commits aux tickets ;
+* d’automatiser les tests ;
+* de créer des pipelines ;
+* de suivre les versions ;
+* de structurer le travail d’équipe ;
+* d’améliorer la traçabilité technique.
+
+---
+
+## 8.8 Limites d’Azure DevOps
+
+Azure DevOps peut être plus complexe pour les débutants.
+
+Ses limites possibles :
+
+* demande une certaine maîtrise de Git ;
+* demande une compréhension des pipelines ;
+* peut être trop lourd pour un très petit projet ;
+* nécessite une bonne organisation ;
+* demande une configuration initiale.
+
+---
+
+## 8.9 Quand utiliser Azure DevOps ?
+
+Azure DevOps est recommandé pour :
+
+* un projet IA professionnel ;
+* un projet avec code source important ;
+* une équipe technique ;
+* un projet qui nécessite des pipelines ;
+* un projet qui doit garder une forte traçabilité ;
+* un projet qui doit être testé et déployé automatiquement.
+
+---
+
+### À retenir
+
+Azure DevOps répond surtout aux questions :
+
+> Où est le code ?
+
+> Quelle modification a été faite ?
+
+> Quel ticket est lié à quel commit ?
+
+> Quels tests ont été exécutés ?
+
+> Quel pipeline a validé le projet ?
+
+C’est un outil très utile lorsque le projet IA devient technique et doit être industrialisé.
 
 </details>
 
@@ -858,61 +1510,89 @@ Azure DevOps est plus complet, mais aussi plus exigeant pour des débutants.
 <a id="section-9"></a>
 
 <details>
-<summary>9 - Comparaison simple entre Trello, Jira, Notion et Azure DevOps</summary>
+<summary>9 - Tableau comparatif des outils</summary>
 
 <br/>
 
 Chaque outil a un rôle différent.
 
-Il ne faut pas penser qu’un seul outil est toujours meilleur que les autres.
-
-Le choix dépend du contexte, du niveau de l’équipe et de la complexité du projet.
-
-| Outil | Utilisation principale | Niveau de complexité | Très utile pour |
-| ----- | ---------------------- | -------------------- | --------------- |
-| Trello | suivi visuel des tâches | simple | débutants, petits projets, prototypes |
-| Jira | gestion agile structurée | moyen à avancé | sprints, anomalies, priorités, équipes agiles |
-| Notion | documentation centralisée | simple à moyen | pages, bases de connaissances, décisions, notes |
-| Azure DevOps | gestion complète code + tâches + pipelines | moyen à avancé | dépôts Git, CI/CD, tests, projets professionnels |
+Il ne faut pas les confondre.
 
 ---
 
-### Comparaison par besoin
+## 9.1 Comparaison générale
 
-| Besoin | Outil recommandé |
-| ------ | ---------------- |
-| Voir rapidement les tâches à faire | Trello |
-| Gérer un sprint | Jira ou Azure Boards |
-| Suivre des bugs | Jira ou Azure Boards |
-| Documenter les données | Notion ou dossier docs dans Git |
-| Garder les décisions techniques | Notion |
-| Gérer le code source | Azure Repos ou GitHub |
-| Automatiser les tests | Azure Pipelines ou GitHub Actions |
-| Suivre un projet IA complet en entreprise | Jira + Notion + Git ou Azure DevOps |
+| Outil        | Rôle principal         | Très utile pour                 | Moins adapté pour        |
+| ------------ | ---------------------- | ------------------------------- | ------------------------ |
+| Trello       | organisation visuelle  | petits projets, suivi simple    | grands projets complexes |
+| Jira         | gestion structurée     | sprints, anomalies, tickets     | documentation longue     |
+| Notion       | documentation          | centralisation de l’information | gestion avancée du code  |
+| Azure DevOps | cycle de vie technique | code, dépôts, pipelines         | prise de notes simple    |
 
 ---
 
-### Combinaisons possibles
+## 9.2 Comparaison selon les besoins
 
-| Type de projet | Combinaison simple |
-| -------------- | ------------------ |
-| Petit projet étudiant | Trello + README Git |
-| Projet étudiant avancé | Trello + Notion + Git |
-| Projet agile structuré | Jira + Notion + Git |
-| Projet entreprise Microsoft | Azure DevOps + Wiki/Notion |
-| Projet IA/MLOps | Jira ou Azure Boards + Git + pipelines + documentation |
+| Besoin                     | Outil recommandé     |
+| -------------------------- | -------------------- |
+| Voir rapidement les tâches | Trello               |
+| Gérer un sprint            | Jira ou Azure Boards |
+| Documenter le projet       | Notion               |
+| Héberger le code           | Azure Repos          |
+| Suivre les anomalies       | Jira ou Azure Boards |
+| Automatiser les tests      | Azure Pipelines      |
+| Garder les comptes rendus  | Notion               |
+| Créer une checklist simple | Trello               |
+| Relier code et tâche       | Azure DevOps         |
+| Gérer une équipe agile     | Jira                 |
 
 ---
 
-### Interprétation courte
+## 9.3 Exemple d’utilisation combinée
 
-Trello sert surtout à voir l’avancement.
+Dans un vrai projet IA, on peut utiliser plusieurs outils ensemble.
 
-Jira sert surtout à structurer le travail agile.
+Exemple :
 
-Notion sert surtout à centraliser les connaissances.
+| Besoin                        | Outil                |
+| ----------------------------- | -------------------- |
+| Organisation visuelle simple  | Trello               |
+| Documentation principale      | Notion               |
+| Code source                   | Azure Repos          |
+| Pipelines automatisés         | Azure Pipelines      |
+| Gestion structurée des tâches | Jira ou Azure Boards |
 
-Azure DevOps sert surtout à relier les tâches, le code et l’automatisation.
+---
+
+## 9.4 Attention
+
+Utiliser trop d’outils peut aussi devenir un problème.
+
+Le but n’est pas d’utiliser Trello, Jira, Notion et Azure DevOps en même temps dans tous les projets.
+
+Le but est de choisir les bons outils selon le niveau du projet.
+
+---
+
+## 9.5 Choix simple selon le contexte
+
+| Contexte                   | Choix recommandé                     |
+| -------------------------- | ------------------------------------ |
+| Petit projet débutant      | Trello + README                      |
+| Projet de cours structuré  | Trello ou Jira + Notion + Git        |
+| Projet technique sérieux   | Azure DevOps + Notion                |
+| Projet agile professionnel | Jira + Git + pipeline                |
+| Projet IA industrialisé    | Azure DevOps + MLOps + documentation |
+
+---
+
+### À retenir
+
+Il n’existe pas un outil unique parfait.
+
+Chaque outil répond à un besoin précis.
+
+Le bon choix dépend de la taille du projet, du niveau de l’équipe et du degré de traçabilité attendu.
 
 </details>
 
@@ -923,121 +1603,193 @@ Azure DevOps sert surtout à relier les tâches, le code et l’automatisation.
 <a id="section-10"></a>
 
 <details>
-<summary>10 - Exemple complet : projet IA de prédiction du désabonnement client</summary>
+<summary>10 - Exemple complet — Projet IA de prédiction du désabonnement client</summary>
 
 <br/>
 
-Imaginons un projet IA simple.
-
-Objectif : prédire si un client risque de quitter une entreprise.
-
-Ce type de projet peut être utilisé pour expliquer comment organiser les tâches, la documentation et la traçabilité.
+Pour comprendre l’utilisation des outils, prenons un exemple complet.
 
 ---
 
-### Contexte du projet
+## 10.1 Sujet du projet
 
-Une entreprise veut identifier les clients qui risquent de se désabonner.
+Le projet consiste à créer un modèle IA capable de prédire si un client risque de quitter une entreprise.
 
-Elle possède un fichier contenant des informations sur ses clients :
-
-* âge ;
-* durée d’abonnement ;
-* montant mensuel payé ;
-* type de contrat ;
-* nombre d’appels au support ;
-* statut de désabonnement.
-
-L’équipe doit construire un modèle capable de prédire la probabilité de désabonnement.
+Le modèle utilise des données historiques sur les clients.
 
 ---
 
-### Organisation dans Trello
+## 10.2 Objectif métier
 
-Tableau : Projet IA — Churn client
+L’objectif métier est d’aider l’entreprise à identifier les clients à risque afin de mettre en place des actions de rétention.
 
-| Colonne | Cartes possibles |
-| ------- | ---------------- |
-| À faire | créer le dépôt Git, analyser le besoin, charger les données |
-| En cours | nettoyer les données, faire l’analyse exploratoire |
-| À vérifier | valider les métriques, relire la documentation |
-| Terminé | structure du projet créée, README initial rédigé |
+Exemples d’actions possibles :
 
----
-
-### Organisation dans Jira
-
-Epic : construire un modèle de prédiction du désabonnement.
-
-User stories :
-
-| User story | Tâches associées |
-| ---------- | ---------------- |
-| Comprendre les données clients | dictionnaire des données, analyse des colonnes, détection valeurs manquantes |
-| Préparer les données | nettoyage, encodage, séparation train/test |
-| Entraîner un modèle | modèle de base, modèle avancé, comparaison métriques |
-| Déployer une prédiction simple | API, tests, documentation endpoint |
+* offrir un rabais ;
+* proposer un meilleur service ;
+* contacter le client ;
+* analyser son insatisfaction ;
+* améliorer son expérience.
 
 ---
 
-### Documentation dans Notion
+## 10.3 Organisation du projet avec Trello
 
-Pages recommandées :
+Tableau Trello proposé :
 
-```text
-Projet IA — Churn client
+| Colonne   | Exemples de cartes                          |
+| --------- | ------------------------------------------- |
+| À faire   | collecter les données, créer le README      |
+| En cours  | nettoyer les données, analyser les colonnes |
+| Bloqué    | accès au fichier refusé, colonne manquante  |
+| À valider | modèle entraîné, rapport rédigé             |
+| Terminé   | environnement installé, dépôt créé          |
+
+---
+
+### Exemple de carte Trello
+
+<pre><code class="language-text">Carte :
+Créer le fichier README.md
+
+Description :
+Rédiger la documentation minimale du projet.
+
+Checklist :
+[ ] Présenter l’objectif du projet
+[ ] Décrire les données utilisées
+[ ] Ajouter les commandes d’installation
+[ ] Ajouter les commandes d’exécution
+[ ] Ajouter les résultats principaux
+[ ] Ajouter les limites connues
+
+Responsable :
+Membre documentation
+
+Statut :
+À faire</code></pre>
+
+---
+
+## 10.4 Organisation du projet avec Jira
+
+Epic principal :
+
+<pre><code class="language-text">Epic :
+Système IA de prédiction du désabonnement client</code></pre>
+
+User story :
+
+<pre><code class="language-text">En tant que responsable marketing,
+je veux identifier les clients qui risquent de quitter l’entreprise,
+afin de prioriser les actions de rétention.</code></pre>
+
+Tickets possibles :
+
+| Ticket                              | Type  |
+| ----------------------------------- | ----- |
+| Collecter les données clients       | Task  |
+| Nettoyer les valeurs manquantes     | Task  |
+| Créer l’analyse exploratoire        | Task  |
+| Entraîner un modèle de base         | Task  |
+| Comparer plusieurs modèles          | Spike |
+| Corriger l’erreur de chargement CSV | Bug   |
+| Documenter les résultats            | Task  |
+
+---
+
+## 10.5 Documentation du projet avec Notion
+
+Structure Notion proposée :
+
+<pre><code class="language-text">Projet IA — Churn client
+
+1. Présentation
+2. Objectifs métier
+3. Données utilisées
+4. Analyse exploratoire
+5. Expériences
+6. Résultats
+7. Décisions
+8. Limites
+9. Réunions
+10. Rapport final</code></pre>
+
+---
+
+## 10.6 Gestion du code avec Azure DevOps
+
+Structure du dépôt :
+
+<pre><code class="language-text">projet-ia-churn/
 │
-├── Présentation générale
-├── Besoin métier
-├── Données disponibles
-├── Dictionnaire des données
-├── Analyse exploratoire
-├── Choix des modèles
-├── Résultats obtenus
-├── Journal des décisions
-├── Limites du modèle
-└── Guide d’installation
-```
+├── data/
+│   ├── raw/
+│   └── processed/
+│
+├── notebooks/
+│   └── analyse_exploratoire.ipynb
+│
+├── src/
+│   ├── train.py
+│   ├── evaluate.py
+│   └── predict.py
+│
+├── tests/
+│   └── test_preprocessing.py
+│
+├── models/
+│
+├── reports/
+│
+├── requirements.txt
+├── azure-pipelines.yml
+└── README.md</code></pre>
 
 ---
 
-### Code et automatisation dans Azure DevOps
+## 10.7 Exemple de traçabilité complète
 
-Azure DevOps peut gérer :
-
-* le dépôt Git du projet ;
-* les tâches dans Azure Boards ;
-* les tests automatiques avec Azure Pipelines ;
-* les pull requests ;
-* les tableaux de bord d’avancement.
-
-Workflow possible :
-
-```mermaid
-flowchart TD
-    A["Créer une tâche"] --> B["Créer une branche Git"]
-    B --> C["Modifier le code"]
-    C --> D["Faire une pull request"]
-    D --> E["Exécuter les tests"]
-    E --> F{"Tests réussis ?"}
-    F -- "Oui" --> G["Fusionner dans main"]
-    F -- "Non" --> H["Corriger le code"]
-    H --> D
-```
+| Élément           | Exemple                                           |
+| ----------------- | ------------------------------------------------- |
+| Ticket            | IA-023 Nettoyer les données                       |
+| Branche           | `feature/nettoyage-donnees`                       |
+| Commit            | `Corrige les valeurs manquantes dans clients.csv` |
+| Fichier modifié   | `src/preprocessing.py`                            |
+| Données utilisées | `clients_clean_v2.csv`                            |
+| Modèle généré     | `model_churn_v2.pkl`                              |
+| Métriques         | précision 82 %, rappel 79 %                       |
+| Documentation     | page Notion Résultats EXP-002                     |
+| Décision          | modèle retenu pour comparaison finale             |
 
 ---
 
-### Exemple de traçabilité complète
+## 10.8 Résultat attendu
 
-| Élément | Exemple de trace |
-| ------- | ---------------- |
-| Tâche | TASK-12 : nettoyer les valeurs manquantes |
-| Code | commit Git : correction preprocessing.py |
-| Documentation | page Notion : stratégie de nettoyage |
-| Résultat | F1-score avant = 0.71, après = 0.76 |
-| Décision | utiliser la médiane pour imputer l’âge |
+À la fin du projet, l’équipe doit pouvoir montrer :
 
-Grâce à cette traçabilité, l’équipe peut expliquer ce qui a été fait et pourquoi.
+* le tableau des tâches ;
+* les tickets réalisés ;
+* le code source ;
+* la documentation ;
+* les expériences réalisées ;
+* les résultats obtenus ;
+* les décisions importantes ;
+* les limites du modèle ;
+* la version finale du modèle.
+
+---
+
+### À retenir
+
+Un projet IA complet ne se limite pas au modèle.
+
+Il doit aussi montrer :
+
+* comment le travail a été organisé ;
+* comment les résultats ont été obtenus ;
+* comment les décisions ont été prises ;
+* comment le projet peut être repris.
 
 </details>
 
@@ -1048,123 +1800,248 @@ Grâce à cette traçabilité, l’équipe peut expliquer ce qui a été fait et
 <a id="section-11"></a>
 
 <details>
-<summary>11 - Bonnes pratiques de documentation dans un projet IA</summary>
+<summary>11 - Modèles de documents à produire</summary>
 
 <br/>
 
-Un projet IA bien documenté doit permettre à une autre personne de comprendre, installer, exécuter et évaluer le projet.
+Dans un projet IA, plusieurs documents peuvent être créés pour améliorer la documentation et la traçabilité.
 
 ---
 
-### 1. Rédiger un README clair
+## 11.1 Fichier README.md
 
-Le fichier README.md est souvent le premier fichier consulté.
+Le fichier `README.md` doit être placé à la racine du projet.
 
-Il doit contenir :
+Modèle simple :
 
-* le nom du projet ;
-* l’objectif ;
-* le contexte ;
-* la structure du dépôt ;
-* les prérequis ;
-* les étapes d’installation ;
-* les commandes d’exécution ;
-* les résultats principaux ;
-* les limites connues.
+<pre><code class="language-markdown"># Nom du projet
 
-Exemple minimal :
+## 1. Objectif
 
-```markdown
-# Projet IA — Prédiction du désabonnement client
+Présenter clairement l’objectif du projet.
 
-## Objectif
+## 2. Contexte
 
-Ce projet vise à prédire si un client risque de quitter l’entreprise à partir de données historiques.
+Expliquer pourquoi ce projet est utile.
 
-## Installation
+## 3. Données utilisées
 
-```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-```
+Décrire les données, leur source, leur format et leurs limites.
 
-## Exécution
+## 4. Installation
 
-```bash
-python src/train.py
-python src/evaluate.py
-```
+Expliquer comment installer le projet.
 
-## Résultats
+## 5. Exécution
 
-Le meilleur modèle obtenu est une Random Forest avec un F1-score de 0.77.
-```
+Donner les commandes nécessaires pour lancer le projet.
+
+## 6. Résultats
+
+Présenter les métriques principales.
+
+## 7. Limites
+
+Expliquer les limites connues du modèle.
+
+## 8. Auteurs
+
+Indiquer les personnes responsables du projet.</code></pre>
 
 ---
 
-### 2. Documenter les données
+## 11.2 Fiche de données
 
-Il ne suffit pas de dire : « nous avons utilisé un fichier CSV ».
+La fiche de données décrit le jeu de données.
 
-Il faut expliquer :
+<pre><code class="language-text">Nom du jeu de données :
+clients.csv
 
-* d’où viennent les données ;
-* combien de lignes elles contiennent ;
-* quelles colonnes sont disponibles ;
-* quelles colonnes ont été supprimées ;
-* quelles transformations ont été appliquées ;
-* quelles limites existent.
+Source :
+À compléter.
 
----
+Date de collecte :
+À compléter.
 
-### 3. Documenter les expériences
+Nombre de lignes :
+À compléter.
 
-Chaque expérience importante doit être enregistrée.
+Nombre de colonnes :
+À compléter.
 
-| Élément | Exemple |
-| ------- | ------- |
-| Nom de l’expérience | Random Forest V2 |
-| Données utilisées | dataset_v2_processed.csv |
-| Modèle | Random Forest |
-| Paramètres | n_estimators=200, max_depth=12 |
-| Métriques | accuracy, precision, recall, F1-score |
-| Résultat | F1-score = 0.79 |
-| Décision | modèle conservé pour comparaison finale |
+Variable cible :
+À compléter.
 
----
+Colonnes importantes :
+À compléter.
 
-### 4. Documenter les décisions
+Valeurs manquantes :
+À compléter.
 
-Un bon projet ne montre pas seulement ce qui a été fait.
+Transformations appliquées :
+À compléter.
 
-Il explique aussi pourquoi cela a été fait.
+Limites connues :
+À compléter.
 
-Exemple :
-
-```text
-Décision : utiliser F1-score comme métrique principale.
-
-Raison : les classes sont déséquilibrées. L’accuracy seule donne une vision trop optimiste.
-
-Impact : les modèles seront comparés principalement selon leur capacité à équilibrer précision et rappel.
-```
+Risques :
+À compléter.</code></pre>
 
 ---
 
-### 5. Documenter les limites
+## 11.3 Fiche d’expérience IA
 
-Un modèle IA a toujours des limites.
+Cette fiche permet de garder une trace de chaque expérience.
 
-Exemples :
+<pre><code class="language-text">Identifiant de l’expérience :
+EXP-001
 
-* le modèle dépend de la qualité des données ;
-* certaines variables importantes peuvent manquer ;
-* les résultats peuvent changer si le comportement des clients évolue ;
-* le modèle peut être moins fiable sur certains groupes de clients ;
-* les prédictions ne doivent pas être interprétées comme des certitudes.
+Date :
+À compléter.
 
-Documenter les limites augmente la crédibilité du projet.
+Objectif :
+À compléter.
+
+Données utilisées :
+À compléter.
+
+Version du code :
+À compléter.
+
+Algorithme :
+À compléter.
+
+Paramètres :
+À compléter.
+
+Métriques obtenues :
+À compléter.
+
+Résultat :
+À compléter.
+
+Décision :
+À compléter.
+
+Commentaires :
+À compléter.</code></pre>
+
+---
+
+## 11.4 Fiche de décision
+
+Cette fiche permet de justifier les choix importants.
+
+<pre><code class="language-text">Décision :
+À compléter.
+
+Date :
+À compléter.
+
+Contexte :
+À compléter.
+
+Options envisagées :
+Option 1 :
+Option 2 :
+Option 3 :
+
+Décision retenue :
+À compléter.
+
+Justification :
+À compléter.
+
+Impact :
+À compléter.
+
+Responsable :
+À compléter.</code></pre>
+
+---
+
+## 11.5 Fiche de modèle
+
+Cette fiche décrit le modèle entraîné.
+
+<pre><code class="language-text">Nom du modèle :
+À compléter.
+
+Version :
+À compléter.
+
+Date d’entraînement :
+À compléter.
+
+Données utilisées :
+À compléter.
+
+Algorithme :
+À compléter.
+
+Paramètres principaux :
+À compléter.
+
+Métriques :
+À compléter.
+
+Forces :
+À compléter.
+
+Limites :
+À compléter.
+
+Utilisation prévue :
+À compléter.
+
+Utilisation déconseillée :
+À compléter.</code></pre>
+
+---
+
+## 11.6 Compte rendu de réunion
+
+<pre><code class="language-text">Date :
+À compléter.
+
+Participants :
+À compléter.
+
+Objectif de la réunion :
+À compléter.
+
+Points discutés :
+- point 1
+- point 2
+- point 3
+
+Décisions prises :
+- décision 1
+- décision 2
+
+Actions à faire :
+- action 1
+- action 2
+
+Responsables :
+À compléter.
+
+Date de suivi :
+À compléter.</code></pre>
+
+---
+
+### À retenir
+
+Ces documents ne sont pas de la décoration.
+
+Ils servent à rendre le projet :
+
+* compréhensible ;
+* vérifiable ;
+* reproductible ;
+* défendable ;
+* professionnel.
 
 </details>
 
@@ -1175,110 +2052,128 @@ Documenter les limites augmente la crédibilité du projet.
 <a id="section-12"></a>
 
 <details>
-<summary>12 - Scénarios sans outils et avec outils</summary>
+<summary>12 - Bonnes pratiques de traçabilité</summary>
 
 <br/>
 
-La manière la plus simple de comprendre l’importance des outils de gestion est de comparer deux situations.
+La traçabilité doit être simple, mais constante.
+
+Il vaut mieux une traçabilité simple et bien appliquée qu’un système compliqué que personne n’utilise.
 
 ---
 
-### Scénario 1 — Sans outil de gestion
+## 12.1 Nommer clairement les fichiers
 
-Une équipe commence un projet IA.
+Mauvais exemple :
 
-Les tâches sont discutées oralement.
+<pre><code class="language-text">data_final.csv
+data_final2.csv
+data_ok.csv
+new_model.pkl
+test_model_last.pkl</code></pre>
 
-Les fichiers sont envoyés par courriel.
+Meilleur exemple :
 
-Les décisions sont prises en réunion, mais ne sont pas notées.
-
-Le code est modifié directement sans branche claire.
-
-Après deux semaines, l’équipe se pose plusieurs questions :
-
-* Qui devait nettoyer les données ?
-* Quelle version du fichier CSV faut-il utiliser ?
-* Pourquoi la colonne contract_type a-t-elle été supprimée ?
-* Quel modèle a donné le meilleur résultat ?
-* Où se trouve le rapport final ?
-* Est-ce que les tests ont été exécutés ?
-
-Personne ne peut répondre avec certitude.
-
-**Résultat :**
-
-le projet devient difficile à comprendre, même si certains morceaux fonctionnent.
+<pre><code class="language-text">clients_raw_2026-06-25.csv
+clients_clean_v1.csv
+clients_clean_v2.csv
+model_churn_logistic_v1.pkl
+model_churn_random_forest_v2.pkl
+rapport_evaluation_exp_003.md</code></pre>
 
 ---
 
-### Scénario 2 — Avec Trello
+## 12.2 Lier les tâches au code
 
-L’équipe crée un tableau Trello.
+Chaque tâche importante devrait être liée à une modification du code.
 
-Chaque tâche est représentée par une carte.
+Exemple :
 
-Les cartes passent de À faire à En cours, puis à Terminé.
-
-L’équipe voit rapidement l’avancement.
-
-**Résultat :**
-
-le suivi devient plus clair, surtout pour un petit projet.
+| Ticket | Branche                     | Commit                                       |
+| ------ | --------------------------- | -------------------------------------------- |
+| IA-012 | `feature/nettoyage-donnees` | `Ajoute le nettoyage des valeurs manquantes` |
+| IA-018 | `feature/evaluation-modele` | `Ajoute le calcul du F1-score`               |
+| IA-021 | `fix/lecture-csv`           | `Corrige le chargement du fichier CSV`       |
 
 ---
 
-### Scénario 3 — Avec Jira
+## 12.3 Documenter les expériences
 
-L’équipe crée un backlog, des user stories et des bugs.
+Chaque expérience doit indiquer :
 
-Les tâches sont planifiées dans des sprints.
+* l’objectif ;
+* les données utilisées ;
+* le modèle utilisé ;
+* les paramètres ;
+* les métriques ;
+* la décision finale.
 
-Chaque anomalie est décrite avec des étapes de reproduction.
-
-**Résultat :**
-
-le projet devient plus structuré et plus professionnel.
-
----
-
-### Scénario 4 — Avec Notion
-
-L’équipe centralise toute la documentation.
-
-Les décisions sont écrites.
-
-Les données sont décrites.
-
-Les résultats des modèles sont comparés dans des tableaux.
-
-**Résultat :**
-
-une autre personne peut comprendre le projet sans devoir poser toutes les questions à l’équipe.
+Sans cela, il devient difficile de comparer les modèles.
 
 ---
 
-### Scénario 5 — Avec Azure DevOps
+## 12.4 Éviter les décisions non documentées
 
-L’équipe relie les tâches au code.
+Mauvais exemple :
 
-Les modifications passent par des branches et des pull requests.
+> On a choisi Random Forest parce que ça semblait mieux.
 
-Les tests sont lancés automatiquement.
+Meilleur exemple :
 
-Le pipeline bloque les modifications problématiques.
-
-**Résultat :**
-
-le projet est plus fiable, plus traçable et plus proche d’un fonctionnement professionnel.
+> Le modèle Random Forest a été retenu parce qu’il obtient un rappel de 79 %, supérieur aux autres modèles testés, tout en conservant un F1-score acceptable de 80 %.
 
 ---
 
-### Interprétation courte
+## 12.5 Conserver les limites
 
-Sans outils, le projet dépend de la mémoire des personnes.
+Un projet professionnel doit aussi documenter ses limites.
 
-Avec outils, le projet dépend d’un processus visible, documenté et vérifiable.
+Exemples :
+
+* données anciennes ;
+* petit échantillon ;
+* données déséquilibrées ;
+* variables importantes absentes ;
+* résultats non validés en production ;
+* modèle non interprétable ;
+* risque de dérive dans le temps.
+
+---
+
+## 12.6 Utiliser un langage clair
+
+La documentation doit être compréhensible.
+
+Il faut éviter les phrases vagues.
+
+Mauvais exemple :
+
+> Le modèle marche bien.
+
+Meilleur exemple :
+
+> Le modèle obtient une exactitude de 86 %, un rappel de 79 % et un F1-score de 80 % sur le jeu de test.
+
+---
+
+## 12.7 Garder une trace des versions
+
+Il faut garder une trace :
+
+* des versions du code ;
+* des versions des données ;
+* des versions du modèle ;
+* des versions de la documentation.
+
+---
+
+### À retenir
+
+La traçabilité n’est pas seulement une question d’outil.
+
+C’est une discipline de travail.
+
+Elle consiste à garder une trace claire de ce qui a été fait, pourquoi cela a été fait et avec quel résultat.
 
 </details>
 
@@ -1289,170 +2184,101 @@ Avec outils, le projet dépend d’un processus visible, documenté et vérifiab
 <a id="section-13"></a>
 
 <details>
-<summary>13 - Activité formative guidée</summary>
+<summary>13 - Scénarios sans outils et avec outils</summary>
 
 <br/>
 
-Cette activité permet de mettre en pratique les notions du cours.
+La manière la plus simple de comprendre l’importance des outils est de comparer deux situations.
 
 ---
 
-### Contexte
+## 13.1 Scénario sans outils
 
-Vous devez organiser un mini-projet IA.
+Une équipe travaille sur un modèle IA.
 
-Sujet : prédire si un étudiant risque d’abandonner un cours en ligne.
+Chaque personne garde ses fichiers localement.
 
-Le jeu de données contient :
+Les tâches sont discutées oralement.
 
-* nombre de connexions ;
-* temps passé sur la plateforme ;
-* nombre de devoirs remis ;
-* moyenne des quiz ;
-* participation au forum ;
-* statut final : abandon ou non.
+Les résultats sont envoyés par messages.
 
----
+Le code est modifié sans lien avec les tâches.
 
-### Travail demandé — Partie 1 : Trello
+Les décisions ne sont pas documentées.
 
-Créer un tableau de tâches avec au minimum quatre colonnes :
+Après deux semaines, l’équipe ne sait plus précisément :
 
-```text
-À faire
-En cours
-À vérifier
-Terminé
-```
-
-Créer au minimum huit cartes :
-
-1. définir l’objectif du projet ;
-2. créer le dépôt Git ;
-3. analyser les colonnes du jeu de données ;
-4. nettoyer les valeurs manquantes ;
-5. produire une analyse exploratoire ;
-6. entraîner un modèle simple ;
-7. évaluer le modèle ;
-8. rédiger la documentation finale.
-
-Pour chaque carte, préciser :
-
-* une description ;
-* un responsable ;
-* une priorité ;
-* une liste de vérification.
+* quelle version des données a été utilisée ;
+* quel modèle a donné les meilleurs résultats ;
+* qui a modifié le script principal ;
+* pourquoi un algorithme a été choisi ;
+* quelles erreurs ont été corrigées ;
+* quelles limites ont été identifiées.
 
 ---
 
-### Travail demandé — Partie 2 : Jira
+### Résultat
 
-Créer une structure agile simple.
+Le projet devient fragile.
 
-Epic :
-
-```text
-Construire un modèle IA de prédiction d’abandon
-```
-
-Créer au moins trois user stories :
-
-```text
-En tant qu’enseignant,
-je veux identifier les étudiants à risque,
-afin d’intervenir plus tôt.
-```
-
-```text
-En tant qu’équipe pédagogique,
-je veux visualiser les facteurs importants,
-afin de comprendre les causes possibles d’abandon.
-```
-
-```text
-En tant qu’administrateur,
-je veux disposer d’un rapport clair,
-afin de prendre des décisions basées sur les données.
-```
-
-Créer au moins deux bugs possibles :
-
-```text
-Bug 1 : le modèle échoue lorsque la moyenne des quiz est vide.
-Bug 2 : le script d’entraînement ne fonctionne pas si le fichier CSV est déplacé.
-```
+Même si le modèle donne un bon score, l’équipe a de la difficulté à expliquer le travail.
 
 ---
 
-### Travail demandé — Partie 3 : Notion
+## 13.2 Scénario avec outils
 
-Créer une structure de documentation.
+La même équipe utilise des outils de gestion.
 
-Pages minimales :
+Trello ou Jira permet de suivre les tâches.
 
-```text
-01 - Présentation du projet
-02 - Données utilisées
-03 - Dictionnaire des données
-04 - Analyse exploratoire
-05 - Expérimentations
-06 - Résultats
-07 - Décisions techniques
-08 - Limites du modèle
-09 - Guide d’installation
-```
+Notion centralise la documentation.
 
-Dans la page « Décisions techniques », ajouter au moins trois décisions.
+Azure DevOps conserve le code, les branches, les commits et les pipelines.
 
-Exemple :
+Chaque expérience est documentée.
 
-| Date | Décision | Justification |
-| ---- | -------- | ------------- |
-| 2026-06-10 | utiliser F1-score | les classes sont déséquilibrées |
-| 2026-06-11 | imputer les valeurs manquantes | éviter de supprimer trop de lignes |
-| 2026-06-12 | tester un modèle simple d’abord | établir une référence de base |
+Chaque décision importante est notée.
+
+Chaque anomalie est suivie.
+
+Chaque modèle est relié à une version des données et du code.
 
 ---
 
-### Travail demandé — Partie 4 : Azure DevOps
+### Résultat
 
-Proposer une organisation du dépôt.
+L’équipe peut répondre clairement à ces questions :
 
-Structure minimale :
-
-```text
-projet-abandon-cours/
-│
-├── data/
-├── notebooks/
-├── src/
-├── tests/
-├── docs/
-├── README.md
-└── requirements.txt
-```
-
-Proposer aussi un pipeline simple qui :
-
-* installe Python ;
-* installe les dépendances ;
-* exécute les tests ;
-* affiche un message si tout est correct.
+* Qu’est-ce qui a été fait ?
+* Qui l’a fait ?
+* Quand cela a-t-il été fait ?
+* Pourquoi cette décision a-t-elle été prise ?
+* Quel résultat a été obtenu ?
+* Quelle version est utilisée ?
+* Quelles limites sont connues ?
 
 ---
 
-### Questions de réflexion
+## 13.3 Comparaison
 
-1. Pourquoi Trello est-il plus simple à utiliser pour des débutants ?
-2. Pourquoi Jira est-il plus adapté à un projet structuré avec des sprints ?
-3. Pourquoi Notion est-il utile pour la documentation ?
-4. Pourquoi Azure DevOps est-il utile pour relier les tâches au code ?
-5. Quelle est la différence entre documentation et traçabilité ?
-6. Pourquoi un projet IA doit-il documenter les données utilisées ?
-7. Pourquoi faut-il garder une trace des décisions techniques ?
-8. Quel outil choisiriez-vous pour un petit projet étudiant ? Pourquoi ?
-9. Quel outil choisiriez-vous pour un projet professionnel ? Pourquoi ?
-10. Que risque une équipe qui ne documente pas son projet IA ?
+| Aspect        | Sans outils                   | Avec outils     |
+| ------------- | ----------------------------- | --------------- |
+| Tâches        | dispersées                    | suivies         |
+| Code          | difficile à relier au travail | lié aux tickets |
+| Documentation | incomplète                    | centralisée     |
+| Décisions     | oubliées                      | enregistrées    |
+| Résultats     | difficiles à comparer         | structurés      |
+| Anomalies     | mal suivies                   | documentées     |
+| Traçabilité   | faible                        | forte           |
+| Projet        | fragile                       | maîtrisé        |
+
+---
+
+### À retenir
+
+Les outils ne garantissent pas automatiquement la qualité du projet.
+
+Mais ils donnent un cadre qui aide l’équipe à travailler de manière plus sérieuse, plus claire et plus professionnelle.
 
 </details>
 
@@ -1463,51 +2289,145 @@ Proposer aussi un pipeline simple qui :
 <a id="section-14"></a>
 
 <details>
-<summary>14 - Annexe — Résumé court</summary>
+<summary>14 - Activité formative</summary>
 
 <br/>
 
-```text
-Un projet IA doit être organisé, documenté et traçable.
+## Objectif de l’activité
 
-Documentation :
-- explique le projet ;
-- décrit les données ;
-- montre comment installer et exécuter ;
-- présente les résultats ;
-- explique les limites.
+L’objectif est de préparer l’organisation complète d’un projet IA en utilisant les notions vues dans le cours.
 
-Traçabilité :
-- montre qui a fait quoi ;
-- indique quand une tâche a changé ;
-- relie les décisions au contexte ;
-- relie les tâches au code ;
-- permet de comprendre l’historique du projet.
+---
 
-Trello :
-- outil simple et visuel ;
-- cartes et colonnes ;
-- utile pour petits projets et débutants.
+## Mise en situation
 
-Jira :
-- outil agile plus structuré ;
-- tâches, stories, bugs, sprints ;
-- utile pour projets professionnels ou équipes organisées.
+Vous travaillez sur un projet IA dont l’objectif est de prédire si un client risque de quitter une entreprise.
 
-Notion :
-- outil de documentation ;
-- pages, bases de données, tableaux ;
-- utile pour centraliser les connaissances et décisions.
+Votre équipe doit organiser le projet avant de commencer le développement.
 
-Azure DevOps :
-- plateforme complète ;
-- tâches, dépôts Git, pipelines, tests ;
-- utile pour relier gestion de projet, code et automatisation.
+Vous devez préparer :
 
-Idée principale :
-Sans outils, le projet dépend de la mémoire des personnes.
-Avec des outils, le projet devient visible, structuré et vérifiable.
-```
+* une structure de tâches ;
+* une documentation minimale ;
+* une stratégie de traçabilité ;
+* une organisation des outils.
+
+---
+
+## Travail demandé
+
+### Partie 1 — Organisation des tâches
+
+Créer un tableau de tâches avec au moins six tâches.
+
+Pour chaque tâche, préciser :
+
+* le titre ;
+* la description ;
+* le responsable ;
+* le statut ;
+* la priorité ;
+* le résultat attendu.
+
+Modèle :
+
+| Tâche       | Description | Responsable | Statut      | Priorité    | Résultat attendu |
+| ----------- | ----------- | ----------- | ----------- | ----------- | ---------------- |
+| À compléter | À compléter | À compléter | À compléter | À compléter | À compléter      |
+
+---
+
+### Partie 2 — Choix des outils
+
+Compléter le tableau suivant.
+
+| Besoin du projet      | Outil choisi | Justification |
+| --------------------- | ------------ | ------------- |
+| Suivre les tâches     | À compléter  | À compléter   |
+| Documenter le projet  | À compléter  | À compléter   |
+| Gérer le code         | À compléter  | À compléter   |
+| Suivre les anomalies  | À compléter  | À compléter   |
+| Automatiser les tests | À compléter  | À compléter   |
+
+---
+
+### Partie 3 — Documentation minimale
+
+Rédiger un mini `README.md` contenant :
+
+* le nom du projet ;
+* l’objectif ;
+* les données utilisées ;
+* les étapes d’installation ;
+* les commandes d’exécution ;
+* les résultats attendus ;
+* les limites connues.
+
+---
+
+### Partie 4 — Traçabilité
+
+Créer une fiche d’expérience IA.
+
+Modèle :
+
+<pre><code class="language-text">Identifiant de l’expérience :
+EXP-001
+
+Objectif :
+À compléter.
+
+Données utilisées :
+À compléter.
+
+Version du code :
+À compléter.
+
+Modèle utilisé :
+À compléter.
+
+Paramètres :
+À compléter.
+
+Métriques :
+À compléter.
+
+Résultat :
+À compléter.
+
+Décision :
+À compléter.</code></pre>
+
+---
+
+### Partie 5 — Réflexion
+
+Répondre aux questions suivantes :
+
+1. Pourquoi la documentation est-elle importante dans un projet IA ?
+2. Quelle est la différence entre documentation et traçabilité ?
+3. Pourquoi Trello peut-il être utile au début d’un projet ?
+4. Pourquoi Jira est-il plus structuré que Trello ?
+5. Pourquoi Notion est-il utile pour centraliser l’information ?
+6. Pourquoi Azure DevOps est-il utile pour relier les tâches au code ?
+7. Que risque-t-on si les expériences IA ne sont pas documentées ?
+8. Pourquoi faut-il documenter les limites d’un modèle ?
+9. Pourquoi un bon score ne suffit-il pas à rendre un projet professionnel ?
+10. Quel outil choisiriez-vous pour un petit projet IA et pourquoi ?
+
+---
+
+## Résultat attendu
+
+À la fin de l’activité, le projet doit être organisé de manière claire.
+
+Il doit contenir :
+
+* un tableau de tâches ;
+* un choix d’outils justifié ;
+* une documentation minimale ;
+* une fiche d’expérience ;
+* une réflexion sur la traçabilité.
 
 </details>
 
@@ -1518,35 +2438,219 @@ Avec des outils, le projet devient visible, structuré et vérifiable.
 <a id="section-15"></a>
 
 <details>
-<summary>15 - Conclusion</summary>
+<summary>15 - Quiz de consolidation</summary>
 
 <br/>
 
-La gestion d’un projet en intelligence artificielle ne se limite pas au développement du modèle.
+## Question 1
 
-Un projet IA sérieux doit être suivi comme un système complet.
+Quel est le rôle principal de la documentation dans un projet IA ?
 
-Il faut organiser les tâches, documenter les décisions, suivre les anomalies, versionner le code et conserver une trace des résultats.
+A. Remplacer le code source
+B. Expliquer le projet et faciliter sa compréhension
+C. Supprimer les données inutiles
+D. Entraîner automatiquement le modèle
 
-Trello, Jira, Notion et Azure DevOps répondent à des besoins différents.
+---
 
-Trello aide à visualiser simplement les tâches.
+## Question 2
 
-Jira aide à structurer le travail agile, les sprints et les anomalies.
+Quel est le rôle principal de la traçabilité ?
 
-Notion aide à centraliser la documentation et les décisions.
+A. Garder une trace de ce qui a été fait, par qui, quand et pourquoi
+B. Créer automatiquement des graphiques
+C. Remplacer les tests du modèle
+D. Supprimer les anomalies
 
-Azure DevOps aide à relier le code, les tâches, les tests et les pipelines.
+---
 
-Le plus important n’est pas de connaître tous les boutons de chaque outil.
+## Question 3
 
-Le plus important est de comprendre pourquoi ces outils existent.
+Quel outil est particulièrement adapté à l’organisation visuelle simple des tâches ?
 
-Ils permettent à une équipe de travailler de manière plus claire, plus fiable et plus professionnelle.
+A. Trello
+B. Python
+C. NumPy
+D. Matplotlib
 
-Dans un projet IA, cette rigueur est essentielle, car il faut suivre non seulement le code, mais aussi les données, les modèles, les expériences et les décisions.
+---
 
-Un projet bien géré est un projet que l’on peut expliquer, reprendre, corriger, améliorer et défendre.
+## Question 4
+
+Quel outil est souvent utilisé pour gérer des tâches, des sprints et des anomalies ?
+
+A. Jira
+B. Excel uniquement
+C. PowerPoint
+D. Bloc-notes
+
+---
+
+## Question 5
+
+Quel outil est particulièrement utile pour centraliser la documentation d’un projet ?
+
+A. Notion
+B. Terminal
+C. Explorateur de fichiers uniquement
+D. Navigateur privé
+
+---
+
+## Question 6
+
+Quel composant d’Azure DevOps sert à gérer le code source ?
+
+A. Azure Repos
+B. Azure Boards
+C. Azure Test Plans uniquement
+D. Azure Notes
+
+---
+
+## Question 7
+
+Quel composant d’Azure DevOps sert à automatiser des étapes comme les tests ou le déploiement ?
+
+A. Azure Pipelines
+B. Azure Calendar
+C. Azure Slides
+D. Azure Forms
+
+---
+
+## Question 8
+
+Pourquoi faut-il documenter les données utilisées dans un projet IA ?
+
+A. Pour savoir d’où elles viennent, ce qu’elles contiennent et quelles sont leurs limites
+B. Pour éviter d’écrire du code
+C. Pour supprimer tous les fichiers du projet
+D. Pour empêcher l’évaluation du modèle
+
+---
+
+## Question 9
+
+Pourquoi faut-il garder une trace des expériences IA ?
+
+A. Pour comparer les modèles et comprendre les résultats obtenus
+B. Pour rendre le projet plus confus
+C. Pour éviter d’utiliser des métriques
+D. Pour supprimer les anciennes décisions
+
+---
+
+## Question 10
+
+Quel est le risque d’un projet IA sans documentation ?
+
+A. Le projet devient difficile à comprendre, à reproduire et à maintenir
+B. Le modèle devient automatiquement parfait
+C. Le code s’améliore automatiquement
+D. Les données deviennent toujours propres
+
+---
+
+## Corrigé
+
+| Question | Réponse |
+| -------- | ------- |
+| 1        | B       |
+| 2        | A       |
+| 3        | A       |
+| 4        | A       |
+| 5        | A       |
+| 6        | A       |
+| 7        | A       |
+| 8        | A       |
+| 9        | A       |
+| 10       | A       |
+
+</details>
+
+<p align="right"><a href="#top">↑ Retour en haut</a></p>
+
+---
+
+<a id="section-16"></a>
+
+<details>
+<summary>16 - Résumé final</summary>
+
+<br/>
+
+<pre><code class="language-text">Un projet IA ne se limite pas à entraîner un modèle.
+
+Il faut aussi organiser les tâches, documenter le travail, suivre les décisions, conserver les résultats et garder une trace des versions.
+
+Trello sert principalement à organiser visuellement les tâches.
+
+Jira sert à gérer les tâches, les sprints, les anomalies et le suivi structuré du travail.
+
+Notion sert à centraliser la documentation, les notes, les décisions et les informations importantes.
+
+Azure DevOps sert à gérer le code, les dépôts, les tâches techniques, les branches, les commits et les pipelines.
+
+La documentation répond à la question :
+Comment comprendre et utiliser le projet ?
+
+La traçabilité répond à la question :
+Qu’est-ce qui a été fait, par qui, quand, pourquoi et avec quels résultats ?
+
+Un projet IA professionnel doit être clair, reproductible, traçable et maintenable.</code></pre>
+
+</details>
+
+<p align="right"><a href="#top">↑ Retour en haut</a></p>
+
+---
+
+<a id="section-17"></a>
+
+<details>
+<summary>17 - Conclusion</summary>
+
+<br/>
+
+Les outils de gestion de projet sont essentiels dans un projet d’intelligence artificielle.
+
+Ils permettent de transformer un travail technique en projet organisé, compréhensible et professionnel.
+
+Sans organisation, un projet IA peut rapidement devenir difficile à suivre.
+
+Les tâches peuvent être oubliées.
+
+Les décisions peuvent être perdues.
+
+Les résultats peuvent devenir impossibles à expliquer.
+
+Les modèles peuvent être entraînés sans que l’équipe sache exactement quelles données ou quels paramètres ont été utilisés.
+
+Avec une bonne organisation, l’équipe peut suivre le travail, documenter les décisions, relier les tâches au code, comparer les expériences et expliquer les résultats.
+
+Trello est utile pour visualiser simplement l’avancement.
+
+Jira est utile pour structurer les tâches, les sprints et les anomalies.
+
+Notion est utile pour centraliser la documentation et les informations importantes.
+
+Azure DevOps est utile pour gérer le code, les dépôts, les pipelines et la traçabilité technique.
+
+La compétence importante n’est pas seulement de connaître ces outils.
+
+La compétence importante est de comprendre quel outil utiliser, à quel moment, et pour quel besoin.
+
+Un projet IA sérieux doit toujours être :
+
+* organisé ;
+* documenté ;
+* traçable ;
+* reproductible ;
+* maintenable ;
+* compréhensible par une autre personne.
+
+C’est ce qui distingue un simple essai technique d’un véritable projet professionnel en intelligence artificielle.
 
 </details>
 
