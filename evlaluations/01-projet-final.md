@@ -667,3 +667,9 @@ données → entraînement → expérimentations → suivi MLflow → comparaiso
 ```
 
 Vous devez montrer que vous savez expérimenter, analyser, comparer et présenter un modèle de Machine Learning de façon professionnelle.
+
+
+# Exemples: 
+
+- https://towardsdatascience.com/how-to-dockerize-machine-learning-applications-built-with-h2o-mlflow-fastapi-and-streamlit-a56221035eb5/
+
