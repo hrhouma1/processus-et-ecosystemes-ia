@@ -1004,6 +1004,9 @@ Il permet de gérer le projet de manière plus structurée que Trello.
 
 Notion est un outil de documentation et d’organisation collaborative.
 
+# Référence :
+
+- https://www.youtube.com/watch?v=92LK3J0ZykA
 Il permet de centraliser plusieurs types d’informations dans un même espace.
 
 Dans un projet IA, Notion peut servir à regrouper :
