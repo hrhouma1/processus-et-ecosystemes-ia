@@ -297,6 +297,16 @@ kubectl exec -it mon-nginx -- /bin/sh
 kubectl delete pod mon-nginx
 ```
 
+## Autres commandes utiles
+
+```bash
+kubectl run mon-nginx --image=nginx:1.27 --port=80 --dry-run=client -o yaml
+kubectl run mon-nginx --image=nginx:1.27 --port=80 --dry-run=client -o yaml > test.yaml
+kubectl apply -f test.yaml
+```
+
+
+
 | Commande | Quand l'utiliser |
 |---|---|
 | `kubectl run` | Test rapide d'une image |
